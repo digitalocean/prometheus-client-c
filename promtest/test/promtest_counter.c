@@ -114,6 +114,7 @@ int promtest_counter_setup(void) {
 int promtest_counter_teardown(void) {
   // Destroy the default registry. This effectively deallocates all metrics registered to it, including itself
   prom_collector_registry_destroy(PROM_COLLECTOR_REGISTRY_DEFAULT);
+  PROM_COLLECTOR_REGISTRY_DEFAULT = NULL;
 
   // Stop the HTTP server
   MHD_stop_daemon(promtest_daemon);
