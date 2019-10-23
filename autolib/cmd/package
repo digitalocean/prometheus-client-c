@@ -39,10 +39,12 @@ EOF
 
 source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
 
+LIBS=(prom promhttp)
+
 run(){
   local r
   autolib_check_dev || return $?
-  autolib_output_banner "Executing ${PROGRAM_NAME}AME}"
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
 
   for lib in ${LIBS[@]}; do
     pushd ${lib} > /dev/null || return $?

@@ -29,8 +29,8 @@ execute_process(
 
 project(promtest VERSION ${Version} LANGUAGES C)
 
-set(prom_deb ${CMAKE_CURRENT_SOURCE_DIR}/../prom/_CPack_Packages/Linux/DEB/libprom-dev-${Version}-Linux.deb)
-set(promhttp_deb ${CMAKE_CURRENT_SOURCE_DIR}/../promhttp/_CPack_Packages/Linux/DEB/libpromhttp-dev-${Version}-Linux.deb)
+set(prom_deb ${CMAKE_CURRENT_SOURCE_DIR}/../prom/libprom-dev-${Version}-Linux.deb)
+set(promhttp_deb ${CMAKE_CURRENT_SOURCE_DIR}/../promhttp/libpromhttp-dev-${Version}-Linux.deb)
 
 execute_process(
     COMMAND dpkg -i ${prom_deb}
