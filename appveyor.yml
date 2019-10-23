@@ -1,9 +1,6 @@
-image: ubuntu
-
-build: off
+dist: bionic
 
 services:
-- docker
+  - docker
 
-test_script:
-  - make
+script: make
