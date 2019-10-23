@@ -1,5 +1,7 @@
 # prometheus-client-c
 
+[![Build Status](https://travis-ci.org/digitalocean/prometheus-client-c.svg?branch=master)](https://travis-ci.org/digitalocean/prometheus-client-c)
+
 This project provides shared libraries for instrumenting software via [Prometheus](https://prometheus.io)
 
 * libprom - Provides the core API. Resources such as counters, gauges, histograms, and
