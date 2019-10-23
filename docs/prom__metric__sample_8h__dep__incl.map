@@ -1,0 +1,9 @@
+<map id="prom/include/prom_metric_sample.h" name="prom/include/prom_metric_sample.h">
+<area shape="rect" id="node2" href="$prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="351,95,558,121"/>
+<area shape="rect" id="node4" href="$prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="376,333,533,360"/>
+<area shape="rect" id="node3" href="$prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="5,169,224,196"/>
+<area shape="rect" id="node5" href="$prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="67,244,275,285"/>
+<area shape="rect" id="node6" href="$prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="349,251,561,278"/>
+<area shape="rect" id="node7" href="$prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="585,251,789,278"/>
+<area shape="rect" id="node8" href="$prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="593,169,823,196"/>
+</map>

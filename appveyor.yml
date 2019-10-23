@@ -1,0 +1,9 @@
+image: ubuntu
+
+build: off
+
+services:
+- docker
+
+test_script:
+  - make

@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME="$(basename $0)"
+
+short="Clean the development environment"
+
+read -d '' long <<EOF
+You MUST execute this command from your development workstation. You
+MUST NOT execute this command from an existing docker container.
+EOF
+
+usage() {
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+DESCRIPTION
+
+$long
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
+
+
+run(){
+  local r
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
+
+  pushd "$(dirname ${BASH_SOURCE[0]})/../.." > /dev/null || return $?
+    for pkg in libprom-dev libpromhttp-dev; do
+      if dpkg --list | grep -q libprom-dev; then
+        dpkg --remove "$pkg"
+      fi
+    done
+    rm -rf prom/build/*
+    rm -rf promhttp/build/*
+  popd > /dev/null || return $?
+}
+
+main(){
+  while getopts "h" opt; do
+    case $opt in
+      ( h ) {
+        usage && exit 0
+      } ;;
+      ( * ) {
+        usage && exit 1
+      }
+    esac
+  done
+  run $@; exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

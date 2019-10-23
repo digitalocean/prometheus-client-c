@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME="$(basename $0)"
+
+short="Generate the documentation"
+
+read -d '' long <<EOF
+You MUST execute this command from your development workstation. You MUST NOT
+execute this command from an existing docker container.
+EOF
+
+usage() {
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+DESCRIPTION
+
+$long
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
+
+run(){
+  local r
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
+  doxygen Doxyfile || {
+    r=$?
+    autolib_output_error "Failed to generate Doxygen documentation"
+    return $r
+  }
+  if [ -d /tmp/html ]; then rm -rf /tmp/html; fi
+  mv docs/html /tmp/
+  rm -r docs/latex
+  cp -R /tmp/html/* docs/
+  autolib_output_success "Doxygen documentation generation complete"
+}
+
+main(){
+  while getopts "h" opt; do
+    case $opt in
+      ( h ) {
+        usage && exit 0
+      } ;;
+    esac
+  done
+  run $@; exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

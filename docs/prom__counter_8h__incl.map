@@ -1,0 +1,5 @@
+<map id="prom/include/prom_counter.h" name="prom/include/prom_counter.h">
+<area shape="rect" id="node3" href="$prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="129,80,246,107"/>
+<area shape="rect" id="node4" href="$prom__metric__sample_8h.html" title="Functions for interfacting with metric samples directly. " alt="" coords="5,162,177,189"/>
+<area shape="rect" id="node5" href="$prom__metric__sample__histogram_8h.html" title="Functions for interacting with histogram metric samples directly. " alt="" coords="202,155,362,196"/>
+</map>

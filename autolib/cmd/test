@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME=$(basename $0)
+
+short="Test the project"
+read -d '' long <<EOF
+
+You MUST execute this command within the development container.
+
+EOF
+
+usage(){
+  cat <<EOF
+
+$PROGRAM_NAME [-h] [-m] [-t]
+
+$short
+
+OPTIONS
+
+-t  Run the unit/integration tests only
+-m  Run the memory tests only
+
+DESCRIPTION
+
+$long
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source "$(dirname ${BASH_SOURCE[0]})/../autolib.sh"
+
+declare -i AUTO_TEST_MEM_ONLY=0
+declare -i AUTO_TEST_TESTS_ONLY=0
+
+run(){
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
+  for lib in prom; do
+    if (( AUTO_TEST_MEM_ONLY == 0 && AUTO_TEST_TESTS_ONLY == 0 )); then
+      { autolib_test "${lib}" && autolib_mem_test "${lib}"; } || return $?
+    fi
+
+    if (( AUTO_TEST_MEM_ONLY == 1 )); then
+      autolib_mem_test "${lib}" || return $?
+    fi
+
+    if (( AUTO_TEST_TESTS_ONLY == 1 )); then
+      autolib_test "${lib}" || return $?
+    fi
+  done
+}
+
+main(){
+  while getopts 'hmts' opt; do
+    case "$opt" in
+      ( h ) {
+        usage && exit 0
+      } ;;
+      ( m ) {
+        AUTO_TEST_MEM_ONLY=1
+      } ;;
+      ( t ) {
+        AUTO_TEST_TESTS_ONLY=1
+      } ;;
+      ( * ) {
+        usage && exit 1
+      } ;;
+    esac
+  done
+  local total=$((AUTO_TEST_MEM_ONLY + AUTO_TEST_TESTS_ONLY))
+  if (( total > 1 )); then
+    usage
+    exit 1
+  fi
+  run $@ || exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

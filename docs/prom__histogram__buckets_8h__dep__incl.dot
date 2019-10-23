@@ -1,0 +1,13 @@
+digraph "prom/include/prom_histogram_buckets.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="prom/include/prom_histogram\l_buckets.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="prom/include/prom_histogram.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$prom__histogram_8h.html",tooltip="https://prometheus.io/docs/concepts/metric_types/#histogram "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="prom/include/prom.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$prom_8h.html",tooltip="Include prom.h to include the entire public API. "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="promhttp/include/promhttp.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$promhttp_8h.html",tooltip="Provides a HTTP endpoint for metric exposition References: "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

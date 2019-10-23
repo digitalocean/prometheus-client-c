@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME="$(basename $0)"
+
+short="Initialize the development environment"
+
+read -d '' long <<EOF
+You MUST execute this command from your development workstation. You
+MUST NOT execute this command from an existing docker container.
+
+-e Execute the following executable
+-a Pass an argument to the executable given by -e. You may specify
+   this flag multiple times. The order is preserved.
+EOF
+
+usage() {
+  cat <<EOF
+
+$PROGRAM_NAME [-h | -e EXECUTABLE [-a ARG1 -a ARG2 ...]]
+
+$short
+
+DESCRIPTION
+
+$long
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
+
+declare DOCKER_EXEC
+declare -a DOCKER_EXEC_ARGS
+
+run(){
+  local r
+  if ! { docker image list | grep -q prometheus-client-c-dev; }; then
+    autolib_output_banner "Building development container"
+    pushd docker > /dev/null || return $?
+      make || {
+        r=$?
+        outlib_output_error "Docker Build Failure"
+        return $r
+      }
+    popd > /dev/null
+  fi
+
+  autolib_output_banner "Entering development environment"
+  declare -a args
+  args+=(--name prometheus-client-c-dev)    # Give the running container a name to use instead of the ID
+  args+=(--interactive)                     # Interactive shell
+  args+=(--tty)                             # We'll need a tty
+  args+=(--volume "${PWD}:/code")           # Mount code into the container
+  args+=(--env DEV=1)                       # Enables check if executing in dev environment
+  args+=(--net host)                        # Use host networking
+  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind and gdb
+  args+=(--security-opt seccomp=unconfined) # Required for debugging
+  args+=(--rm)                              # Remove when done
+
+  docker run ${args[@]} prometheus-client-c-dev ${DOCKER_EXEC} ${DOCKER_EXEC_ARGS[@]} || {
+    r=$?
+    autolib_output_error "Failed to enter development environment"
+    return $r
+  }
+}
+
+main(){
+  while getopts "he:a:" opt; do
+    case $opt in
+      ( h ) {
+        usage && exit 0
+      } ;;
+      ( e ) {
+        DOCKER_EXEC="$OPTARG"
+      } ;;
+      ( a ) {
+        DOCKER_EXEC_ARGS+=($OPTARG)
+      } ;;
+    esac
+  done
+  run $@; exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

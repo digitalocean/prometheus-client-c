@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME=$(basename $0)
+
+short="Extinguish smoke"
+read -d '' long <<EOF
+
+You MUST execute this command within the development container.
+
+EOF
+
+usage(){
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+DESCRIPTION
+
+$long
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source "$(dirname ${BASH_SOURCE[0]})/../autolib.sh"
+
+run(){
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
+  if [ ! -d promtest/build ]; then mkdir promtest/build; fi
+  pushd promtest/build > /dev/null
+    { cmake .. && make && ARGS=' --track-origins=yes --output-on-failure=yes --verbose' make test; } || {
+      autolib_output_error "Smoke test failure"
+      return 1
+    }
+    autolib_output_success "Smoke test pass"
+  popd > /dev/null
+}
+
+main(){
+  while getopts 'h' opt; do
+    case "$opt" in
+      ( h ) {
+        usage && exit 0
+      } ;;
+      ( * ) {
+        usage && exit 1
+      } ;;
+    esac
+  done
+  run $@ || exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

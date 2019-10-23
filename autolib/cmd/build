@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME=$(basename $0)
+
+short="Build the project"
+read -d '' long <<EOF
+
+You MUST execute this command within the development container.
+
+-t Include the test build for testing
+
+EOF
+
+
+usage(){
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+DESCRIPTION
+
+$long
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source "$(dirname ${BASH_SOURCE[0]})/../autolib.sh"
+
+declare AUTOLIB_BUILD_TEST=0
+declare AUTOLIB_TEST_LIB
+
+run(){
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}"
+  declare -a libs
+  if [ -z "$AUTOLIB_TEST_LIB" ]; then
+    libs+=(prom promhttp)
+  else
+    libs+=($AUTOLIB_TEST_LIB)
+  fi
+
+  for lib in ${libs[@]}; do
+    autolib_build "$lib" "$AUTOLIB_BUILD_TEST" || return $?
+  done
+  autolib_output_success "Build Complete"
+}
+
+main(){
+  while getopts 'hl:t' opt; do
+    case "$opt" in
+      ( h ) {
+        usage && exit 0
+      } ;;
+      ( t ) {
+        AUTOLIB_BUILD_TEST=1
+      } ;;
+      ( l ) {
+        AUTOLIB_TEST_LIB="$OPTARG"
+      } ;;
+      ( * ) {
+        usage && exit 1
+      } ;;
+    esac
+  done
+  run $@ || exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

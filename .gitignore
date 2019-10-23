@@ -1,0 +1,10 @@
+.vscode
+prom/build/*
+promhttp/build/*
+promtest/build/*
+tty.gif
+ttyrecord
+_CPack_Packages/
+*deb
+*tar.gz
+*vgcore*

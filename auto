@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROJECT_ROOT=$(pushd $(dirname $0) > /dev/null; echo $PWD; popd > /dev/null)
+PROGRAM_NAME="$(basename $0)"
+
+usage(){
+  cat <<EOF
+
+$PROGRAM_NAME [command [options...]]
+
+Provide developer workflow automation
+
+$PROGRAM_NAME command -h for help
+
+COMMANDS
+
+$(commands)
+
+ENVIRONMENT
+
+AUTO_DEBUG Set to 1 to enable and 0 to disable
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+declare -i DEV=${DEV:=1} && export DEV
+declare lib="$(dirname ${BASH_SOURCE[0]})/autolib"
+source "${lib}/autolib.sh"
+
+commands(){
+  while read cmd; do
+    printf "${cmd} - "
+    source "${lib}/cmd/${cmd}"
+    echo "$short"
+  done < <(ls -1 "${lib}/cmd")
+}
+
+main(){
+  if [[ "$PROJECT_ROOT" != "$PWD" ]]; then
+    echo "You must execute auto within the PROJECT_ROOT $PROJECT_ROOT"
+    exit 1
+  fi
+  if (($# < 1)); then
+    usage
+    exit 1
+  fi
+  local cmd=$1
+  case "$cmd" in
+    ( -h | --help | help ) {
+      usage
+      exit 0
+    } ;;
+    ( build | dev | test | package | docs | clean | smoke ) {
+      shift
+      exec "${lib}/cmd/${cmd}" $@ || exit $?
+    } ;;
+    ( * ) {
+      usage
+      exit 1
+    } ;;
+  esac
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

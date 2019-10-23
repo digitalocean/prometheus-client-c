@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME="$(basename $0)"
+
+short="Package prometheus-client-c"
+
+read -d '' long <<EOF
+You MUST execute this command from your development workstation. You MUST NOT
+execute this command from an existing docker container.
+EOF
+
+usage() {
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+DESCRIPTION
+
+$long
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
+
+run(){
+  local r
+  autolib_check_dev || return $?
+  autolib_output_banner "Executing ${PROGRAM_NAME}AME}"
+
+  for lib in ${LIBS[@]}; do
+    pushd ${lib} > /dev/null || return $?
+      cpack \
+        --config build/CPackConfig.cmake \
+        -D "CPACK_DEBIAN_PACKAGE_MAINTAINER=Demitri Swan" \
+        -D "CPACK_PACKAGE_CONTACT=dswan@digitalocean.com" || {
+
+        r=$?
+        autolib_output_error "${lib}: Package build failed"
+        return $r
+      }
+    popd > /dev/null || return $?
+  done
+  autolib_output_success "Package build success"
+}
+
+main(){
+  while getopts "h" opt; do
+    case $opt in
+      ( h ) {
+        usage && exit 0
+      } ;;
+    esac
+  done
+  run $@; exit $?
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@
