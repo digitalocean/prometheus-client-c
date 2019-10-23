@@ -29,8 +29,26 @@ execute_process(
 
 project(promtest VERSION ${Version} LANGUAGES C)
 
-execute_process(COMMAND dpkg -i ${CMAKE_CURRENT_SOURCE_DIR}/../prom/libprom-dev-${Version}-Linux.deb)
-execute_process(COMMAND dpkg -i ${CMAKE_CURRENT_SOURCE_DIR}/../promhttp/libpromhttp-dev-${Version}-Linux.deb)
+set(prom_deb ${CMAKE_CURRENT_SOURCE_DIR}/../prom/_CPack_Packages/Linux/DEB/libprom-dev-${Version}-Linux.deb)
+set(promhttp_deb ${CMAKE_CURRENT_SOURCE_DIR}/../promhttp/_CPack_Packages/Linux/DEB/libpromhttp-dev-${Version}-Linux.deb)
+
+execute_process(
+    COMMAND dpkg -i ${prom_deb}
+    RESULT_VARIABLE prom_install_result
+)
+
+if(${prom_install_result} GREATER 0)
+    message(FATAL_ERROR "failed to install ${prom_deb}")
+endif()
+
+execute_process(
+    COMMAND dpkg -i ${promhttp_deb}
+    RESULT_VARIABLE promhttp_install_result
+)
+
+if(${promhttp_install_result} GREATER 0)
+    message(FATAL_ERROR "failed to install ${promhttp_deb}")
+endif()
 
 enable_testing()
 set(vendor_dir ${CMAKE_SOURCE_DIR}/../vendor)

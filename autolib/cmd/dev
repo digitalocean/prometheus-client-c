@@ -71,11 +71,7 @@ run(){
   args+=(--security-opt seccomp=unconfined) # Required for debugging
   args+=(--rm)                              # Remove when done
 
-  docker run ${args[@]} prometheus-client-c-dev ${DOCKER_EXEC} ${DOCKER_EXEC_ARGS[@]} || {
-    r=$?
-    autolib_output_error "Failed to enter development environment"
-    return $r
-  }
+  docker run ${args[@]} prometheus-client-c-dev ${DOCKER_EXEC} ${DOCKER_EXEC_ARGS[@]} || return $r
 }
 
 main(){
