@@ -8,7 +8,7 @@ This project provides shared libraries for instrumenting software via [Prometheu
   collector registries can be found here. This library has no dependencies on third-party
   libraries; however, it does rely on pthreads native to POSIX systems.
 * libpromhttp - Provides a simple web handler to expose Prometheus metrics for scraping.
-  This library has a dependency on libmircohttpd.
+  This library has a dependency on libmicrohttpd.
 
 Documentation can be found
 [at the documentation site](https://digitalocean.github.io/prometheus-client-c/)
