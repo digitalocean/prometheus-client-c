@@ -1,7 +1,19 @@
 
 SHELL = /bin/bash
 
-build_and_test: docker clean build test package smoke
+# Origin does not point to https://github.com/digitalocean/prometheus-client-c.git in TravisCI so we must add a new
+# remote for fetching. Fetch master, diff on the filenames and look for C files. If no changes to C files are made, skip
+# the build.
+CHANGED_FILES = $(shell git remote add ci https://github.com/digitalocean/prometheus-client-c.git > /dev/null 2>&1; git fetch ci master > /dev/null 2>&1; git diff --name-only ci/master | egrep '.*[c|h]$$')
+
+ifneq ($(shell echo "x${CHANGED_FILES}x" | sed 's/\n\t //'), xx)
+default: build_and_test
+else
+default: changed_files
+	@echo -e "\033[1;32mNothing to build\033[0m"
+endif
+
+build_and_test: changed_files docker clean build test package smoke
 .PHONY: build_and_test
 
 all: build_and_test docs
@@ -26,10 +38,14 @@ package: test
 	./auto dev -e auto -a package
 .PHONY: smoke
 
-smoke: package
-	./auto dev -e auto -a smoke
-.PHONY: smoke
-
 docs: smoke
 	./auto dev -e auto -a docs
 .PHONY: package
+
+changed_files:
+	@echo "Changed C files: ${CHANGED_FILES}"
+.PHONY: changed_files
+
+smoke: package
+	./auto dev -e auto -a smoke
+.PHONY: smoke
