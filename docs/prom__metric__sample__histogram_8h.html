@@ -79,13 +79,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__metric__sample__histogram_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__metric__sample__histogram_8hdep" alt=""/></div>
 <map name="prom_2include_2prom__metric__sample__histogram_8hdep" id="prom_2include_2prom__metric__sample__histogram_8hdep">
-<area shape="rect" id="node2" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="351,95,558,121"/>
-<area shape="rect" id="node4" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="376,333,533,360"/>
-<area shape="rect" id="node3" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="5,169,224,196"/>
-<area shape="rect" id="node5" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="67,244,275,285"/>
-<area shape="rect" id="node6" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="349,251,561,278"/>
-<area shape="rect" id="node7" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="585,251,789,278"/>
-<area shape="rect" id="node8" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="593,169,823,196"/>
+<area shape="rect" id="node2" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="407,95,613,121"/>
+<area shape="rect" id="node4" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="547,333,705,360"/>
+<area shape="rect" id="node3" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="147,169,366,196"/>
+<area shape="rect" id="node5" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="6,244,214,285"/>
+<area shape="rect" id="node7" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="288,251,500,278"/>
+<area shape="rect" id="node8" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="524,251,728,278"/>
+<area shape="rect" id="node9" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="548,169,779,196"/>
+<area shape="rect" id="node6" href="promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="5,333,215,360"/>
 </map>
 </div>
 </div>
@@ -100,14 +101,52 @@ typedef struct prom_metric_sample_histogram&#160;</td><td class="memItemRight" v
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a20a030bf6be56211c87c9feb520a3761"><td class="memItemLeft" align="right" valign="top"><a id="a20a030bf6be56211c87c9feb520a3761"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__metric__sample__histogram_8h.html#a20a030bf6be56211c87c9feb520a3761">prom_metric_sample_histogram_observe</a> (<a class="el" href="prom__metric__sample__histogram_8h.html#aed3455bc4eec61a3d8f01e6c1af84f9f">prom_metric_sample_histogram_t</a> *self, double value)</td></tr>
-<tr class="memdesc:a20a030bf6be56211c87c9feb520a3761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observe the double for the given prom_metric_sample_histogram_observe_t. <br /></td></tr>
+<tr class="memitem:a20a030bf6be56211c87c9feb520a3761"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__metric__sample__histogram_8h.html#a20a030bf6be56211c87c9feb520a3761">prom_metric_sample_histogram_observe</a> (<a class="el" href="prom__metric__sample__histogram_8h.html#aed3455bc4eec61a3d8f01e6c1af84f9f">prom_metric_sample_histogram_t</a> *self, double value)</td></tr>
+<tr class="memdesc:a20a030bf6be56211c87c9feb520a3761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observe the double for the given prom_metric_sample_histogram_observe_t.  <a href="#a20a030bf6be56211c87c9feb520a3761">More...</a><br /></td></tr>
 <tr class="separator:a20a030bf6be56211c87c9feb520a3761"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for interacting with histogram metric samples directly. </p>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a20a030bf6be56211c87c9feb520a3761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a030bf6be56211c87c9feb520a3761">&#9670;&nbsp;</a></span>prom_metric_sample_histogram_observe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_metric_sample_histogram_observe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__metric__sample__histogram_8h.html#aed3455bc4eec61a3d8f01e6c1af84f9f">prom_metric_sample_histogram_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Observe the double for the given prom_metric_sample_histogram_observe_t. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_metric_sample_histogram_t* </td></tr>
+    <tr><td class="paramname">value</td><td>The value to observe. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero integer value upon failure </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

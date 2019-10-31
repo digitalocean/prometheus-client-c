@@ -30,6 +30,9 @@ typedef struct prom_metric_sample_histogram prom_metric_sample_histogram_t;
 
 /**
  * @brief Observe the double for the given prom_metric_sample_histogram_observe_t
+ * @param self The target prom_metric_sample_histogram_t*
+ * @param value The value to observe.
+ * @return Non-zero integer value upon failure
  */
 int prom_metric_sample_histogram_observe(prom_metric_sample_histogram_t *self, double value);
 

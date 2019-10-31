@@ -92,8 +92,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__collector_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__collector_8hdep" alt=""/></div>
 <map name="prom_2include_2prom__collector_8hdep" id="prom_2include_2prom__collector_8hdep">
-<area shape="rect" id="node2" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="36,169,193,196"/>
-<area shape="rect" id="node3" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="81,80,289,121"/>
+<area shape="rect" id="node2" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="5,169,163,196"/>
+<area shape="rect" id="node3" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="121,80,329,121"/>
+<area shape="rect" id="node4" href="promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="187,169,397,196"/>
 </map>
 </div>
 </div>
@@ -111,31 +112,26 @@ typedef struct prom_collector&#160;</td><td class="memItemRight" valign="bottom"
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a4300cf33b6f8e4457df385c3d2a51a4b"><td class="memItemLeft" align="right" valign="top"><a id="a4300cf33b6f8e4457df385c3d2a51a4b"></a>
-<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a4300cf33b6f8e4457df385c3d2a51a4b">prom_collector_new</a> (const char *name)</td></tr>
-<tr class="memdesc:a4300cf33b6f8e4457df385c3d2a51a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a collector. <br /></td></tr>
+<tr class="memitem:a4300cf33b6f8e4457df385c3d2a51a4b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a4300cf33b6f8e4457df385c3d2a51a4b">prom_collector_new</a> (const char *name)</td></tr>
+<tr class="memdesc:a4300cf33b6f8e4457df385c3d2a51a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a collector.  <a href="#a4300cf33b6f8e4457df385c3d2a51a4b">More...</a><br /></td></tr>
 <tr class="separator:a4300cf33b6f8e4457df385c3d2a51a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af50746bb4af87eda617fa08237e3834e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#af50746bb4af87eda617fa08237e3834e">prom_collector_process_new</a> (const char *limits_path, const char *stat_path)</td></tr>
-<tr class="memdesc:af50746bb4af87eda617fa08237e3834e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a collector including the default process metrics.  <a href="#af50746bb4af87eda617fa08237e3834e">More...</a><br /></td></tr>
+<tr class="memdesc:af50746bb4af87eda617fa08237e3834e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a prom_collector_t* which includes the default process metrics.  <a href="#af50746bb4af87eda617fa08237e3834e">More...</a><br /></td></tr>
 <tr class="separator:af50746bb4af87eda617fa08237e3834e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a037b72b2edb81a477999a7dfc08758c7"><td class="memItemLeft" align="right" valign="top"><a id="a037b72b2edb81a477999a7dfc08758c7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a037b72b2edb81a477999a7dfc08758c7">prom_collector_destroy</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self)</td></tr>
-<tr class="memdesc:a037b72b2edb81a477999a7dfc08758c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a collector. <br /></td></tr>
+<tr class="memitem:a037b72b2edb81a477999a7dfc08758c7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a037b72b2edb81a477999a7dfc08758c7">prom_collector_destroy</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self)</td></tr>
+<tr class="memdesc:a037b72b2edb81a477999a7dfc08758c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a collector.  <a href="#a037b72b2edb81a477999a7dfc08758c7">More...</a><br /></td></tr>
 <tr class="separator:a037b72b2edb81a477999a7dfc08758c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a875b72940cd578ee76c71f1f4853f139"><td class="memItemLeft" align="right" valign="top"><a id="a875b72940cd578ee76c71f1f4853f139"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>prom_collector_free_generic</b> (void *gen)</td></tr>
+<tr class="memitem:a875b72940cd578ee76c71f1f4853f139"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a875b72940cd578ee76c71f1f4853f139">prom_collector_free_generic</a> (void *gen)</td></tr>
+<tr class="memdesc:a875b72940cd578ee76c71f1f4853f139"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees a collector passed as a void pointer.  <a href="#a875b72940cd578ee76c71f1f4853f139">More...</a><br /></td></tr>
 <tr class="separator:a875b72940cd578ee76c71f1f4853f139"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12c297cce0a30ee4149f2b486d9f0337"><td class="memItemLeft" align="right" valign="top"><a id="a12c297cce0a30ee4149f2b486d9f0337"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a12c297cce0a30ee4149f2b486d9f0337">prom_collector_destroy_generic</a> (void *gen)</td></tr>
-<tr class="memdesc:a12c297cce0a30ee4149f2b486d9f0337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a collector. <br /></td></tr>
+<tr class="memitem:a12c297cce0a30ee4149f2b486d9f0337"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a12c297cce0a30ee4149f2b486d9f0337">prom_collector_destroy_generic</a> (void *gen)</td></tr>
+<tr class="memdesc:a12c297cce0a30ee4149f2b486d9f0337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a collector passed as a void pointer.  <a href="#a12c297cce0a30ee4149f2b486d9f0337">More...</a><br /></td></tr>
 <tr class="separator:a12c297cce0a30ee4149f2b486d9f0337"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd87021bd63f759d55642685a74874ee"><td class="memItemLeft" align="right" valign="top"><a id="abd87021bd63f759d55642685a74874ee"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#abd87021bd63f759d55642685a74874ee">prom_collector_add_metric</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self, <a class="el" href="prom__metric_8h.html#afd1bd014c48955d6c2c36aa8a8cbb889">prom_metric_t</a> *metric)</td></tr>
-<tr class="memdesc:abd87021bd63f759d55642685a74874ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a metric to a collector. <br /></td></tr>
+<tr class="memitem:abd87021bd63f759d55642685a74874ee"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#abd87021bd63f759d55642685a74874ee">prom_collector_add_metric</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self, <a class="el" href="prom__metric_8h.html#afd1bd014c48955d6c2c36aa8a8cbb889">prom_metric_t</a> *metric)</td></tr>
+<tr class="memdesc:abd87021bd63f759d55642685a74874ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a metric to a collector.  <a href="#abd87021bd63f759d55642685a74874ee">More...</a><br /></td></tr>
 <tr class="separator:abd87021bd63f759d55642685a74874ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9929cb81f4fb49ffca8aa880a4699650"><td class="memItemLeft" align="right" valign="top"><a id="a9929cb81f4fb49ffca8aa880a4699650"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a9929cb81f4fb49ffca8aa880a4699650">prom_collector_set_collect_fn</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self, <a class="el" href="prom__collector_8h.html#af87330edd48cdb8e1074517e734b1e40">prom_collect_fn</a> *fn)</td></tr>
-<tr class="memdesc:a9929cb81f4fb49ffca8aa880a4699650"><td class="mdescLeft">&#160;</td><td class="mdescRight">The collect function is responsible for doing any work involving a set of metrics and then returning them for metric exposition. <br /></td></tr>
+<tr class="memitem:a9929cb81f4fb49ffca8aa880a4699650"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector_8h.html#a9929cb81f4fb49ffca8aa880a4699650">prom_collector_set_collect_fn</a> (<a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *self, <a class="el" href="prom__collector_8h.html#af87330edd48cdb8e1074517e734b1e40">prom_collect_fn</a> *fn)</td></tr>
+<tr class="memdesc:a9929cb81f4fb49ffca8aa880a4699650"><td class="mdescLeft">&#160;</td><td class="mdescRight">The collect function is responsible for doing any work involving a set of metrics and then returning them for metric exposition.  <a href="#a9929cb81f4fb49ffca8aa880a4699650">More...</a><br /></td></tr>
 <tr class="separator:a9929cb81f4fb49ffca8aa880a4699650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -154,11 +150,163 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom_
 </div><div class="memdoc">
 
 <p>The function responsible for preparing metric data and returning metrics for a given collector. </p>
-<p>If you use the default collector registry, this should not concern you. If you are using a custom collector, you may which to set this function on your collector to do additional work before returning the contained metrics. </p>
+<p>If you use the default collector registry, this should not concern you. If you are using a custom collector, you may set this function on your collector to do additional work before returning the contained metrics.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The prom_map_t* containing the collected metrics </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="abd87021bd63f759d55642685a74874ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd87021bd63f759d55642685a74874ee">&#9670;&nbsp;</a></span>prom_collector_add_metric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_add_metric </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="prom__metric_8h.html#afd1bd014c48955d6c2c36aa8a8cbb889">prom_metric_t</a> *&#160;</td>
+          <td class="paramname"><em>metric</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a metric to a collector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_t* </td></tr>
+    <tr><td class="paramname">metric</td><td>the prom_metric_t* to add to the prom_collector_t* passed as self. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure. </dd></dl>
+
+</div>
+</div>
+<a id="a037b72b2edb81a477999a7dfc08758c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a037b72b2edb81a477999a7dfc08758c7">&#9670;&nbsp;</a></span>prom_collector_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a collector. </p>
+<p>You MUST set self to NULL after destruction. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure. </dd></dl>
+
+</div>
+</div>
+<a id="a12c297cce0a30ee4149f2b486d9f0337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12c297cce0a30ee4149f2b486d9f0337">&#9670;&nbsp;</a></span>prom_collector_destroy_generic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_destroy_generic </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroys a collector passed as a void pointer. </p>
+<p>You MUST set self to NULL after destruction. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gen</td><td>The target prom_collector_t* represented as a void* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure. </dd></dl>
+
+</div>
+</div>
+<a id="a875b72940cd578ee76c71f1f4853f139"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a875b72940cd578ee76c71f1f4853f139">&#9670;&nbsp;</a></span>prom_collector_free_generic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prom_collector_free_generic </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>gen</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Frees a collector passed as a void pointer. </p>
+<p>You MUST set self to NULL after destruction. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">gen</td><td>The target prom_collector_t* represented as a void* </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4300cf33b6f8e4457df385c3d2a51a4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4300cf33b6f8e4457df385c3d2a51a4b">&#9670;&nbsp;</a></span>prom_collector_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a>* prom_collector_new </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a collector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the collector. The name MUST NOT be default or process. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_collector_t* </dd></dl>
+
+</div>
+</div>
 <a id="af50746bb4af87eda617fa08237e3834e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af50746bb4af87eda617fa08237e3834e">&#9670;&nbsp;</a></span>prom_collector_process_new()</h2>
 
@@ -185,14 +333,53 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom_
       </table>
 </div><div class="memdoc">
 
-<p>Return a collector including the default process metrics. </p>
+<p>Construct a prom_collector_t* which includes the default process metrics. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">limits_path</td><td>Pass NULL to discover the path to the proc/[pid]/limits file associated with process ID assigned by the host environment. Otherwise, pass a string to said path. </td></tr>
-    <tr><td class="paramname">stat_path</td><td>Pass NULL to discover the path to the proc/[pid]/stat file associated with process ID assigned by the host environment. Otherwise, pass a string to said path. </td></tr>
+    <tr><td class="paramname">limits_path</td><td>Pass NULL to discover the path to the /proc/[pid]/limits file associated with process ID assigned by the host environment. Otherwise, pass a string to said path. </td></tr>
+    <tr><td class="paramname">stat_path</td><td>Pass NULL to discover the path to the /proc/[pid]/stat file associated with process ID assigned by the host environment. Otherwise, pass a string to said path. </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_collector_t* </dd></dl>
+
+</div>
+</div>
+<a id="a9929cb81f4fb49ffca8aa880a4699650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9929cb81f4fb49ffca8aa880a4699650">&#9670;&nbsp;</a></span>prom_collector_set_collect_fn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_set_collect_fn </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__collector_8h.html#a28cf36f114f69a96508c044c44716f9c">prom_collector_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="prom__collector_8h.html#af87330edd48cdb8e1074517e734b1e40">prom_collect_fn</a> *&#160;</td>
+          <td class="paramname"><em>fn</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The collect function is responsible for doing any work involving a set of metrics and then returning them for metric exposition. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_t* </td></tr>
+    <tr><td class="paramname">fn</td><td>The prom_collect_fn* which will be responsible for handling any metric collection operations before returning the collected metrics for exposition. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure. </dd></dl>
 
 </div>
 </div>

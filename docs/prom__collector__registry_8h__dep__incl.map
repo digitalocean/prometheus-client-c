@@ -1,3 +1,4 @@
 <map id="prom/include/prom_collector_registry.h" name="prom/include/prom_collector_registry.h">
-<area shape="rect" id="node2" href="$prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="31,95,188,121"/>
+<area shape="rect" id="node2" href="$prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="5,95,163,121"/>
+<area shape="rect" id="node3" href="$promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="187,95,397,121"/>
 </map>
