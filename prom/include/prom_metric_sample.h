@@ -31,6 +31,9 @@ typedef struct prom_metric_sample prom_metric_sample_t;
 
 /**
  * @brief Add the r_value to the sample. The value must be greater than or equal to zero.
+ * @param self The target prom_metric_sample_t*
+ * @param r_value The double to add to prom_metric_sample_t* provided by self
+ * @return Non-zero integer value upon failure
  */
 int prom_metric_sample_add(prom_metric_sample_t *self, double r_value);
 
@@ -38,6 +41,9 @@ int prom_metric_sample_add(prom_metric_sample_t *self, double r_value);
  * @brief Subtract the r_value from the sample.
  *
  * This operation MUST be called a sample derived from a gauge metric.
+ * @param self The target prom_metric_sample_t*
+ * @param r_value The double to subtract from the prom_metric_sample_t* provided by self
+ * @return Non-zero integer value upon failure
  */
 int prom_metric_sample_sub(prom_metric_sample_t *self, double r_value);
 
@@ -45,6 +51,9 @@ int prom_metric_sample_sub(prom_metric_sample_t *self, double r_value);
  * @brief Set the r_value of the sample.
  *
  * This operation MUST be called on a sample derived from a gauge metric.
+ * @param self The target prom_metric_sample_t*
+ * @param r_value The double which will be set to the prom_metric_sample_t* provided by self
+ * @return Non-zero integer value upon failure
  */
 int prom_metric_sample_set(prom_metric_sample_t *self, double r_value);
 

@@ -90,12 +90,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__metric_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__metric_8hdep" alt=""/></div>
 <map name="prom_2include_2prom__metric_8hdep" id="prom_2include_2prom__metric_8hdep">
-<area shape="rect" id="node2" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="5,80,224,107"/>
-<area shape="rect" id="node3" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="304,244,461,271"/>
-<area shape="rect" id="node4" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="67,155,275,196"/>
-<area shape="rect" id="node5" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="349,162,561,189"/>
-<area shape="rect" id="node6" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="585,162,789,189"/>
-<area shape="rect" id="node7" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="657,80,887,107"/>
+<area shape="rect" id="node2" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="70,80,289,107"/>
+<area shape="rect" id="node3" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="302,244,459,271"/>
+<area shape="rect" id="node4" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="6,155,214,196"/>
+<area shape="rect" id="node6" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="339,162,551,189"/>
+<area shape="rect" id="node7" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="575,162,779,189"/>
+<area shape="rect" id="node8" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="636,80,867,107"/>
+<area shape="rect" id="node5" href="promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="5,244,215,271"/>
 </map>
 </div>
 </div>
@@ -165,7 +166,15 @@ Functions</h2></td></tr>
 
 <p>Returns a prom_metric_sample_t*. </p>
 <p>The order of label_values is significant.</p>
-<p>You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be preferrable in performance-sensitive situations. </p>
+<p>You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be preferrable in performance-sensitive situations.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_metric_t* </td></tr>
+    <tr><td class="paramname">label_values</td><td>The label values associated with the metric sample being updated. The number of labels must match the value passed to label_key_count in the counter's constructor. If no label values are necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A prom_metric_sample_t* </dd></dl>
 
 </div>
 </div>
@@ -197,7 +206,15 @@ Functions</h2></td></tr>
 
 <p>Returns a prom_metric_sample_histogram_t*. </p>
 <p>The order of label_values is significant.</p>
-<p>You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be preferrable in performance-sensitive situations. </p>
+<p>You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be preferrable in performance-sensitive situations.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_histogram_metric_t* </td></tr>
+    <tr><td class="paramname">label_values</td><td>The label values associated with the metric sample being updated. The number of labels must match the value passed to label_key_count in the counter's constructor. If no label values are necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>prom_metric_sample_histogram_t* </dd></dl>
 
 </div>
 </div>

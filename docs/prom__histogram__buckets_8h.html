@@ -76,7 +76,15 @@ $(function() {
 
 <p><a href="https://prometheus.io/docs/concepts/metric_types/#histogram">https://prometheus.io/docs/concepts/metric_types/#histogram</a>  
 <a href="#details">More...</a></p>
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &quot;stdlib.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for prom_histogram_buckets.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="prom__histogram__buckets_8h__incl.png" border="0" usemap="#prom_2include_2prom__histogram__buckets_8h" alt=""/></div>
+<map name="prom_2include_2prom__histogram__buckets_8h" id="prom_2include_2prom__histogram__buckets_8h">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__histogram__buckets_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__histogram__buckets_8hdep" alt=""/></div>
@@ -101,22 +109,20 @@ typedef struct <a class="el" href="structprom__histogram__buckets.html">prom_his
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a03736e2fac21748bbfd80100bf9546c4"><td class="memItemLeft" align="right" valign="top"><a id="a03736e2fac21748bbfd80100bf9546c4"></a>
-<a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>prom_histogram_buckets_new</b> (size_t count, double bucket,...)</td></tr>
+<tr class="memitem:a03736e2fac21748bbfd80100bf9546c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a03736e2fac21748bbfd80100bf9546c4">prom_histogram_buckets_new</a> (size_t count, double bucket,...)</td></tr>
+<tr class="memdesc:a03736e2fac21748bbfd80100bf9546c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a prom_histogram_buckets_t*.  <a href="#a03736e2fac21748bbfd80100bf9546c4">More...</a><br /></td></tr>
 <tr class="separator:a03736e2fac21748bbfd80100bf9546c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1adc550bf8999a27f6a26769d6bfc72"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#aa1adc550bf8999a27f6a26769d6bfc72">prom_histogram_buckets_linear</a> (double start, double width, size_t count)</td></tr>
-<tr class="memdesc:aa1adc550bf8999a27f6a26769d6bfc72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create linear buckets.  <a href="#aa1adc550bf8999a27f6a26769d6bfc72">More...</a><br /></td></tr>
+<tr class="memdesc:aa1adc550bf8999a27f6a26769d6bfc72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a linearly sized prom_histogram_buckets_t*.  <a href="#aa1adc550bf8999a27f6a26769d6bfc72">More...</a><br /></td></tr>
 <tr class="separator:aa1adc550bf8999a27f6a26769d6bfc72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a164da4101785b6fa2a292a964c232f12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a164da4101785b6fa2a292a964c232f12">prom_histogram_buckets_exponential</a> (double start, double factor, size_t count)</td></tr>
-<tr class="memdesc:a164da4101785b6fa2a292a964c232f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create linear buckets.  <a href="#a164da4101785b6fa2a292a964c232f12">More...</a><br /></td></tr>
+<tr class="memdesc:a164da4101785b6fa2a292a964c232f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct an exponentially sized prom_histogram_buckets_t*.  <a href="#a164da4101785b6fa2a292a964c232f12">More...</a><br /></td></tr>
 <tr class="separator:a164da4101785b6fa2a292a964c232f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36bc3312f8f479bbd6eb92fa3b1a5033"><td class="memItemLeft" align="right" valign="top"><a id="a36bc3312f8f479bbd6eb92fa3b1a5033"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a36bc3312f8f479bbd6eb92fa3b1a5033">prom_histogram_buckets_destroy</a> (<a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *self)</td></tr>
-<tr class="memdesc:a36bc3312f8f479bbd6eb92fa3b1a5033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a prom_histogram_buckets_t. <br /></td></tr>
+<tr class="memitem:a36bc3312f8f479bbd6eb92fa3b1a5033"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a36bc3312f8f479bbd6eb92fa3b1a5033">prom_histogram_buckets_destroy</a> (<a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *self)</td></tr>
+<tr class="memdesc:a36bc3312f8f479bbd6eb92fa3b1a5033"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a prom_histogram_buckets_t*.  <a href="#a36bc3312f8f479bbd6eb92fa3b1a5033">More...</a><br /></td></tr>
 <tr class="separator:a36bc3312f8f479bbd6eb92fa3b1a5033"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92158192cfe9a71a98dbb1d9adc8508a"><td class="memItemLeft" align="right" valign="top"><a id="a92158192cfe9a71a98dbb1d9adc8508a"></a>
-size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a92158192cfe9a71a98dbb1d9adc8508a">prom_histogram_buckets_count</a> (<a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *self)</td></tr>
-<tr class="memdesc:a92158192cfe9a71a98dbb1d9adc8508a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the count of buckets. <br /></td></tr>
+<tr class="memitem:a92158192cfe9a71a98dbb1d9adc8508a"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram__buckets_8h.html#a92158192cfe9a71a98dbb1d9adc8508a">prom_histogram_buckets_count</a> (<a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *self)</td></tr>
+<tr class="memdesc:a92158192cfe9a71a98dbb1d9adc8508a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the count of buckets.  <a href="#a92158192cfe9a71a98dbb1d9adc8508a">More...</a><br /></td></tr>
 <tr class="separator:a92158192cfe9a71a98dbb1d9adc8508a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -129,6 +135,60 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a href="https://prometheus.io/docs/concepts/metric_types/#histogram">https://prometheus.io/docs/concepts/metric_types/#histogram</a> </p>
 </div><h2 class="groupheader">Function Documentation</h2>
+<a id="a92158192cfe9a71a98dbb1d9adc8508a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92158192cfe9a71a98dbb1d9adc8508a">&#9670;&nbsp;</a></span>prom_histogram_buckets_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t prom_histogram_buckets_count </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the count of buckets. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_histogram_buckets_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The count of buckets </dd></dl>
+
+</div>
+</div>
+<a id="a36bc3312f8f479bbd6eb92fa3b1a5033"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36bc3312f8f479bbd6eb92fa3b1a5033">&#9670;&nbsp;</a></span>prom_histogram_buckets_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_histogram_buckets_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a prom_histogram_buckets_t*. </p>
+<p>Self MUST be set to NULL after destruction. Returns a non-zero integer value upon failure. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_histogram_buckets_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero integer value upon failure </dd></dl>
+
+</div>
+</div>
 <a id="a164da4101785b6fa2a292a964c232f12"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a164da4101785b6fa2a292a964c232f12">&#9670;&nbsp;</a></span>prom_histogram_buckets_exponential()</h2>
 
@@ -161,17 +221,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create linear buckets. </p>
+<p>Construct an exponentially sized prom_histogram_buckets_t*. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start</td><td>The first upper bound. The value MUST be greater than 0. </td></tr>
+    <tr><td class="paramname">start</td><td>The first inclusive upper bound. The value MUST be greater than 0. </td></tr>
     <tr><td class="paramname">factor</td><td>The factor to apply to the previous upper bound to produce the next upper bound. The value MUST be greater than 1. </td></tr>
-    <tr><td class="paramname">count</td><td>The total number of buckets. The final +Inf bucket is not counted and not included in the returned. The value MUST be greater than or equal to 1 array </td></tr>
+    <tr><td class="paramname">count</td><td>The total number of buckets. The final +Inf bucket is not counted and not included. The value MUST be greater than or equal to 1 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The array of upper bounds represented as double values</dd></dl>
-<p>The array returned MUST be freed </p>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_histogram_buckets_t* </dd></dl>
 
 </div>
 </div>
@@ -207,17 +266,60 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create linear buckets. </p>
+<p>Construct a linearly sized prom_histogram_buckets_t*. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start</td><td>The first upper bound </td></tr>
-    <tr><td class="paramname">width</td><td>The distance between each upper bound in buckets </td></tr>
-    <tr><td class="paramname">count</td><td>The total number of buckets. The final +Inf bucket is not counted and not included in the returned array </td></tr>
+    <tr><td class="paramname">start</td><td>The first inclusive upper bound </td></tr>
+    <tr><td class="paramname">width</td><td>The distance between each upper bound </td></tr>
+    <tr><td class="paramname">count</td><td>The total number of buckets. The final +Inf bucket is not counted and not included. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The array of upper bounds represented as double values</dd></dl>
-<p>The Array returned MUST be freed </p>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_histogram_buckets_t* </dd></dl>
+
+</div>
+</div>
+<a id="a03736e2fac21748bbfd80100bf9546c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03736e2fac21748bbfd80100bf9546c4">&#9670;&nbsp;</a></span>prom_histogram_buckets_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a>* prom_histogram_buckets_new </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>bucket</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a prom_histogram_buckets_t*. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">count</td><td>The number of buckets </td></tr>
+    <tr><td class="paramname">bucket</td><td>The first bucket. A variable number of bucket values may be passed. This quantity MUST equal the value passed as count. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_histogram_buckets_t* </dd></dl>
 
 </div>
 </div>

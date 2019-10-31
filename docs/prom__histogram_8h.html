@@ -82,10 +82,10 @@ Include dependency graph for prom_histogram.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__histogram_8h__incl.png" border="0" usemap="#prom_2include_2prom__histogram_8h" alt=""/></div>
 <map name="prom_2include_2prom__histogram_8h" id="prom_2include_2prom__histogram_8h">
-<area shape="rect" id="node3" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="129,80,246,107"/>
-<area shape="rect" id="node6" href="prom__histogram__buckets_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="269,80,468,107"/>
-<area shape="rect" id="node4" href="prom__metric__sample_8h.html" title="Functions for interfacting with metric samples directly. " alt="" coords="5,162,177,189"/>
-<area shape="rect" id="node5" href="prom__metric__sample__histogram_8h.html" title="Functions for interacting with histogram metric samples directly. " alt="" coords="202,155,362,196"/>
+<area shape="rect" id="node3" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="244,80,361,107"/>
+<area shape="rect" id="node6" href="prom__histogram__buckets_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="22,80,220,107"/>
+<area shape="rect" id="node4" href="prom__metric__sample_8h.html" title="Functions for interfacting with metric samples directly. " alt="" coords="164,162,336,189"/>
+<area shape="rect" id="node5" href="prom__metric__sample__histogram_8h.html" title="Functions for interacting with histogram metric samples directly. " alt="" coords="361,155,521,196"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -107,17 +107,14 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ad42681e59e727f9e3d43bf0cdbba9a1b"><td class="memItemLeft" align="right" valign="top"><a id="ad42681e59e727f9e3d43bf0cdbba9a1b"></a>
-<a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#ad42681e59e727f9e3d43bf0cdbba9a1b">prom_histogram_new</a> (const char *name, const char *help, <a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *buckets, size_t label_key_count, const char **label_keys)</td></tr>
-<tr class="memdesc:ad42681e59e727f9e3d43bf0cdbba9a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to a prom_histogram_t. <br /></td></tr>
+<tr class="memitem:ad42681e59e727f9e3d43bf0cdbba9a1b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#ad42681e59e727f9e3d43bf0cdbba9a1b">prom_histogram_new</a> (const char *name, const char *help, <a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *buckets, size_t label_key_count, const char **label_keys)</td></tr>
+<tr class="memdesc:ad42681e59e727f9e3d43bf0cdbba9a1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a prom_histogram_t*.  <a href="#ad42681e59e727f9e3d43bf0cdbba9a1b">More...</a><br /></td></tr>
 <tr class="separator:ad42681e59e727f9e3d43bf0cdbba9a1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9067b27e7ab2abd815af0614bb35357"><td class="memItemLeft" align="right" valign="top"><a id="af9067b27e7ab2abd815af0614bb35357"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#af9067b27e7ab2abd815af0614bb35357">prom_histogram_destroy</a> (<a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *self)</td></tr>
-<tr class="memdesc:af9067b27e7ab2abd815af0614bb35357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a pointer to a prom_gauge. <br /></td></tr>
+<tr class="memitem:af9067b27e7ab2abd815af0614bb35357"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#af9067b27e7ab2abd815af0614bb35357">prom_histogram_destroy</a> (<a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *self)</td></tr>
+<tr class="memdesc:af9067b27e7ab2abd815af0614bb35357"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a prom_histogram_t*.  <a href="#af9067b27e7ab2abd815af0614bb35357">More...</a><br /></td></tr>
 <tr class="separator:af9067b27e7ab2abd815af0614bb35357"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a274e4b869c7d9239e9f47b3898210fbe"><td class="memItemLeft" align="right" valign="top"><a id="a274e4b869c7d9239e9f47b3898210fbe"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#a274e4b869c7d9239e9f47b3898210fbe">prom_histogram_observe</a> (<a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *self, double value, const char **label_values)</td></tr>
-<tr class="memdesc:a274e4b869c7d9239e9f47b3898210fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observe the prom_histogram_t given the value and labells. <br /></td></tr>
+<tr class="memitem:a274e4b869c7d9239e9f47b3898210fbe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__histogram_8h.html#a274e4b869c7d9239e9f47b3898210fbe">prom_histogram_observe</a> (<a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *self, double value, const char **label_values)</td></tr>
+<tr class="memdesc:a274e4b869c7d9239e9f47b3898210fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Observe the prom_histogram_t given the value and labells.  <a href="#a274e4b869c7d9239e9f47b3898210fbe">More...</a><br /></td></tr>
 <tr class="separator:a274e4b869c7d9239e9f47b3898210fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -139,6 +136,138 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom_
 <p>References</p><ul>
 <li>See <a href="https://prometheus.io/docs/concepts/metric_types/#histogram">https://prometheus.io/docs/concepts/metric_types/#histogram</a> </li>
 </ul>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="af9067b27e7ab2abd815af0614bb35357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9067b27e7ab2abd815af0614bb35357">&#9670;&nbsp;</a></span>prom_histogram_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_histogram_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a prom_histogram_t*. </p>
+<p>self MUSTS be set to NULL after destruction. Returns a non-zero integer value upon failure. </p><dl class="section return"><dt>Returns</dt><dd>Non-zero value upon failure. </dd></dl>
+
+</div>
+</div>
+<a id="ad42681e59e727f9e3d43bf0cdbba9a1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42681e59e727f9e3d43bf0cdbba9a1b">&#9670;&nbsp;</a></span>prom_histogram_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a>* prom_histogram_new </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>help</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structprom__histogram__buckets.html">prom_histogram_buckets_t</a> *&#160;</td>
+          <td class="paramname"><em>buckets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>label_key_count</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>label_keys</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a prom_histogram_t*. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the metric </td></tr>
+    <tr><td class="paramname">help</td><td>The metric description </td></tr>
+    <tr><td class="paramname">buckets</td><td>The prom_histogram_buckets_t*. See <a class="el" href="prom__histogram__buckets_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram ">prom_histogram_buckets.h</a>. </td></tr>
+    <tr><td class="paramname">label_key_count</td><td>is the number of labels associated with the given metric. Pass 0 if the metric does not require labels. </td></tr>
+    <tr><td class="paramname">label_keys</td><td>A collection of label keys. The number of keys MUST match the value passed as label_key_count. If no labels are required, pass NULL. Otherwise, it may be convenient to pass this value as a literal. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_histogram_t*</dd></dl>
+<p><em>Example</em> </p><pre class="fragment">// An example with labels
+prom_histogram_buckets_t* buckets = prom_histogram_buckets_linear(5.0, 5.0, 10);
+prom_histogram_new("foo", "foo is a counter with labels", buckets, 2, (const char**) { "one", "two" });
+
+// An example without labels
+prom_histogram_buckets_t* buckets = prom_histogram_buckets_linear(5.0, 5.0, 10);
+prom_histogram_new("foo", "foo is a counter without labels", buckets, 0, NULL);</pre> 
+</div>
+</div>
+<a id="a274e4b869c7d9239e9f47b3898210fbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a274e4b869c7d9239e9f47b3898210fbe">&#9670;&nbsp;</a></span>prom_histogram_observe()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_histogram_observe </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__histogram_8h.html#a8c061924368d41c161025bf3d3cde9ae">prom_histogram_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>label_values</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Observe the prom_histogram_t given the value and labells. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_histogram_t* </td></tr>
+    <tr><td class="paramname">value</td><td>The value to observe </td></tr>
+    <tr><td class="paramname">label_keys</td><td>A collection of label keys. The number of keys MUST match the value passed as label_key_count. If no labels are required, pass NULL. Otherwise, it may be convenient to pass this value as a literal. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero value upon failure </dd></dl>
 
 </div>
 </div>

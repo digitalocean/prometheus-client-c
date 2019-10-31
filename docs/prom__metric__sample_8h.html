@@ -79,13 +79,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__metric__sample_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__metric__sample_8hdep" alt=""/></div>
 <map name="prom_2include_2prom__metric__sample_8hdep" id="prom_2include_2prom__metric__sample_8hdep">
-<area shape="rect" id="node2" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="351,95,558,121"/>
-<area shape="rect" id="node4" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="376,333,533,360"/>
-<area shape="rect" id="node3" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="5,169,224,196"/>
-<area shape="rect" id="node5" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="67,244,275,285"/>
-<area shape="rect" id="node6" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="349,251,561,278"/>
-<area shape="rect" id="node7" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="585,251,789,278"/>
-<area shape="rect" id="node8" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="593,169,823,196"/>
+<area shape="rect" id="node2" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="407,95,613,121"/>
+<area shape="rect" id="node4" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="547,333,705,360"/>
+<area shape="rect" id="node3" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="147,169,366,196"/>
+<area shape="rect" id="node5" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="6,244,214,285"/>
+<area shape="rect" id="node7" href="prom__counter_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#counter " alt="" coords="288,251,500,278"/>
+<area shape="rect" id="node8" href="prom__gauge_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#gauge " alt="" coords="524,251,728,278"/>
+<area shape="rect" id="node9" href="prom__histogram_8h.html" title="https://prometheus.io/docs/concepts/metric_types/#histogram " alt="" coords="548,169,779,196"/>
+<area shape="rect" id="node6" href="promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="5,333,215,360"/>
 </map>
 </div>
 </div>
@@ -140,7 +141,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Add the r_value to the sample. </p>
-<p>The value must be greater than or equal to zero. </p>
+<p>The value must be greater than or equal to zero. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_metric_sample_t* </td></tr>
+    <tr><td class="paramname">r_value</td><td>The double to add to prom_metric_sample_t* provided by self </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>
@@ -171,7 +179,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the r_value of the sample. </p>
-<p>This operation MUST be called on a sample derived from a gauge metric. </p>
+<p>This operation MUST be called on a sample derived from a gauge metric. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_metric_sample_t* </td></tr>
+    <tr><td class="paramname">r_value</td><td>The double which will be set to the prom_metric_sample_t* provided by self </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>
@@ -202,7 +217,14 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Subtract the r_value from the sample. </p>
-<p>This operation MUST be called a sample derived from a gauge metric. </p>
+<p>This operation MUST be called a sample derived from a gauge metric. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_metric_sample_t* </td></tr>
+    <tr><td class="paramname">r_value</td><td>The double to subtract from the prom_metric_sample_t* provided by self </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>

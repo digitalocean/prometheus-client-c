@@ -39,6 +39,12 @@ typedef struct prom_metric prom_metric_t;
  * You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map
  * with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be
  * preferrable in performance-sensitive situations.
+ *
+ * @param self The target prom_metric_t*
+ * @param label_values The label values associated with the metric sample being updated. The number of labels must
+ *                     match the value passed to label_key_count in the counter's constructor. If no label values are
+ *                     necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal.
+ * @return A prom_metric_sample_t*
  */
 prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const char **label_values);
 
@@ -48,6 +54,12 @@ prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const 
  * You may use this function to cache metric samples to avoid sample lookup. Metric samples are stored in a hash map
  * with O(1) lookups in average case; nonethless, caching metric samples and updating them directly might be
  * preferrable in performance-sensitive situations.
+ *
+ * @param self The target prom_histogram_metric_t*
+ * @param label_values The label values associated with the metric sample being updated. The number of labels must
+ *                     match the value passed to label_key_count in the counter's constructor. If no label values are
+ *                     necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal.
+ * @return prom_metric_sample_histogram_t*
  */
 prom_metric_sample_histogram_t* prom_metric_sample_histogram_from_labels(prom_metric_t *self,
                                                                          const char **label_values);

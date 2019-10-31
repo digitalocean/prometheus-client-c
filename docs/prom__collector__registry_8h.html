@@ -94,7 +94,8 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="prom__collector__registry_8h__dep__incl.png" border="0" usemap="#prom_2include_2prom__collector__registry_8hdep" alt=""/></div>
 <map name="prom_2include_2prom__collector__registry_8hdep" id="prom_2include_2prom__collector__registry_8hdep">
-<area shape="rect" id="node2" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="31,95,188,121"/>
+<area shape="rect" id="node2" href="prom_8h.html" title="Include prom.h to include the entire public API. " alt="" coords="5,95,163,121"/>
+<area shape="rect" id="node3" href="promhttp_8h.html" title="Provides a HTTP endpoint for metric exposition References: " alt="" coords="187,95,397,121"/>
 </map>
 </div>
 </div>
@@ -109,21 +110,17 @@ typedef struct prom_collector_registry&#160;</td><td class="memItemRight" valign
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaf1421bd744f0dbbdaba7e64cec11f54"><td class="memItemLeft" align="right" valign="top"><a id="aaf1421bd744f0dbbdaba7e64cec11f54"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#aaf1421bd744f0dbbdaba7e64cec11f54">prom_collector_registry_default_init</a> (void)</td></tr>
-<tr class="memdesc:aaf1421bd744f0dbbdaba7e64cec11f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the default collector registry and enables metric collection on the executing process. <br /></td></tr>
+<tr class="memitem:aaf1421bd744f0dbbdaba7e64cec11f54"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#aaf1421bd744f0dbbdaba7e64cec11f54">prom_collector_registry_default_init</a> (void)</td></tr>
+<tr class="memdesc:aaf1421bd744f0dbbdaba7e64cec11f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the default collector registry and enables metric collection on the executing process.  <a href="#aaf1421bd744f0dbbdaba7e64cec11f54">More...</a><br /></td></tr>
 <tr class="separator:aaf1421bd744f0dbbdaba7e64cec11f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5d622258998978c528253f07e2903b8"><td class="memItemLeft" align="right" valign="top"><a id="ab5d622258998978c528253f07e2903b8"></a>
-<a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#ab5d622258998978c528253f07e2903b8">prom_collector_registry_new</a> (const char *name)</td></tr>
-<tr class="memdesc:ab5d622258998978c528253f07e2903b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a new collector registry. <br /></td></tr>
+<tr class="memitem:ab5d622258998978c528253f07e2903b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#ab5d622258998978c528253f07e2903b8">prom_collector_registry_new</a> (const char *name)</td></tr>
+<tr class="memdesc:ab5d622258998978c528253f07e2903b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a prom_collector_registry_t*.  <a href="#ab5d622258998978c528253f07e2903b8">More...</a><br /></td></tr>
 <tr class="separator:ab5d622258998978c528253f07e2903b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3854e6e40b6f741fde53dc65f0ecd87"><td class="memItemLeft" align="right" valign="top"><a id="ad3854e6e40b6f741fde53dc65f0ecd87"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#ad3854e6e40b6f741fde53dc65f0ecd87">prom_collector_registry_destroy</a> (<a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *self)</td></tr>
-<tr class="memdesc:ad3854e6e40b6f741fde53dc65f0ecd87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a collector registry. <br /></td></tr>
+<tr class="memitem:ad3854e6e40b6f741fde53dc65f0ecd87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#ad3854e6e40b6f741fde53dc65f0ecd87">prom_collector_registry_destroy</a> (<a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *self)</td></tr>
+<tr class="memdesc:ad3854e6e40b6f741fde53dc65f0ecd87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a collector registry.  <a href="#ad3854e6e40b6f741fde53dc65f0ecd87">More...</a><br /></td></tr>
 <tr class="separator:ad3854e6e40b6f741fde53dc65f0ecd87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d59bf988de4ee29e076910fa7135071"><td class="memItemLeft" align="right" valign="top"><a id="a0d59bf988de4ee29e076910fa7135071"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#a0d59bf988de4ee29e076910fa7135071">prom_collector_registry_enable_process_metrics</a> (<a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *self)</td></tr>
-<tr class="memdesc:a0d59bf988de4ee29e076910fa7135071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable process metrics on the given collector registry. <br /></td></tr>
+<tr class="memitem:a0d59bf988de4ee29e076910fa7135071"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#a0d59bf988de4ee29e076910fa7135071">prom_collector_registry_enable_process_metrics</a> (<a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *self)</td></tr>
+<tr class="memdesc:a0d59bf988de4ee29e076910fa7135071"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable process metrics on the given collector registry.  <a href="#a0d59bf988de4ee29e076910fa7135071">More...</a><br /></td></tr>
 <tr class="separator:a0d59bf988de4ee29e076910fa7135071"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a113683f4e15ad9240a37ed2139ddaea6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="prom__metric_8h.html#afd1bd014c48955d6c2c36aa8a8cbb889">prom_metric_t</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="prom__collector__registry_8h.html#a113683f4e15ad9240a37ed2139ddaea6">prom_collector_registry_must_register_metric</a> (<a class="el" href="prom__metric_8h.html#afd1bd014c48955d6c2c36aa8a8cbb889">prom_metric_t</a> *metric)</td></tr>
 <tr class="memdesc:a113683f4e15ad9240a37ed2139ddaea6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a metric with the default collector on PROM_DEFAULT_COLLECTOR_REGISTRY.  <a href="#a113683f4e15ad9240a37ed2139ddaea6">More...</a><br /></td></tr>
@@ -167,7 +164,90 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns a string in the default metric exposition format. </p>
-<p>Reference: <a href="https://prometheus.io/docs/instrumenting/exposition_formats/">https://prometheus.io/docs/instrumenting/exposition_formats/</a> </p>
+<p>The string MUST be freed to avoid unnecessary heap memory growth.</p>
+<p>Reference: <a href="https://prometheus.io/docs/instrumenting/exposition_formats/">https://prometheus.io/docs/instrumenting/exposition_formats/</a></p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_registry_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The string int he default metric exposition format. </dd></dl>
+
+</div>
+</div>
+<a id="aaf1421bd744f0dbbdaba7e64cec11f54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf1421bd744f0dbbdaba7e64cec11f54">&#9670;&nbsp;</a></span>prom_collector_registry_default_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_registry_default_init </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the default collector registry and enables metric collection on the executing process. </p>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
+
+</div>
+</div>
+<a id="ad3854e6e40b6f741fde53dc65f0ecd87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3854e6e40b6f741fde53dc65f0ecd87">&#9670;&nbsp;</a></span>prom_collector_registry_destroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_registry_destroy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destroy a collector registry. </p>
+<p>You MUST set self to NULL after destruction. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_registry_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
+
+</div>
+</div>
+<a id="a0d59bf988de4ee29e076910fa7135071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d59bf988de4ee29e076910fa7135071">&#9670;&nbsp;</a></span>prom_collector_registry_enable_process_metrics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int prom_collector_registry_enable_process_metrics </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a> *&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable process metrics on the given collector registry. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_registry_t* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>
@@ -188,7 +268,41 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Registers a metric with the default collector on PROM_DEFAULT_COLLECTOR_REGISTRY. </p>
-<p>The metric to be registered MUST NOT already be registered with the given metric. If so, the program will halt. It returns a prom_metric_t* to simplify metric creation and registration. Furthermore, PROM_DEFAULT_COLLECTOR_REGISTRY must be registered via <a class="el" href="prom__collector__registry_8h.html#aaf1421bd744f0dbbdaba7e64cec11f54" title="Initializes the default collector registry and enables metric collection on the executing process...">prom_collector_registry_default_init()</a> prior to calling this function. The metric will be added to the default registry's default collector. </p>
+<p>The metric to be registered MUST NOT already be registered with the given . If so, the program will halt. It returns a prom_metric_t* to simplify metric creation and registration. Furthermore, PROM_DEFAULT_COLLECTOR_REGISTRY must be registered via <a class="el" href="prom__collector__registry_8h.html#aaf1421bd744f0dbbdaba7e64cec11f54" title="Initializes the default collector registry and enables metric collection on the executing process...">prom_collector_registry_default_init()</a> prior to calling this function. The metric will be added to the default registry's default collector.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metric</td><td>The metric to register on PROM_DEFAULT_COLLECTOR_REGISTRY* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The registered prom_metric_t* </dd></dl>
+
+</div>
+</div>
+<a id="ab5d622258998978c528253f07e2903b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5d622258998978c528253f07e2903b8">&#9670;&nbsp;</a></span>prom_collector_registry_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="prom__collector__registry_8h.html#a20f07748401fbbde9efc8a718f9bc202">prom_collector_registry_t</a>* prom_collector_registry_new </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a prom_collector_registry_t*. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the collector registry. It MUST NOT be default. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The constructed prom_collector_registry_t* </dd></dl>
 
 </div>
 </div>
@@ -219,7 +333,14 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Register a collector with the given registry. </p>
-<p>Returns an error on failure. </p>
+<p>Returns a non-zero integer value on failure. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_registry_t* </td></tr>
+    <tr><td class="paramname">collector</td><td>The prom_collector_t* to register onto the prom_collector_registry_t* as self </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>
@@ -240,7 +361,15 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Registers a metric with the default collector on PROM_DEFAULT_COLLECTOR_REGISTRY. </p>
-<p>Returns an error on failure. See prom_collector_registry_must_register_metric. </p>
+<p>Returns an non-zero integer value on failure.</p>
+<p>See prom_collector_registry_must_register_metric.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">metric</td><td>The metric to register on PROM_DEFAULT_COLLECTOR_REGISTRY* </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>
@@ -271,7 +400,16 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Validates that the given metric name complies with the specification: </p>
-<p>Reference: <a href="https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels">https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels</a> </p>
+<p>Reference: <a href="https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels">https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels</a></p>
+<p>Returns a non-zero integer value on failure.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self</td><td>The target prom_collector_registry_t* </td></tr>
+    <tr><td class="paramname">metric_name</td><td>The metric name to validate </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A non-zero integer value upon failure </dd></dl>
 
 </div>
 </div>

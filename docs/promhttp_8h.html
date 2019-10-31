@@ -75,11 +75,18 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;microhttpd.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="prom__collector__registry_8h_source.html">prom_collector_registry.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for promhttp.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="promhttp_8h__incl.png" border="0" usemap="#promhttp_2include_2promhttp_8h" alt=""/></div>
 <map name="promhttp_2include_2promhttp_8h" id="promhttp_2include_2promhttp_8h">
+<area shape="rect" id="node4" href="prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="230,80,417,107"/>
+<area shape="rect" id="node5" href="prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="207,155,338,181"/>
+<area shape="rect" id="node7" href="prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="317,229,434,256"/>
+<area shape="rect" id="node6" href="prom__map_8h_source.html" title="prom_map.h" alt="" coords="189,229,293,256"/>
+<area shape="rect" id="node8" href="prom__metric__sample_8h.html" title="Functions for interfacting with metric samples directly. " alt="" coords="195,311,367,338"/>
+<area shape="rect" id="node9" href="prom__metric__sample__histogram_8h.html" title="Functions for interacting with histogram metric samples directly. " alt="" coords="391,304,551,345"/>
 </map>
 </div>
 </div>
@@ -118,7 +125,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets the active registry for metric scraping. </p>
-<p>If null is passed, the default registry is used. The registry MUST be initialized. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">active_registery</td><td>The target prom_collector_registry_t*. If null is passed, the default registry is used. The registry MUST be initialized. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -162,8 +174,9 @@ Functions</h2></td></tr>
 
 <p>Starts a daemon in the background and returns a pointer to an HMD_Daemon. </p>
 <p>References:</p><ul>
-<li><a href="https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#microhttpd_002dinit">https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#microhttpd_002dinit</a> </li>
+<li><a href="https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#microhttpd_002dinit">https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#microhttpd_002dinit</a></li>
 </ul>
+<dl class="section return"><dt>Returns</dt><dd>struct MHD_Daemon* </dd></dl>
 
 </div>
 </div>

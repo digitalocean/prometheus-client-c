@@ -1,2 +1,8 @@
 <map id="promhttp/include/promhttp.h" name="promhttp/include/promhttp.h">
+<area shape="rect" id="node4" href="$prom__collector__registry_8h.html" title="The collector registry registers collectors for metric exposition. " alt="" coords="230,80,417,107"/>
+<area shape="rect" id="node5" href="$prom__collector_8h.html" title="A Prometheus collector returns a collection of metrics. " alt="" coords="207,155,338,181"/>
+<area shape="rect" id="node7" href="$prom__metric_8h.html" title="Functions for retrieving metric samples from metrics given an ordered set of labels. " alt="" coords="317,229,434,256"/>
+<area shape="rect" id="node6" href="$prom__map_8h_source.html" title="prom_map.h" alt="" coords="189,229,293,256"/>
+<area shape="rect" id="node8" href="$prom__metric__sample_8h.html" title="Functions for interfacting with metric samples directly. " alt="" coords="195,311,367,338"/>
+<area shape="rect" id="node9" href="$prom__metric__sample__histogram_8h.html" title="Functions for interacting with histogram metric samples directly. " alt="" coords="391,304,551,345"/>
 </map>
