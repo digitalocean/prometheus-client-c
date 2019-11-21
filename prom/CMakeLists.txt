@@ -129,7 +129,7 @@ set(CPACK_PACKAGE_VENDOR DigitalOcean)
 set(CPACK_PACKAGE_VERSION_MAJOR ${MajorVersion})
 set(CPACK_PACKAGE_VERSION_MINOR ${MinorVersion})
 set(CPACK_PACKAGE_VERSION_PATCH ${PatchVersion})
-set(CPACK_PACKAGE_DESCRIPTION_FILE /code/README.md)
+set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../README.md)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A prometheus client library")
 set(CPACK_PACKAGE_HOMEPAGE_URL https://github.internal.digitalocean.com/timeseries/prometheus-client-c)
 
