@@ -5,8 +5,7 @@ RUN apt-get update && \
     apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc libmicrohttpd-dev doxygen graphviz && \
     curl -L https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz 2> /dev/null | tar xzvf - -C /usr/local && \
     mkdir -p /gopath/{src,bin} && \
-    echo 'export GOPATH=/gopath' > /root/.bash_profile && \
-    echo 'export PATH=$PATH:/usr/local/go/bin:/gopath/bin' > /root/.bash_profile && \
+    printf 'export GOPATH=/gopath\nexport PATH=$PATH:/usr/local/go/bin:/gopath/bin\n' > /root/.bash_profile && \
     printf '#!/usr/bin/env bash\nsource /root/.bash_profile\nexec /bin/bash $@\n' > /entrypoint && \
     chmod +x /entrypoint && \
     GOPATH=/gopath /usr/local/go/bin/go get github.com/prometheus/prom2json && \
