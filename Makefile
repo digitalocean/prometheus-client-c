@@ -13,17 +13,13 @@ default: changed_files
 	@echo -e "\033[1;32mNothing to build\033[0m"
 endif
 
-build_and_test: changed_files docker clean build test package smoke
+build_and_test: changed_files clean build test package smoke
 .PHONY: build_and_test
 
 all: build_and_test docs
 .PHONY: all
 
-docker:
-	pushd docker && make
-.PHONY: docker
-
-clean: docker
+clean:
 	./auto dev -e auto -a clean
 
 build: clean
