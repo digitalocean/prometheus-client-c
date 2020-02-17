@@ -119,12 +119,6 @@ int prom_metric_destroy(prom_metric_t *self) {
   self->formatter = NULL;
   if (r) ret = r;
 
-  r = pthread_rwlock_unlock(self->rwlock);
-  if (r) {
-    PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);
-    ret = r;
-  }
-
   r = pthread_rwlock_destroy(self->rwlock);
   if (r) {
     PROM_LOG(PROM_PTHREAD_RWLOCK_DESTROY_ERROR);
