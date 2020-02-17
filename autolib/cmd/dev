@@ -43,21 +43,21 @@ EOF
 
 source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
 
+declare DOCKER_IMAGE=${DOCKER_IMAGE:=ubuntu:18.04}
 declare DOCKER_EXEC
 declare -a DOCKER_EXEC_ARGS
 
 run(){
   local r
-  if ! { docker image list | grep -q prometheus-client-c-dev; }; then
-    autolib_output_banner "Building development container"
-    pushd docker > /dev/null || return $?
-      make || {
-        r=$?
-        outlib_output_error "Docker Build Failure"
-        return $r
-      }
-    popd > /dev/null
-  fi
+  autolib_output_banner "Building development container"
+  autolib_write_dockerfile "$DOCKER_IMAGE" || return $?
+  pushd docker > /dev/null || return $?
+    make || {
+      r=$?
+      outlib_output_error "Docker Build Failure"
+      return $r
+    }
+  popd > /dev/null
 
   autolib_output_banner "Entering development environment"
   declare -a args
@@ -67,7 +67,7 @@ run(){
   args+=(--volume "${PWD}:/code")           # Mount code into the container
   args+=(--env DEV=1)                       # Enables check if executing in dev environment
   args+=(--net host)                        # Use host networking
-  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind and gdb
+  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind eand gdb
   args+=(--security-opt seccomp=unconfined) # Required for debugging
   args+=(--rm)                              # Remove when done
 
@@ -75,10 +75,13 @@ run(){
 }
 
 main(){
-  while getopts "he:a:" opt; do
+  while getopts "he:a:i:" opt; do
     case $opt in
       ( h ) {
         usage && exit 0
+      } ;;
+      ( i ) {
+        DOCKER_IMAGE="$OPTARG"
       } ;;
       ( e ) {
         DOCKER_EXEC="$OPTARG"

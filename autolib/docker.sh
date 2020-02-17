@@ -1,4 +1,13 @@
-FROM debian:buster
+#!/usr/bin/env bash
+
+lib="$(dirname ${BASH_SOURCE[0]})"
+source "${lib}/output.sh"
+
+PROJECT_ROOT=$(pushd "$(dirname ${BASH_SOURCE[0]})/.." > /dev/null; echo $PWD; popd > /dev/null)
+
+autolib_debian_template(){
+  cat <<'EOF'
+FROM __DOCKER_IMAGE__
 
 RUN apt-get update && \
     apt-get install -y apt-utils && \
@@ -20,3 +29,25 @@ RUN apt-get update && \
 WORKDIR /code
 ENTRYPOINT ["/entrypoint"]
 
+EOF
+}
+
+autolib_write_dockerfile(){
+  local docker_image="$1"
+  local r
+  case "$docker_image" in
+    ( ubuntu:18.04 | ubuntu:16.04 | debian:buster | debian:stretch ) {
+      autolib_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
+        r=$?
+        autolib_output_error "failed to generate dockerfile"
+        return $r
+      }
+    } ;;
+
+    ( * ) {
+      r=1
+      autolib_output_error "unsupported DOCKER_IMAGE: $docker_image"
+      return $r
+    } ;;
+  esac
+}
