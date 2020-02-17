@@ -36,7 +36,7 @@ autolib_write_dockerfile(){
   local docker_image="$1"
   local r
   case "$docker_image" in
-    ( ubuntu:18.04 | ubuntu:16.04 | debian:buster | debian:stretch ) {
+    ( ubuntu:18.04 | ubuntu:16.04 | debian:buster | debian:stretch | debian:jessie ) {
       autolib_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
         r=$?
         autolib_output_error "failed to generate dockerfile"

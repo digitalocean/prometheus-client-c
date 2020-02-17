@@ -21,6 +21,9 @@ MUST NOT execute this command from an existing docker container.
 -e Execute the following executable
 -a Pass an argument to the executable given by -e. You may specify
    this flag multiple times. The order is preserved.
+-i The docker image to use.
+   Default: ubuntu:18.04
+   Options: ubuntu:18.04, ubuntu:16.04, debian:buster, debian:stretch, debian:jessie
 EOF
 
 usage() {
