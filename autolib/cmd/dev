@@ -70,7 +70,7 @@ run(){
   args+=(--volume "${PWD}:/code")           # Mount code into the container
   args+=(--env DEV=1)                       # Enables check if executing in dev environment
   args+=(--net host)                        # Use host networking
-  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind eand gdb
+  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind and gdb
   args+=(--security-opt seccomp=unconfined) # Required for debugging
   args+=(--rm)                              # Remove when done
 
