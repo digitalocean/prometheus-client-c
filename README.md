@@ -73,3 +73,9 @@ communication process so please do not be shy. Speak up!
 ## Misc
 
 * Language level: C11
+* Operating Systems:
+  * Ubuntu 18.04
+  * Ubuntu 16.04
+  * Debian Buster
+  * Debian Stretch
+  * Debian Jessie
