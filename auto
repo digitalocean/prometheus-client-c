@@ -10,7 +10,8 @@ if [[ "$AUTO_DEBUG" == "1" ]]; then
   export AUTO_DEBUG=1
 fi
 
-PROJECT_ROOT=$(pushd $(dirname $0) > /dev/null; echo $PWD; popd > /dev/null)
+export PROJECT_ROOT=$(pushd $(dirname $0) > /dev/null; echo $PWD; popd > /dev/null)
+export DOCKER_IMAGE
 PROGRAM_NAME="$(basename $0)"
 
 usage(){

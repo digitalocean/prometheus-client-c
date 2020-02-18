@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.14.5)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 execute_process(
     COMMAND cat ${CMAKE_CURRENT_SOURCE_DIR}/../VERSION

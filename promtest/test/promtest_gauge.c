@@ -105,7 +105,7 @@ int promtest_gauge_setup(void) {
   promhttp_set_active_collector_registry(NULL);
 
   // Start the HTTP server
-  promtest_daemon = promhttp_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, 8000, NULL, NULL);
+  promtest_daemon = promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
 
   if (promtest_daemon == NULL) return 1;
   else return 0;

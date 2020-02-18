@@ -136,12 +136,6 @@ int prom_map_destroy(prom_map_t *self) {
   prom_free(self->addrs);
   self->addrs = NULL;
 
-  r = pthread_rwlock_unlock(self->rwlock);
-  if (r) {
-    PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);
-    ret = r;
-  }
-
   r = pthread_rwlock_destroy(self->rwlock);
   if (r) {
     PROM_LOG(PROM_PTHREAD_RWLOCK_DESTROY_ERROR)

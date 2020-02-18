@@ -21,6 +21,9 @@ MUST NOT execute this command from an existing docker container.
 -e Execute the following executable
 -a Pass an argument to the executable given by -e. You may specify
    this flag multiple times. The order is preserved.
+-i The docker image to use.
+   Default: ubuntu:18.04
+   Options: ubuntu:18.04, ubuntu:16.04, debian:buster, debian:stretch, debian:jessie
 EOF
 
 usage() {
@@ -43,21 +46,21 @@ EOF
 
 source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
 
+declare DOCKER_IMAGE=${DOCKER_IMAGE:=ubuntu:18.04}
 declare DOCKER_EXEC
 declare -a DOCKER_EXEC_ARGS
 
 run(){
   local r
-  if ! { docker image list | grep -q prometheus-client-c-dev; }; then
-    autolib_output_banner "Building development container"
-    pushd docker > /dev/null || return $?
-      make || {
-        r=$?
-        outlib_output_error "Docker Build Failure"
-        return $r
-      }
-    popd > /dev/null
-  fi
+  autolib_output_banner "Building development container"
+  autolib_write_dockerfile "$DOCKER_IMAGE" || return $?
+  pushd docker > /dev/null || return $?
+    make || {
+      r=$?
+      outlib_output_error "Docker Build Failure"
+      return $r
+    }
+  popd > /dev/null
 
   autolib_output_banner "Entering development environment"
   declare -a args
@@ -75,10 +78,13 @@ run(){
 }
 
 main(){
-  while getopts "he:a:" opt; do
+  while getopts "he:a:i:" opt; do
     case $opt in
       ( h ) {
         usage && exit 0
+      } ;;
+      ( i ) {
+        DOCKER_IMAGE="$OPTARG"
       } ;;
       ( e ) {
         DOCKER_EXEC="$OPTARG"

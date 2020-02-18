@@ -327,9 +327,6 @@ int prom_metric_sample_histogram_destroy(prom_metric_sample_histogram_t *self) {
   if (r) ret = r;
   self->metric_formatter = NULL;
 
-  r = pthread_rwlock_unlock(self->rwlock);
-  if (r) ret = r;
-
   r = pthread_rwlock_destroy(self->rwlock);
   if (r) ret = r;
 
