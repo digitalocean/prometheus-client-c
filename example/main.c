@@ -74,7 +74,7 @@ int main(int argc, const char **argv) {
   }
 
 
-  struct MHD_Daemon *daemon = promhttp_start_daemon(MHD_USE_INTERNAL_POLLING_THREAD, 8000, NULL, NULL);
+  struct MHD_Daemon *daemon = promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
   if (daemon == NULL) {
     return 1;
   }
