@@ -3,7 +3,7 @@
 To run this example:
 
 * Execute `./auto dev` from the root of the project directory to enter the development environment
-* Execute `cd examples`
+* Execute `cd example`
 * Execute `make`
 * This process will build a binary called example in the current working directory. Execute `./example` to execute the
   example.
