@@ -21,6 +21,8 @@ MUST NOT execute this command from an existing docker container.
 -e Execute the following executable
 -a Pass an argument to the executable given by -e. You may specify
    this flag multiple times. The order is preserved.
+-p Port to map to the host environment.
+   Default: 8000
 -i The docker image to use.
    Default: ubuntu:18.04
    Options: ubuntu:18.04, ubuntu:16.04, debian:buster, debian:stretch, debian:jessie
@@ -48,6 +50,7 @@ source $(dirname ${BASH_SOURCE[0]})/../autolib.sh
 
 declare DOCKER_IMAGE=${DOCKER_IMAGE:=ubuntu:18.04}
 declare DOCKER_EXEC
+declare DOCKER_PORT=${DOCKER_PORT=8000}
 declare -a DOCKER_EXEC_ARGS
 
 run(){
@@ -64,21 +67,22 @@ run(){
 
   autolib_output_banner "Entering development environment"
   declare -a args
-  args+=(--name prometheus-client-c-dev)    # Give the running container a name to use instead of the ID
-  args+=(--interactive)                     # Interactive shell
-  args+=(--tty)                             # We'll need a tty
-  args+=(--volume "${PWD}:/code")           # Mount code into the container
-  args+=(--env DEV=1)                       # Enables check if executing in dev environment
-  args+=(--net host)                        # Use host networking
-  args+=(--cap-add=SYS_PTRACE)              # Required for valgrind and gdb
-  args+=(--security-opt seccomp=unconfined) # Required for debugging
-  args+=(--rm)                              # Remove when done
+  args+=(--name prometheus-client-c-dev)      # Give the running container a name to use instead of the ID
+  args+=(--interactive)                       # Interactive shell
+  args+=(--tty)                               # We'll need a tty
+  args+=(--volume "${PWD}:/code")             # Mount code into the container
+  args+=(--env DEV=1)                         # Enables check if executing in dev environment
+  args+=(--cap-add=SYS_PTRACE)                # Required for valgrind and gdb
+  args+=(--security-opt seccomp=unconfined)   # Required for debugging
+  args+=(--publish $DOCKER_PORT:$DOCKER_PORT) # map DOCKER_PORT to the host
+  args+=(--rm)                                # Remove when done
 
+  echo ${args[@]}
   docker run ${args[@]} prometheus-client-c-dev ${DOCKER_EXEC} ${DOCKER_EXEC_ARGS[@]}
 }
 
 main(){
-  while getopts "he:a:i:" opt; do
+  while getopts "he:a:i:p:" opt; do
     case $opt in
       ( h ) {
         usage && exit 0
@@ -91,6 +95,9 @@ main(){
       } ;;
       ( a ) {
         DOCKER_EXEC_ARGS+=($OPTARG)
+      } ;;
+      ( p ) {
+        DOCKER_PORT=${OPTARG}
       } ;;
     esac
   done
