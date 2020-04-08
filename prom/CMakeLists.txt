@@ -121,7 +121,7 @@ target_sources(
 
 target_link_libraries(prom PUBLIC Threads::Threads)
 
-if ($ENV{TEST} EQUAL "1")
+if ($ENV{TEST})
     include(test/CMakeLists.txt)
 endif()
 
