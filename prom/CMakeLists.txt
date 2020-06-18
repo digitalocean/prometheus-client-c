@@ -137,4 +137,4 @@ set(CPACK_PACKAGE_HOMEPAGE_URL https://github.internal.digitalocean.com/timeseri
 
 include(CPack)
 install(TARGETS prom ARCHIVE)
-install(DIRECTORY include/ DESTINATION usr/include)
+install(DIRECTORY include/ DESTINATION include)
