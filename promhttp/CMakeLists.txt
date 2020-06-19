@@ -74,5 +74,6 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS "libprom-dev (= ${Version})")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libmicrohttpd-dev")
 
 include(CPack)
+include(GNUInstallDirs)
 install(TARGETS promhttp ARCHIVE)
-install(DIRECTORY include/ DESTINATION /usr/include/)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
