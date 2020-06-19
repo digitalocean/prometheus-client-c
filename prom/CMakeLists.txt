@@ -136,5 +136,6 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A prometheus client library")
 set(CPACK_PACKAGE_HOMEPAGE_URL https://github.internal.digitalocean.com/timeseries/prometheus-client-c)
 
 include(CPack)
+include(GNUInstallDirs)
 install(TARGETS prom ARCHIVE)
-install(DIRECTORY include/ DESTINATION /usr/include/)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
