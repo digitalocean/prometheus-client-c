@@ -34,7 +34,7 @@ typedef struct prom_collector_registry prom_collector_registry_t;
  * @brief Initialize the default registry by calling prom_collector_registry_init within your program. You MUST NOT
  * modify this value.
  */
-prom_collector_registry_t *PROM_COLLECTOR_REGISTRY_DEFAULT;
+extern prom_collector_registry_t *PROM_COLLECTOR_REGISTRY_DEFAULT;
 
 /**
  * @brief Initializes the default collector registry and enables metric collection on the executing process

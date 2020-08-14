@@ -19,6 +19,6 @@
 #ifndef PROM_PROESS_FDS_T_H
 #define PROM_PROESS_FDS_T_H
 
-prom_gauge_t *prom_process_open_fds;
+extern prom_gauge_t *prom_process_open_fds;
 
 #endif // PROM_PROESS_FDS_T_H
