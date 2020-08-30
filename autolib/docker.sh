@@ -56,12 +56,11 @@ RUN set -x && \
     cd $OLDPWD && \
     echo 'export PATH=/usr/local/gcc/bin:$PATH' >> /root/.bashrc && \
     echo 'LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc && \
+    rm -f /usr/bin/gcc && \
+    ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
     curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
     cp /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/* /usr/local/bin/ && \
     cp -R /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
-    apt install -y /tmp/gcc.deb && \
-    rm -f /usr/bin/gcc && \
-    ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
     curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
     cp /opt/cmake-3.14.5-Linux-x86_64/bin/* /usr/local/bin/ && \
     cp -R /opt/cmake-3.14.5-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
