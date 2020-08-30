@@ -12,6 +12,9 @@ fi
 
 export PROJECT_ROOT=$(pushd $(dirname $0) > /dev/null; echo $PWD; popd > /dev/null)
 export DOCKER_IMAGE
+export CI=${CI:=0}
+export CC=/usr/bin/gcc
+
 PROGRAM_NAME="$(basename $0)"
 
 usage(){
