@@ -1,6 +1,6 @@
 # prometheus-client-c
 
-![Build Status](https://github.com/miroswan/prometheus-client-c/workflows/CI/badge.svg)
+![Build Status](https://github.com/digitalocean/prometheus-client-c/workflows/CI/badge.svg)
 
 This project provides shared libraries for instrumenting software via [Prometheus](https://prometheus.io)
 
