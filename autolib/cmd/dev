@@ -69,7 +69,6 @@ run(){
   declare -a args
   args+=(--name prometheus-client-c-dev)      # Give the running container a name to use instead of the ID
   args+=(--interactive)                       # Interactive shell
-  args+=(--tty)                               # We'll need a tty
   args+=(--volume "${PWD}:/code")             # Mount code into the container
   args+=(--env DEV=1)                         # Enables check if executing in dev environment
   args+=(--cap-add=SYS_PTRACE)                # Required for valgrind and gdb
