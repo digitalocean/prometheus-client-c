@@ -1,0 +1,50 @@
+name: CI
+# This workflow is triggered on pushes to the repository.
+on: [push]
+
+jobs:
+  ubuntu-18-04:
+    name: ubuntu-18-04
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: ubuntu:18.04
+        run: make
+  ubuntu-16-04:
+    name: ubuntu-16-04
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: ubuntu:16.04
+        run: make
+  debian-buster:
+    name: debian-buster
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: debian:buster
+        run: make
+  debian-stretch:
+    name: debian-stretch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: debian:stretch
+        run: make
+  debian-jessie:
+    name: debian-jessie
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: debian:jessie
+        run: make
