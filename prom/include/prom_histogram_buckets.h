@@ -41,7 +41,7 @@ prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket
 /**
  * @brief the default histogram buckets: .005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10
  */
-prom_histogram_buckets_t *prom_histogram_default_buckets;
+extern prom_histogram_buckets_t *prom_histogram_default_buckets;
 
 /**
  *@brief Construct a linearly sized prom_histogram_buckets_t*

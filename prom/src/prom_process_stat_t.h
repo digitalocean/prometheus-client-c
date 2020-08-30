@@ -22,9 +22,9 @@
 
 #include "prom_procfs_t.h"
 
-prom_gauge_t *prom_process_cpu_seconds_total;
-prom_gauge_t *prom_process_virtual_memory_bytes;
-prom_gauge_t *prom_process_start_time_seconds;
+extern prom_gauge_t *prom_process_cpu_seconds_total;
+extern prom_gauge_t *prom_process_virtual_memory_bytes;
+extern prom_gauge_t *prom_process_start_time_seconds;
 
 /**
  * @brief Refer to man proc and search for /proc/[pid]/stat

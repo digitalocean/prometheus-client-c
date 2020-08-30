@@ -49,6 +49,10 @@ typedef enum prom_process_limit_rdp_limit_type {
   PROM_PROCESS_LIMITS_RDP_HARD
 } prom_process_limit_rdp_limit_type_t;
 
+prom_gauge_t *prom_process_virtual_memory_max_bytes;
+prom_gauge_t *prom_process_resident_memory_bytes;
+prom_gauge_t *prom_process_max_fds;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // prom_process_limits_row_t
 

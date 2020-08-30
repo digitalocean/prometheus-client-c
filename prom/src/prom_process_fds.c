@@ -30,6 +30,8 @@
 #include "prom_log.h"
 #include "prom_process_fds_t.h"
 
+prom_gauge_t *prom_process_open_fds;
+
 int prom_process_fds_count(const char *path) {
   int count = 0;
   int r = 0;

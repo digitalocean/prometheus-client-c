@@ -25,6 +25,8 @@
 #include "prom_assert.h"
 #include "prom_log.h"
 
+prom_histogram_buckets_t *prom_histogram_default_buckets;
+
 prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket, ...) {
   prom_histogram_buckets_t *self = (prom_histogram_buckets_t*) prom_malloc(sizeof(prom_histogram_buckets_t));
   double *upper_bounds = (double*) prom_malloc(sizeof(double)*count);
