@@ -5,20 +5,60 @@ source "${lib}/output.sh"
 
 PROJECT_ROOT=$(pushd "$(dirname ${BASH_SOURCE[0]})/.." > /dev/null; echo $PWD; popd > /dev/null)
 
-autolib_debian_template(){
+autolib_new_debian_template(){
   cat <<'EOF'
 FROM __DOCKER_IMAGE__
 
 RUN set -x && \
     apt-get update && \
     apt-get install -y apt-utils gnupg2 && \
-    apt-get install -y curl tar build-essential git pkg-config gdb valgrind libmicrohttpd-dev doxygen graphviz && \
-    echo 'deb http://http.us.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list && \
-    echo 'deb-src http://http.us.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7638D0442B90D010 && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC && \
+    apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc-10 libmicrohttpd-dev doxygen graphviz && \
+    rm -f /usr/bin/gcc && \
+    ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
+    curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
+    cp /opt/cmake-3.14.5-Linux-x86_64/bin/* /usr/local/bin/ && \
+    cp -R /opt/cmake-3.14.5-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
+    curl -sL https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz 2> /dev/null | tar xzf - -C /usr/local && \
+    mkdir -p /gopath/{src,bin} && \
+    printf 'export GOPATH=/gopath\nexport PATH=$PATH:/usr/local/go/bin:/gopath/bin\n' > /root/.bash_profile && \
+    printf '#!/usr/bin/env bash\nsource /root/.bash_profile\nexec /bin/bash $@\n' > /entrypoint && \
+    chmod +x /entrypoint && \
+    GOPATH=/gopath /usr/local/go/bin/go get github.com/prometheus/prom2json && \
+    GOPATH=/gopath /usr/local/go/bin/go install github.com/prometheus/prom2json/cmd/prom2json && \
+    GOPATH=/gopath /usr/local/go/bin/go get github.com/git-chglog/git-chglog && \
+    GOPATH=/gopath /usr/local/go/bin/go install github.com/git-chglog/git-chglog/cmd/git-chglog && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /code
+ENTRYPOINT ["/entrypoint"]
+
+EOF
+}
+
+autolib_old_debian_template(){
+  cat <<'EOF'
+FROM __DOCKER_IMAGE__
+
+ENV GCC_VERSION 10.1.0
+
+RUN set -x && \
     apt-get update && \
-    curl -Lo /tmp/gcc.deb http://http.us.debian.org/debian/pool/main/g/gcc-10/gcc-10_10.2.0-5_amd64.deb && \
+    apt-get install -y apt-utils gnupg2 && \
+    apt-get install -y curl tar build-essential git pkg-config gdb valgrind libmicrohttpd-dev doxygen graphviz && \
+    curl -L -o /tmp/gcc-${GCC_VERSION}.tar.xz https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz && \
+    tar xf /tmp/gcc-${GCC_VERSION}.tar.xz -C /tmp && \
+    rm -rf /tmp/gcc-${GCC_VERSION}.tar.xz && \
+    cd /tmp/gcc-${GCC_VERSION} && \
+      contrib/download_prerequisites && \
+      ./configure -v --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc --enable-checking=release --enable-languages=c --disable-multilib && \
+      make && \
+      make install-strip && \
+    cd $OLDPWD && \
+    echo 'export PATH=/usr/local/gcc/bin:$PATH' >> /root/.bashrc && \
+    echo 'LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc && \
+    curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
+    cp /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/* /usr/local/bin/ && \
+    cp -R /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
     apt install -y /tmp/gcc.deb && \
     rm -f /usr/bin/gcc && \
     ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
@@ -46,14 +86,20 @@ autolib_write_dockerfile(){
   local docker_image="$1"
   local r
   case "$docker_image" in
-    ( ubuntu:18.04 | ubuntu:16.04 | debian:buster | debian:stretch | debian:jessie ) {
-      autolib_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
+    ( ubuntu:18.04 ) || {
+       autolib_new_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
         r=$?
         autolib_output_error "failed to generate dockerfile"
         return $r
       }
     } ;;
-
+    ( ubuntu:16.04 | debian:buster | debian:stretch | debian:jessie ) {
+      autolib_old_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
+        r=$?
+        autolib_output_error "failed to generate dockerfile"
+        return $r
+      }
+    } ;;
     ( * ) {
       r=1
       autolib_output_error "unsupported DOCKER_IMAGE: $docker_image"
