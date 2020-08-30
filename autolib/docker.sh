@@ -11,7 +11,8 @@ FROM __DOCKER_IMAGE__
 
 RUN set -x && \
     apt-get update && \
-    apt-get install -y apt-utils gnupg2 && \
+    apt-get install -y apt-utils software-properties-common && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc-10 libmicrohttpd-dev doxygen graphviz && \
     rm -f /usr/bin/gcc && \
     ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
@@ -43,7 +44,7 @@ ENV GCC_VERSION 10.1.0
 
 RUN set -x && \
     apt-get update && \
-    apt-get install -y apt-utils gnupg2 && \
+    apt-get install -y apt-utils && \
     apt-get install -y curl tar build-essential git pkg-config gdb valgrind libmicrohttpd-dev doxygen graphviz && \
     curl -L -o /tmp/gcc-${GCC_VERSION}.tar.xz https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz && \
     tar xf /tmp/gcc-${GCC_VERSION}.tar.xz -C /tmp && \
