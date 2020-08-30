@@ -9,13 +9,17 @@ autolib_debian_template(){
   cat <<'EOF'
 FROM __DOCKER_IMAGE__
 
-ENV GCC_VERSION 10.1.0
-
 RUN set -x && \
     apt-get update && \
-    apt-get install -y apt-utils software-properties-common && \
-    add-apt-repository ppa:ubuntu-toolchain-r/test && \
-    apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc-10 libmicrohttpd-dev doxygen graphviz && \
+    apt-get install -y apt-utils gnupg2 && \
+    apt-get install -y curl tar build-essential git pkg-config gdb valgrind libmicrohttpd-dev doxygen graphviz && \
+    echo 'deb http://http.us.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list && \
+    echo 'deb-src http://http.us.debian.org/debian unstable main non-free contrib' >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 7638D0442B90D010 && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 04EE7237B7D453EC && \
+    apt-get update && \
+    curl -Lo /tmp/gcc.deb http://http.us.debian.org/debian/pool/main/g/gcc-10/gcc-10_10.2.0-5_amd64.deb && \
+    apt install -y /tmp/gcc.deb && \
     rm -f /usr/bin/gcc && \
     ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
     curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
