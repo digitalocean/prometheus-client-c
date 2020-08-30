@@ -1,7 +1,7 @@
 
 SHELL = /bin/bash
 
-GITHUB_ORG = miroswan
+GITHUB_ORG = digitalocean
 
 # Origin does not point to https://github.com/digitalocean/prometheus-client-c.git in TravisCI so we must add a new
 # remote for fetching. Fetch master, diff on the filenames and look for C files. If no changes to C files are made, skip
