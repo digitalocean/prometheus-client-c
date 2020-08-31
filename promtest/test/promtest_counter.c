@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
+#include "promtest_counter.h"
+
 #include <pthread.h>
 
 #include "parson.h"
-#include "unity.h"
-
 #include "prom.h"
 #include "promhttp.h"
 #include "promtest_helpers.h"
-#include "promtest_counter.h"
-
+#include "unity.h"
 
 static void *promtest_counter_handler(void *data);
 static int promtest_parse_counter_output(const char *output, char **value);
+prom_counter_t *foo_counter;
 
 /**
- * @brief For each thread in a threadpool of 10 we increment a single counter 1 million times
+ * @brief For each thread in a threadpool of 10 we increment a single counter 1
+ * million times
  *
  * The purpose of this test is to check for deadlock and race conditions
  */
@@ -43,21 +44,22 @@ void promtest_counter(void) {
 
   // Start each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (pthread_create(&(thread_pool[i]), NULL, promtest_counter_handler, NULL)) {
+    if (pthread_create(&(thread_pool[i]), NULL, promtest_counter_handler,
+                       NULL)) {
       TEST_FAIL_MESSAGE("failed to create thread");
     }
   }
 
   // Join each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (pthread_join(thread_pool[i], (void**) &(retvals[i]))) {
+    if (pthread_join(thread_pool[i], (void **)&(retvals[i]))) {
       TEST_FAIL_MESSAGE("thread failed to join");
     }
   }
 
   // verify clean exit for each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (*((int *) retvals[i]) != 0) {
+    if (*((int *)retvals[i]) != 0) {
       TEST_FAIL_MESSAGE("thread did not exit properly");
     }
   }
@@ -78,7 +80,7 @@ void promtest_counter(void) {
   }
 
   // Parse the output
-  char *value = (char *) malloc(sizeof(char)*100);
+  char *value = (char *)malloc(sizeof(char) * 100);
   if (promtest_parse_counter_output(output, &value)) {
     TEST_FAIL_MESSAGE("failed to parse output");
   }
@@ -97,22 +99,25 @@ int promtest_counter_setup(void) {
   prom_collector_registry_default_init();
 
   // Set the counter
-  foo_counter = prom_collector_registry_must_register_metric(prom_counter_new(
-    "foo_counter", "counter for foo", 0, NULL
-  ));
+  foo_counter = prom_collector_registry_must_register_metric(
+      prom_counter_new("foo_counter", "counter for foo", 0, NULL));
 
   // Set the collector registry on the handler to the default registry
   promhttp_set_active_collector_registry(NULL);
 
   // Start the HTTP server
-  promtest_daemon = promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
+  promtest_daemon =
+      promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
 
-  if (promtest_daemon == NULL) return 1;
-  else return 0;
+  if (promtest_daemon == NULL)
+    return 1;
+  else
+    return 0;
 }
 
 int promtest_counter_teardown(void) {
-  // Destroy the default registry. This effectively deallocates all metrics registered to it, including itself
+  // Destroy the default registry. This effectively deallocates all metrics
+  // registered to it, including itself
   prom_collector_registry_destroy(PROM_COLLECTOR_REGISTRY_DEFAULT);
   PROM_COLLECTOR_REGISTRY_DEFAULT = NULL;
 
@@ -122,7 +127,6 @@ int promtest_counter_teardown(void) {
   return 0;
 }
 
-
 /**
  * @brief The entrypoint to a worker thread within the prom_counter_test
  */
@@ -130,9 +134,9 @@ static void *promtest_counter_handler(void *data) {
   for (int i = 0; i < 1000000; i++) {
     prom_counter_inc(foo_counter, NULL);
   }
-  int *retval = (int*) malloc(sizeof(int));
+  int *retval = (int *)malloc(sizeof(int));
   *retval = 0;
-  return (void*) retval;
+  return (void *)retval;
 }
 
 /**
@@ -165,14 +169,14 @@ static int promtest_parse_counter_output(const char *output, char **value) {
     if (samples == NULL) {
       TEST_FAIL_MESSAGE("failed to retrieve metrics from JSON_Object");
     }
-    if (json_array_get_count(samples) < 1){
+    if (json_array_get_count(samples) < 1) {
       TEST_FAIL_MESSAGE("No samples found");
     }
     JSON_Object *sample = json_array_get_object(samples, 0);
     if (sample == NULL) {
       TEST_FAIL_MESSAGE("failed to get metric sample");
     }
-    *value = (char *) json_object_get_string(sample, "value");
+    *value = (char *)json_object_get_string(sample, "value");
     break;
   }
   if (strlen(*value) == 0) {
@@ -180,4 +184,3 @@ static int promtest_parse_counter_output(const char *output, char **value) {
   }
   return 0;
 }
-

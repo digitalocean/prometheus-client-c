@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
+#include "promtest_gauge.h"
+
 #include <pthread.h>
 
 #include "parson.h"
-#include "unity.h"
-
 #include "prom.h"
 #include "promhttp.h"
 #include "promtest_helpers.h"
-#include "promtest_gauge.h"
-
+#include "unity.h"
 
 static void *promtest_gauge_handler(void *data);
 static int promtest_parse_gauge_output(const char *output, char **value);
+prom_gauge_t *foo_gauge;
 
 /**
- * @brief For each thread in a threadpool of 10 we increment a single gauge 1 million times
+ * @brief For each thread in a threadpool of 10 we increment a single gauge 1
+ * million times
  *
  * The purpose of this test is to check for deadlock and race conditions
  */
@@ -50,14 +51,14 @@ void promtest_gauge(void) {
 
   // Join each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (pthread_join(thread_pool[i], (void**) &(retvals[i]))) {
+    if (pthread_join(thread_pool[i], (void **)&(retvals[i]))) {
       TEST_FAIL_MESSAGE("thread failed to join");
     }
   }
 
   // verify clean exit for each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (*((int *) retvals[i]) != 0) {
+    if (*((int *)retvals[i]) != 0) {
       TEST_FAIL_MESSAGE("thread did not exit properly");
     }
   }
@@ -78,7 +79,7 @@ void promtest_gauge(void) {
   }
 
   // Parse the output
-  char *value = (char *) malloc(sizeof(char)*100);
+  char *value = (char *)malloc(sizeof(char) * 100);
   if (promtest_parse_gauge_output(output, &value)) {
     TEST_FAIL_MESSAGE("failed to parse output");
   }
@@ -97,22 +98,25 @@ int promtest_gauge_setup(void) {
   prom_collector_registry_default_init();
 
   // Set the gauge
-  foo_gauge = prom_collector_registry_must_register_metric(prom_gauge_new(
-    "foo_gauge", "gauge for foo", 0, NULL
-  ));
+  foo_gauge = prom_collector_registry_must_register_metric(
+      prom_gauge_new("foo_gauge", "gauge for foo", 0, NULL));
 
   // Set the collector registry on the handler to the default registry
   promhttp_set_active_collector_registry(NULL);
 
   // Start the HTTP server
-  promtest_daemon = promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
+  promtest_daemon =
+      promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
 
-  if (promtest_daemon == NULL) return 1;
-  else return 0;
+  if (promtest_daemon == NULL)
+    return 1;
+  else
+    return 0;
 }
 
 int promtest_gauge_teardown(void) {
-  // Destroy the default registry. This effectively deallocates all metrics registered to it, including itself
+  // Destroy the default registry. This effectively deallocates all metrics
+  // registered to it, including itself
   prom_collector_registry_destroy(PROM_COLLECTOR_REGISTRY_DEFAULT);
 
   PROM_COLLECTOR_REGISTRY_DEFAULT = NULL;
@@ -123,7 +127,6 @@ int promtest_gauge_teardown(void) {
   return 0;
 }
 
-
 /**
  * @brief The entrypoint to a worker thread within the prom_gauge_test
  */
@@ -131,9 +134,9 @@ static void *promtest_gauge_handler(void *data) {
   for (int i = 0; i < 1000000; i++) {
     prom_gauge_inc(foo_gauge, NULL);
   }
-  int *retval = (int*) malloc(sizeof(int));
+  int *retval = (int *)malloc(sizeof(int));
   *retval = 0;
-  return (void*) retval;
+  return (void *)retval;
 }
 
 /**
@@ -166,14 +169,14 @@ static int promtest_parse_gauge_output(const char *output, char **value) {
     if (samples == NULL) {
       TEST_FAIL_MESSAGE("failed to retrieve metrics from JSON_Object");
     }
-    if (json_array_get_count(samples) < 1){
+    if (json_array_get_count(samples) < 1) {
       TEST_FAIL_MESSAGE("No samples found");
     }
     JSON_Object *sample = json_array_get_object(samples, 0);
     if (sample == NULL) {
       TEST_FAIL_MESSAGE("failed to get metric sample");
     }
-    *value = (char *) json_object_get_string(sample, "value");
+    *value = (char *)json_object_get_string(sample, "value");
     break;
   }
   if (strlen(*value) == 0) {
@@ -181,4 +184,3 @@ static int promtest_parse_gauge_output(const char *output, char **value) {
   }
   return 0;
 }
-
