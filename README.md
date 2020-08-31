@@ -54,16 +54,14 @@ communication process so please do not be shy. Speak up!
 ### Coding Rules for Contribution
 
 * Please follow the general coding style already present in the project.
-  * We use a 120 character margin, so please honor this margin by breaking long statements and expressions over multiple
-    lines.
-  * Indent with 2 spaces instead of tabs.
+  * clang-format your code with style Google. 
   * Every struct must have a constructor function and destructor function.
   * Every method must pass a pointer to the target struct as the first argument.
   * Every function that is not a constructor or destructor and does not return a value must return an int to signify
     success with 0 and failure with non-zero.
   * Every function name must begin with the library name. For example, all functions within prom must begin with `prom_`
     and all functions within promhttp must begin with `promhttp_`.
-  * All l-values must be underscore delimited (i.e. snake-case).
+  * All variables must be underscore delimited (i.e. snake-case).
   * All macros must be captilalized.
   * Every pointer reference must be assigned a NULL value after it is destroyed either by prom_free or its
     corresponding destructor function.
