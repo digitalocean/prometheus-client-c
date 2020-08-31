@@ -19,11 +19,11 @@
 #ifndef PROMTEST_GAUGE_H
 #define PROMTEST_GAUGE_H
 
-prom_gauge_t *foo_gauge;
+extern prom_gauge_t *foo_gauge;
 
 int promtest_gauge_setup(void);
 int promtest_gauge_teardown(void);
 
 void promtest_gauge(void);
 
-#endif // PROMTEST_GAUGE_H
+#endif  // PROMTEST_GAUGE_H
