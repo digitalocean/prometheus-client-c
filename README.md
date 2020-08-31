@@ -74,6 +74,7 @@ communication process so please do not be shy. Speak up!
 
 * Language level: C11
 * Operating Systems:
+  * Ubuntu 20.04
   * Ubuntu 18.04
   * Ubuntu 16.04
   * Debian Buster
