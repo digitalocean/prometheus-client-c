@@ -45,28 +45,11 @@ ENV GCC_VERSION 10.1.0
 RUN set -x && \
     apt-get update && \
     apt-get install -y apt-utils && \
-    apt-get install -y curl tar build-essential git pkg-config gdb valgrind libmicrohttpd-dev doxygen graphviz && \
-    curl -L -o /tmp/gcc-${GCC_VERSION}.tar.xz https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz && \
-    tar xf /tmp/gcc-${GCC_VERSION}.tar.xz -C /tmp && \
-    rm -rf /tmp/gcc-${GCC_VERSION}.tar.xz && \
-    cd /tmp/gcc-${GCC_VERSION} && \
-      contrib/download_prerequisites && \
-      ./configure -v --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc --enable-checking=release --enable-languages=c --disable-multilib && \
-      make -j 8 && \
-      make install-strip && \
-    cd $OLDPWD && \
-    echo 'export PATH=/usr/local/gcc/bin:$PATH' >> /root/.bashrc && \
-    echo 'LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc && \
-    rm -f /usr/bin/gcc && \
-    ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
-    curl -sL -o /tmp/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz  && \
-    tar xzf /tmp/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz -C /opt && \
-    cp /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/* /usr/local/bin/ && \
-    rm -rf /tmp/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz && \
-    cp -R /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
-    curl -sL -o /tmp/go1.13.1.linux-amd64.tar.gz https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz && \
-    tar xzf /tmp/go1.13.1.linux-amd64.tar.gz -C /usr/local/share/ && \
-    rm -rf /tmp/go1.13.1.linux-amd64.tar.gz && \
+    apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc libmicrohttpd-dev doxygen graphviz && \
+    curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
+    cp /opt/cmake-3.14.5-Linux-x86_64/bin/* /usr/local/bin/ && \
+    cp -R /opt/cmake-3.14.5-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
+    curl -sL https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz 2> /dev/null | tar xzf - -C /usr/local && \
     mkdir -p /gopath/{src,bin} && \
     printf 'export GOPATH=/gopath\nexport PATH=$PATH:/usr/local/go/bin:/gopath/bin\n' > /root/.bash_profile && \
     printf '#!/usr/bin/env bash\nsource /root/.bash_profile\nexec /bin/bash $@\n' > /entrypoint && \
