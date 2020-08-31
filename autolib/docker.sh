@@ -13,6 +13,7 @@ RUN set -x && \
     apt-get update && \
     apt-get install -y apt-utils software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt-get update -y && \
     apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc-10 libmicrohttpd-dev doxygen graphviz && \
     rm -f /usr/bin/gcc && \
     ln -s /usr/bin/gcc-10 /usr/bin/gcc && \
