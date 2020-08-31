@@ -28,6 +28,10 @@
 #include "prom_process_stat_t.h"
 #include "prom_procfs_i.h"
 
+prom_gauge_t *prom_process_cpu_seconds_total;
+prom_gauge_t *prom_process_virtual_memory_bytes;
+prom_gauge_t *prom_process_start_time_seconds;
+
 prom_process_stat_file_t* prom_process_stat_file_new(const char *path) {
   if (path) {
     return prom_procfs_buf_new(path);

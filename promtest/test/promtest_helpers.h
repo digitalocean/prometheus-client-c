@@ -21,7 +21,7 @@
 
 #define PROMTEST_THREAD_POOL_SIZE 5
 
-struct MHD_Daemon *promtest_daemon;
+extern struct MHD_Daemon *promtest_daemon;
 
 typedef struct promtest_popen_buf {
   char *buf;
@@ -32,9 +32,7 @@ typedef struct promtest_popen_buf {
 
 promtest_popen_buf_t *promtest_popen_buf_new(FILE *f);
 int promtest_popen_buf_destroy(promtest_popen_buf_t *self);
-int promtest_popen_buf_read(promtest_popen_buf_t* self);
+int promtest_popen_buf_read(promtest_popen_buf_t *self);
 int promtest_popen_buf_ensure_space(promtest_popen_buf_t *self);
 
-
-#endif // PROMTEST_HELPERS_H
-
+#endif  // PROMTEST_HELPERS_H

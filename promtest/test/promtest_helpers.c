@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-
-#include "prom.h"
 #include "promtest_helpers.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "prom.h"
+
+struct MHD_Daemon *promtest_daemon;
 
 promtest_popen_buf_t *promtest_popen_buf_new(FILE *f) {
-  promtest_popen_buf_t *self = (promtest_popen_buf_t*) malloc(sizeof(promtest_popen_buf_t));
+  promtest_popen_buf_t *self =
+      (promtest_popen_buf_t *)malloc(sizeof(promtest_popen_buf_t));
   self->buf = malloc(32);
   self->size = 32;
   self->allocated = 32;
@@ -31,9 +34,9 @@ promtest_popen_buf_t *promtest_popen_buf_new(FILE *f) {
 }
 
 int promtest_popen_buf_ensure_space(promtest_popen_buf_t *self) {
-  if (self->allocated >= self->size+1) return 0;
-  while (self->allocated < self->size+1) self->allocated <<= 1;
-  self->buf = (char *) prom_realloc(self->buf, self->allocated);
+  if (self->allocated >= self->size + 1) return 0;
+  while (self->allocated < self->size + 1) self->allocated <<= 1;
+  self->buf = (char *)prom_realloc(self->buf, self->allocated);
   return 0;
 }
 
@@ -41,19 +44,16 @@ int promtest_popen_buf_destroy(promtest_popen_buf_t *self) {
   if (self == NULL) {
     return 0;
   }
-  free((void*) self->buf);
+  free((void *)self->buf);
   self->buf = NULL;
-  free((void*) self);
+  free((void *)self);
   self = NULL;
   return 0;
 }
 
-int promtest_popen_buf_read(promtest_popen_buf_t* self) {
-  for (
-    int current_char = fgetc(self->f), i = 0;
-    current_char != EOF;
-    current_char = fgetc(self->f), i++
-  ) {
+int promtest_popen_buf_read(promtest_popen_buf_t *self) {
+  for (int current_char = fgetc(self->f), i = 0; current_char != EOF;
+       current_char = fgetc(self->f), i++) {
     promtest_popen_buf_ensure_space(self);
     self->buf[i] = current_char;
     self->size++;

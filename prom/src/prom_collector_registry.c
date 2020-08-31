@@ -37,6 +37,7 @@
 #include "prom_process_limits_i.h"
 #include "prom_string_builder_i.h"
 
+prom_collector_registry_t *PROM_COLLECTOR_REGISTRY_DEFAULT;
 
 prom_collector_registry_t* prom_collector_registry_new(const char *name)
 {

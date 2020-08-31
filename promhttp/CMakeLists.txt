@@ -59,6 +59,9 @@ target_sources(
 find_library(prom prom HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../prom/build)
 find_library(microhttpd microhttpd)
 
+target_compile_options(promhttp PRIVATE "-Werror" "-Wuninitialized" "-Wall" "-Wno-unused-label" "-std=gnu11")
+target_compile_options(promhttp PUBLIC "-Werror" "-Wuninitialized" "-Wall" "-Wno-unused-label" "-std=gnu11")
+
 target_link_libraries(promhttp PUBLIC Threads::Threads prom microhttpd)
 
 set(CPACK_PACKAGE_NAME libpromhttp-dev)

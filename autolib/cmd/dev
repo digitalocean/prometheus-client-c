@@ -75,6 +75,9 @@ run(){
   args+=(--security-opt seccomp=unconfined)   # Required for debugging
   args+=(--publish $DOCKER_PORT:$DOCKER_PORT) # map DOCKER_PORT to the host
   args+=(--rm)                                # Remove when done
+  if (( ${CI} == 0 )); then
+    args+=(--tty)
+  fi
 
   echo ${args[@]}
   docker run ${args[@]} prometheus-client-c-dev ${DOCKER_EXEC} ${DOCKER_EXEC_ARGS[@]}
@@ -104,3 +107,18 @@ main(){
 }
 
 [[ $BASH_SOURCE == $0 ]] && main $@
+
+#  curl -L -o /tmp/gcc-${GCC_VERSION}.tar.xz https://ftpmirror.gnu.org/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.xz && \
+#     tar xf /tmp/gcc-${GCC_VERSION}.tar.xz -C /tmp && \
+#     rm -rf /tmp/gcc-${GCC_VERSION}.tar.xz && \
+#     cd /tmp/gcc-${GCC_VERSION} && \
+#       contrib/download_prerequisites && \
+#       ./configure -v --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu --prefix=/usr/local/gcc --enable-checking=release --enable-languages=c --disable-multilib && \
+#       make && \
+#       make install-strip && \
+#     cd $OLDPWD && \
+#     echo 'export PATH=/usr/local/gcc/bin:$PATH' >> /root/.bashrc && \
+#     echo 'LD_LIBRARY_PATH=/usr/local/gcc/lib64:$LD_LIBRARY_PATH' >> /root/.bashrc && \
+#     curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
+#     cp /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/* /usr/local/bin/ && \
+#     cp -R /opt/cmake-${CMAKE_VERSION}-Linux-x86_64/share/cmake-3.14 /usr/local/share/ && \
