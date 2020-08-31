@@ -5,6 +5,16 @@ on:
   - pull_request
 
 jobs:
+  ubuntu-20-04:
+    name: ubuntu-20-04
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test
+        env:
+          DOCKER_IMAGE: ubuntu:20.04
+          CI: 1
+        run: make
   ubuntu-18-04:
     name: ubuntu-18-04
     runs-on: ubuntu-latest
