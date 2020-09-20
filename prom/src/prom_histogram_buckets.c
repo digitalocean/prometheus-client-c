@@ -29,6 +29,7 @@ prom_histogram_buckets_t *prom_histogram_default_buckets;
 
 prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket, ...) {
   prom_histogram_buckets_t *self = (prom_histogram_buckets_t*) prom_malloc(sizeof(prom_histogram_buckets_t));
+  self->count = count;
   double *upper_bounds = (double*) prom_malloc(sizeof(double)*count);
   upper_bounds[0] = bucket;
   if (count == 1) {
