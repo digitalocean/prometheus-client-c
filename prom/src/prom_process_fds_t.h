@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,4 +21,4 @@
 
 extern prom_gauge_t *prom_process_open_fds;
 
-#endif // PROM_PROESS_FDS_T_H
+#endif  // PROM_PROESS_FDS_T_H

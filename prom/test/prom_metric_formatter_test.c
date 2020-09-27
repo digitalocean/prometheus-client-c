@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
-
 
 void test_prom_metric_formatter_load_l_value(void) {
   prom_metric_formatter_t *mf = prom_metric_formatter_new();
-  const char *keys[] = { "foo", "bar", "bing" };
-  const char *values[] = { "one", "two", "three" };
+  const char *keys[] = {"foo", "bar", "bing"};
+  const char *values[] = {"one", "two", "three"};
   prom_metric_formatter_load_l_value(mf, "test", NULL, 3, keys, values);
   char *actual = prom_metric_formatter_dump(mf);
   char *expected = "test{foo=\"one\",bar=\"two\",bing=\"three\"}";
@@ -49,11 +47,11 @@ void test_prom_metric_formatter_load_sample(void) {
   mf = NULL;
 }
 
-void test_prom_metric_formatter_load_metric(void){
+void test_prom_metric_formatter_load_metric(void) {
   prom_metric_formatter_t *mf = prom_metric_formatter_new();
-  const char *counter_keys[] = { "foo", "bar" };
-  const char *sample_a[] = { "f", "b" };
-  const char *sample_b[] = { "o", "r" };
+  const char *counter_keys[] = {"foo", "bar"};
+  const char *sample_a[] = {"f", "b"};
+  const char *sample_b[] = {"o", "r"};
   prom_metric_t *m = prom_metric_new(PROM_COUNTER, "test_counter", "counter under test", 2, counter_keys);
   prom_metric_sample_t *s_a = prom_metric_sample_from_labels(m, sample_a);
   prom_metric_sample_add(s_a, 2.3);
@@ -62,9 +60,12 @@ void test_prom_metric_formatter_load_metric(void){
   prom_metric_formatter_load_metric(mf, m);
   const char *result = prom_metric_formatter_dump(mf);
 
-  TEST_ASSERT_EQUAL_STRING("# HELP test_counter counter under test\n# TYPE test_counter counter\ntest_counter{foo=\"f\",bar=\"b\"} 2.300000\ntest_counter{foo=\"o\",bar=\"r\"} 4.600000\n\n", result);
+  TEST_ASSERT_EQUAL_STRING(
+      "# HELP test_counter counter under test\n# TYPE test_counter counter\ntest_counter{foo=\"f\",bar=\"b\"} "
+      "2.300000\ntest_counter{foo=\"o\",bar=\"r\"} 4.600000\n\n",
+      result);
 
-  free((char *) result);
+  free((char *)result);
   result = NULL;
   prom_metric_destroy(m);
   m = NULL;
@@ -90,9 +91,14 @@ void test_prom_metric_formatter_load_metrics(void) {
   prom_metric_formatter_load_metrics(mf, PROM_COLLECTOR_REGISTRY_DEFAULT->collectors);
 
   const char *result = prom_metric_formatter_dump(mf);
-  const char *expected = "# HELP test_counter_a counter under test\n# TYPE test_counter_a counter\ntest_counter_a 2.300000\n\n# HELP test_counter_b counter under test\n# TYPE test_counter_b counter\ntest_counter_b 4.600000\n\n# HELP process_max_fds Maximum number of open file descriptors.\n# TYPE process_max_fds gauge\nprocess_max_fds 1048576.000000\n\n# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.\n# TYPE process_virtual_memory_max_bytes gauge\nprocess_virtual_memory_max_bytes -1.000000\n\n";
+  const char *expected =
+      "# HELP test_counter_a counter under test\n# TYPE test_counter_a counter\ntest_counter_a 2.300000\n\n# HELP "
+      "test_counter_b counter under test\n# TYPE test_counter_b counter\ntest_counter_b 4.600000\n\n# HELP "
+      "process_max_fds Maximum number of open file descriptors.\n# TYPE process_max_fds gauge\nprocess_max_fds "
+      "1048576.000000\n\n# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in "
+      "bytes.\n# TYPE process_virtual_memory_max_bytes gauge\nprocess_virtual_memory_max_bytes -1.000000\n\n";
   TEST_ASSERT_NOT_NULL(strstr(result, expected));
-  free((char *) result);
+  free((char *)result);
   result = NULL;
 
   r = prom_metric_formatter_destroy(mf);

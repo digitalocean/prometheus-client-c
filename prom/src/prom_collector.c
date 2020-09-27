@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,18 +31,15 @@
 #include "prom_process_fds_t.h"
 #include "prom_process_limits_i.h"
 #include "prom_process_limits_t.h"
-#include "prom_process_stat_t.h"
 #include "prom_process_stat_i.h"
+#include "prom_process_stat_t.h"
 #include "prom_string_builder_i.h"
 
+prom_map_t *prom_collector_default_collect(prom_collector_t *self) { return self->metrics; }
 
-prom_map_t* prom_collector_default_collect(prom_collector_t *self) {
-  return self->metrics;
-}
-
-prom_collector_t* prom_collector_new(const char *name) {
+prom_collector_t *prom_collector_new(const char *name) {
   int r = 0;
-  prom_collector_t *self = (prom_collector_t*) prom_malloc(sizeof(prom_collector_t));
+  prom_collector_t *self = (prom_collector_t *)prom_malloc(sizeof(prom_collector_t));
   self->name = prom_strdup(name);
   self->metrics = prom_map_new();
   if (self->metrics == NULL) {
@@ -80,7 +77,7 @@ int prom_collector_destroy(prom_collector_t *self) {
   if (r) ret = r;
   self->string_builder = NULL;
 
-  prom_free((char *) self->name);
+  prom_free((char *)self->name);
   self->name = NULL;
   prom_free(self);
   self = NULL;
@@ -90,15 +87,15 @@ int prom_collector_destroy(prom_collector_t *self) {
 
 int prom_collector_destroy_generic(void *gen) {
   int r = 0;
-  prom_collector_t *self = (prom_collector_t *) gen;
+  prom_collector_t *self = (prom_collector_t *)gen;
   r = prom_collector_destroy(self);
   self = NULL;
   return r;
- }
+}
 
 void prom_collector_free_generic(void *gen) {
- prom_collector_t *self = (prom_collector_t *) gen;
- prom_collector_destroy(self);
+  prom_collector_t *self = (prom_collector_t *)gen;
+  prom_collector_destroy(self);
 }
 
 int prom_collector_set_collect_fn(prom_collector_t *self, prom_collect_fn *fn) {
@@ -111,22 +108,19 @@ int prom_collector_set_collect_fn(prom_collector_t *self, prom_collect_fn *fn) {
 int prom_collector_add_metric(prom_collector_t *self, prom_metric_t *metric) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
-  if (prom_map_get(self->metrics, metric->name ) != NULL) {
+  if (prom_map_get(self->metrics, metric->name) != NULL) {
     PROM_LOG("metric already found in collector");
     return 1;
   }
   return prom_map_set(self->metrics, metric->name, metric);
 }
 
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Process Collector
 
-prom_map_t* prom_collector_process_collect(prom_collector_t *self);
+prom_map_t *prom_collector_process_collect(prom_collector_t *self);
 
-prom_collector_t* prom_collector_process_new(const char *limits_path, const char *stat_path) {
+prom_collector_t *prom_collector_process_new(const char *limits_path, const char *stat_path) {
   prom_collector_t *self = prom_collector_new("process");
   PROM_ASSERT(self != NULL);
   if (self == NULL) return NULL;
@@ -167,7 +161,7 @@ prom_collector_t* prom_collector_process_new(const char *limits_path, const char
   return self;
 }
 
-prom_map_t* prom_collector_process_collect(prom_collector_t *self) {
+prom_map_t *prom_collector_process_collect(prom_collector_t *self) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return NULL;
 
@@ -190,7 +184,7 @@ prom_map_t* prom_collector_process_collect(prom_collector_t *self) {
   }
 
   // Retrieve the *prom_process_limits_row_t for Max open files
-  prom_process_limits_row_t *max_fds = (prom_process_limits_row_t *) prom_map_get(limits_map, "Max open files");
+  prom_process_limits_row_t *max_fds = (prom_process_limits_row_t *)prom_map_get(limits_map, "Max open files");
   if (max_fds == NULL) {
     prom_process_limits_file_destroy(limits_f);
     prom_map_destroy(limits_map);
@@ -198,9 +192,8 @@ prom_map_t* prom_collector_process_collect(prom_collector_t *self) {
   }
 
   // Retrieve the *prom_process_limits_row_t for Max address space
-  prom_process_limits_row_t *virtual_memory_max_bytes = (prom_process_limits_row_t *) prom_map_get(
-    limits_map, "Max address space"
-  );
+  prom_process_limits_row_t *virtual_memory_max_bytes =
+      (prom_process_limits_row_t *)prom_map_get(limits_map, "Max address space");
   if (virtual_memory_max_bytes == NULL) {
     prom_process_limits_file_destroy(limits_f);
     prom_map_destroy(limits_map);
@@ -270,6 +263,3 @@ prom_map_t* prom_collector_process_collect(prom_collector_t *self) {
 
   return self->metrics;
 }
-
-
-

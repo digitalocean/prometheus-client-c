@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,32 +25,23 @@
 #include "prom_errors.h"
 #include "prom_log.h"
 #include "prom_map_i.h"
-#include "prom_metric_i.h"
 #include "prom_metric_formatter_i.h"
-#include "prom_metric_sample_i.h"
+#include "prom_metric_i.h"
 #include "prom_metric_sample_histogram_i.h"
+#include "prom_metric_sample_i.h"
 
-char *prom_metric_type_map[4] = {
-  "counter",
-  "gauge",
-  "histogram",
-  "summary"
-};
+char *prom_metric_type_map[4] = {"counter", "gauge", "histogram", "summary"};
 
-prom_metric_t* prom_metric_new(prom_metric_type_t metric_type,
-                               const char *name,
-                               const char *help,
-                               size_t label_key_count,
-                               const char **label_keys)
-{
+prom_metric_t *prom_metric_new(prom_metric_type_t metric_type, const char *name, const char *help,
+                               size_t label_key_count, const char **label_keys) {
   int r = 0;
-  prom_metric_t *self = (prom_metric_t *) prom_malloc(sizeof(prom_metric_t));
+  prom_metric_t *self = (prom_metric_t *)prom_malloc(sizeof(prom_metric_t));
   self->type = metric_type;
   self->name = name;
   self->help = help;
   self->buckets = NULL;
 
-  const char **k = (const char **) prom_malloc(sizeof(const char *) * label_key_count);
+  const char **k = (const char **)prom_malloc(sizeof(const char *) * label_key_count);
 
   for (int i = 0; i < label_key_count; i++) {
     if (strcmp(label_keys[i], "le") == 0) {
@@ -88,7 +79,7 @@ prom_metric_t* prom_metric_new(prom_metric_type_t metric_type,
     prom_metric_destroy(self);
     return NULL;
   }
-  self->rwlock = (pthread_rwlock_t*) prom_malloc(sizeof(pthread_rwlock_t));
+  self->rwlock = (pthread_rwlock_t *)prom_malloc(sizeof(pthread_rwlock_t));
   r = pthread_rwlock_init(self->rwlock, NULL);
   if (r) {
     PROM_LOG(PROM_PTHREAD_RWLOCK_INIT_ERROR);
@@ -110,7 +101,6 @@ int prom_metric_destroy(prom_metric_t *self) {
     if (r) ret = r;
   }
 
-
   r = prom_map_destroy(self->samples);
   self->samples = NULL;
   if (r) ret = r;
@@ -129,7 +119,7 @@ int prom_metric_destroy(prom_metric_t *self) {
   self->rwlock = NULL;
 
   for (int i = 0; i < self->label_key_count; i++) {
-    prom_free((void *) self->label_keys[i]);
+    prom_free((void *)self->label_keys[i]);
     self->label_keys[i] = NULL;
   }
   prom_free(self->label_keys);
@@ -143,18 +133,18 @@ int prom_metric_destroy(prom_metric_t *self) {
 
 int prom_metric_destroy_generic(void *item) {
   int r = 0;
-  prom_metric_t *self = (prom_metric_t *) item;
+  prom_metric_t *self = (prom_metric_t *)item;
   r = prom_metric_destroy(self);
   self = NULL;
   return r;
 }
 
 void prom_metric_free_generic(void *item) {
-  prom_metric_t *self = (prom_metric_t *) item;
+  prom_metric_t *self = (prom_metric_t *)item;
   prom_metric_destroy(self);
 }
 
-prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const char **label_values) {
+prom_metric_sample_t *prom_metric_sample_from_labels(prom_metric_t *self, const char **label_values) {
   PROM_ASSERT(self != NULL);
   int r = 0;
   r = pthread_rwlock_wrlock(self->rwlock);
@@ -163,21 +153,14 @@ prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const 
     return NULL;
   }
 
-  #define PROM_METRIC_SAMPLE_FROM_LABELS_HANDLE_UNLOCK() \
-    r = pthread_rwlock_unlock(self->rwlock);             \
-    if (r) PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);   \
-    return NULL;
-
+#define PROM_METRIC_SAMPLE_FROM_LABELS_HANDLE_UNLOCK() \
+  r = pthread_rwlock_unlock(self->rwlock);             \
+  if (r) PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);   \
+  return NULL;
 
   // Get l_value
-  r = prom_metric_formatter_load_l_value(
-    self->formatter,
-    self->name,
-    NULL,
-    self->label_key_count,
-    self->label_keys,
-    label_values
-  );
+  r = prom_metric_formatter_load_l_value(self->formatter, self->name, NULL, self->label_key_count, self->label_keys,
+                                         label_values);
   if (r) {
     PROM_METRIC_SAMPLE_FROM_LABELS_HANDLE_UNLOCK();
   }
@@ -189,7 +172,7 @@ prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const 
   }
 
   // Get sample
-  prom_metric_sample_t *sample = (prom_metric_sample_t*) prom_map_get(self->samples, l_value);
+  prom_metric_sample_t *sample = (prom_metric_sample_t *)prom_map_get(self->samples, l_value);
   if (sample == NULL) {
     sample = prom_metric_sample_new(self->type, l_value, 0.0);
     r = prom_map_set(self->samples, l_value, sample);
@@ -198,12 +181,12 @@ prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const 
     }
   }
   pthread_rwlock_unlock(self->rwlock);
-  prom_free((void *) l_value);
+  prom_free((void *)l_value);
   return sample;
 }
 
-prom_metric_sample_histogram_t* prom_metric_sample_histogram_from_labels(prom_metric_t *self, const char **label_values)
-{
+prom_metric_sample_histogram_t *prom_metric_sample_histogram_from_labels(prom_metric_t *self,
+                                                                         const char **label_values) {
   PROM_ASSERT(self != NULL);
 
   int r = 0;
@@ -213,22 +196,16 @@ prom_metric_sample_histogram_t* prom_metric_sample_histogram_from_labels(prom_me
     return NULL;
   }
 
-  #define PROM_METRIC_SAMPLE_HISTOGRAM_FROM_LABELS_HANDLE_UNLOCK() \
-    r = pthread_rwlock_unlock(self->rwlock);                       \
-    if (r) {                                                       \
-      PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);                  \
-      return NULL;                                                 \
-    }
+#define PROM_METRIC_SAMPLE_HISTOGRAM_FROM_LABELS_HANDLE_UNLOCK() \
+  r = pthread_rwlock_unlock(self->rwlock);                       \
+  if (r) {                                                       \
+    PROM_LOG(PROM_PTHREAD_RWLOCK_UNLOCK_ERROR);                  \
+    return NULL;                                                 \
+  }
 
   // Load the l_value
-  r = prom_metric_formatter_load_l_value(
-    self->formatter,
-    self->name,
-    NULL,
-    self->label_key_count,
-    self->label_keys,
-    label_values
-  );
+  r = prom_metric_formatter_load_l_value(self->formatter, self->name, NULL, self->label_key_count, self->label_keys,
+                                         label_values);
   if (r) {
     PROM_METRIC_SAMPLE_HISTOGRAM_FROM_LABELS_HANDLE_UNLOCK();
   }
@@ -240,23 +217,22 @@ prom_metric_sample_histogram_t* prom_metric_sample_histogram_from_labels(prom_me
   }
 
   // Get sample
-  prom_metric_sample_histogram_t *sample = (prom_metric_sample_histogram_t*) prom_map_get(self->samples, l_value);
+  prom_metric_sample_histogram_t *sample = (prom_metric_sample_histogram_t *)prom_map_get(self->samples, l_value);
   if (sample == NULL) {
-    sample = prom_metric_sample_histogram_new(
-      self->name, self->buckets, self->label_key_count, self->label_keys, label_values
-    );
+    sample = prom_metric_sample_histogram_new(self->name, self->buckets, self->label_key_count, self->label_keys,
+                                              label_values);
     if (sample == NULL) {
-      prom_free((void *) l_value);
+      prom_free((void *)l_value);
       PROM_METRIC_SAMPLE_HISTOGRAM_FROM_LABELS_HANDLE_UNLOCK();
     }
     r = prom_map_set(self->samples, l_value, sample);
     if (r) {
-      prom_free((void *) l_value);
+      prom_free((void *)l_value);
       pthread_rwlock_unlock(self->rwlock);
       PROM_METRIC_SAMPLE_HISTOGRAM_FROM_LABELS_HANDLE_UNLOCK();
     }
   }
   pthread_rwlock_unlock(self->rwlock);
-  prom_free((void *) l_value);
+  prom_free((void *)l_value);
   return sample;
 }

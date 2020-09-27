@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 // Private
-#include "prom_metric_t.h"
 #include "prom_metric_sample_histogram_t.h"
+#include "prom_metric_t.h"
 
 #ifndef PROM_METRIC_I_INCLUDED
 #define PROM_METRIC_I_INCLUDED
@@ -24,10 +24,7 @@
 /**
  * @brief API PRIVATE Returns a *prom_metric
  */
-prom_metric_t* prom_metric_new(prom_metric_type_t type,
-                               const char *name,
-                               const char *help,
-                               size_t label_key_count,
+prom_metric_t *prom_metric_new(prom_metric_type_t type, const char *name, const char *help, size_t label_key_count,
                                const char **label_keys);
 
 /**
@@ -44,6 +41,5 @@ int prom_metric_destroy_generic(void *item);
  * @brief API Private takes a generic item, casts to a *prom_metric_t and destroys it. Discards any errors.
  */
 void prom_metric_free_generic(void *item);
-
 
 #endif  // PROM_METRIC_I_INCLUDED

@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ limitations under the License.
 
 #include <stdlib.h>
 
-#include "prom_metric.h"
 #include "prom_histogram_buckets.h"
+#include "prom_metric.h"
 
 /**
  * @brief A prometheus histogram.
@@ -57,11 +57,8 @@ typedef prom_metric_t prom_histogram_t;
  *     prom_histogram_buckets_t* buckets = prom_histogram_buckets_linear(5.0, 5.0, 10);
  *     prom_histogram_new("foo", "foo is a counter without labels", buckets, 0, NULL);
  */
-prom_histogram_t* prom_histogram_new(const char *name,
-                                     const char *help,
-                                     prom_histogram_buckets_t *buckets,
-                                     size_t label_key_count,
-                                     const char **label_keys);
+prom_histogram_t *prom_histogram_new(const char *name, const char *help, prom_histogram_buckets_t *buckets,
+                                     size_t label_key_count, const char **label_keys);
 
 /**
  * @brief Destroy a prom_histogram_t*. self MUSTS be set to NULL after destruction. Returns a non-zero integer value
@@ -69,7 +66,6 @@ prom_histogram_t* prom_histogram_new(const char *name,
  * @return Non-zero value upon failure.
  */
 int prom_histogram_destroy(prom_histogram_t *self);
-
 
 /**
  * @brief Observe the prom_histogram_t given the value and labells

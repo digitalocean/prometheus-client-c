@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@
 #define PROM_ASSERT_H
 
 #ifdef PROM_ASSERT_ENABLE
-  #define PROM_ASSERT(i) assert(i);
+#define PROM_ASSERT(i) assert(i);
 #else
-  #define PROM_ASSERT(i)
-#endif // PROM_TEST
+#define PROM_ASSERT(i)
+#endif  // PROM_TEST
 
-#endif // PROM_ASSERT_H
+#endif  // PROM_ASSERT_H

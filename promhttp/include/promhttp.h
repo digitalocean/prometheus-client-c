@@ -1,5 +1,5 @@
 /*
- Copyright 2019 DigitalOcean Inc.
+ Copyright 2019-2020 DigitalOcean Inc.
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
  * @brief Provides a HTTP endpoint for metric exposition
  * References:
  *   * MHD_FLAG: https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#microhttpd_002dconst
- *   * MHD_AcceptPolicyCallback: https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#index-_002aMHD_005fAcceptPolicyCallback
+ *   * MHD_AcceptPolicyCallback:
+ * https://www.gnu.org/software/libmicrohttpd/manual/libmicrohttpd.html#index-_002aMHD_005fAcceptPolicyCallback
  */
 
 #include <string.h>
 
 #include "microhttpd.h"
-
 #include "prom_collector_registry.h"
 
 /**
@@ -44,7 +44,5 @@ void promhttp_set_active_collector_registry(prom_collector_registry_t *active_re
  *
  * @return struct MHD_Daemon*
  */
-struct MHD_Daemon* promhttp_start_daemon(unsigned int flags,
-                                         unsigned short port,
-                                         MHD_AcceptPolicyCallback apc,
+struct MHD_Daemon *promhttp_start_daemon(unsigned int flags, unsigned short port, MHD_AcceptPolicyCallback apc,
                                          void *apc_cls);

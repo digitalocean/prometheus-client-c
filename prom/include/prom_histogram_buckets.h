@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ typedef struct prom_histogram_buckets {
  *               passed as count.
  * @return The constructed prom_histogram_buckets_t*
  */
-prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket, ...);
+prom_histogram_buckets_t *prom_histogram_buckets_new(size_t count, double bucket, ...);
 
 /**
  * @brief the default histogram buckets: .005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10
@@ -50,7 +50,7 @@ extern prom_histogram_buckets_t *prom_histogram_default_buckets;
  * @param count The total number of buckets. The final +Inf bucket is not counted and not included.
  * @return The constructed prom_histogram_buckets_t*
  */
-prom_histogram_buckets_t* prom_histogram_buckets_linear(double start, double width, size_t count);
+prom_histogram_buckets_t *prom_histogram_buckets_linear(double start, double width, size_t count);
 
 /**
  * @brief Construct an exponentially sized prom_histogram_buckets_t*
@@ -61,8 +61,7 @@ prom_histogram_buckets_t* prom_histogram_buckets_linear(double start, double wid
  *              greater than or equal to 1
  * @return The constructed prom_histogram_buckets_t*
  */
-prom_histogram_buckets_t* prom_histogram_buckets_exponential(double start, double factor, size_t count);
-
+prom_histogram_buckets_t *prom_histogram_buckets_exponential(double start, double factor, size_t count);
 
 /**
  * @brief Destroy a prom_histogram_buckets_t*. Self MUST be set to NULL after destruction. Returns a non-zero integer
@@ -79,4 +78,4 @@ int prom_histogram_buckets_destroy(prom_histogram_buckets_t *self);
  */
 size_t prom_histogram_buckets_count(prom_histogram_buckets_t *self);
 
-#endif // PROM_HISTOGRAM_BUCKETS_H
+#endif  // PROM_HISTOGRAM_BUCKETS_H

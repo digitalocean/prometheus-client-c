@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 
 #ifndef PROM_COLLECTOR_T_H
 #define PROM_COLLECTOR_T_H
@@ -31,4 +30,4 @@ struct prom_collector {
   const char *proc_stat_file_path;
 };
 
-#endif // PROM_COLLECTOR_T_H
+#endif  // PROM_COLLECTOR_T_H

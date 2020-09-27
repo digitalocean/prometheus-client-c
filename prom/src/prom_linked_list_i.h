@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-
 #ifndef PROM_LIST_I_INCLUDED
 #define PROM_LIST_I_INCLUDED
 
 // Private
 #include "prom_linked_list_t.h"
-
 
 /**
  * @brief API PRIVATE Returns a pointer to a prom_linked_list
@@ -40,12 +38,12 @@ int prom_linked_list_destroy(prom_linked_list_t *self);
 /**
  * @brief API PRIVATE Append an item to the back of the list
  */
-int prom_linked_list_append(prom_linked_list_t *self, void* item);
+int prom_linked_list_append(prom_linked_list_t *self, void *item);
 
 /**
  * @brief API PRIVATE Push an item onto the front of the list
  */
-int prom_linked_list_push(prom_linked_list_t *self, void* item);
+int prom_linked_list_push(prom_linked_list_t *self, void *item);
 
 /**
  * @brief API PRIVATE Pop the first item off of the list

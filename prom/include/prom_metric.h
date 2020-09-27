@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ typedef struct prom_metric prom_metric_t;
  *                     necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal.
  * @return A prom_metric_sample_t*
  */
-prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const char **label_values);
+prom_metric_sample_t *prom_metric_sample_from_labels(prom_metric_t *self, const char **label_values);
 
 /**
  * @brief Returns a prom_metric_sample_histogram_t*. The order of label_values is significant.
@@ -61,7 +61,7 @@ prom_metric_sample_t* prom_metric_sample_from_labels(prom_metric_t *self, const 
  *                     necessary, pass NULL. Otherwise, It may be convenient to pass this value as a literal.
  * @return prom_metric_sample_histogram_t*
  */
-prom_metric_sample_histogram_t* prom_metric_sample_histogram_from_labels(prom_metric_t *self,
+prom_metric_sample_histogram_t *prom_metric_sample_histogram_from_labels(prom_metric_t *self,
                                                                          const char **label_values);
 
 #endif  // PROM_METRIC_H

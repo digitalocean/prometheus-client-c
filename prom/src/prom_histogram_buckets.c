@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,10 @@
 
 prom_histogram_buckets_t *prom_histogram_default_buckets;
 
-prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket, ...) {
-  prom_histogram_buckets_t *self = (prom_histogram_buckets_t*) prom_malloc(sizeof(prom_histogram_buckets_t));
+prom_histogram_buckets_t *prom_histogram_buckets_new(size_t count, double bucket, ...) {
+  prom_histogram_buckets_t *self = (prom_histogram_buckets_t *)prom_malloc(sizeof(prom_histogram_buckets_t));
   self->count = count;
-  double *upper_bounds = (double*) prom_malloc(sizeof(double)*count);
+  double *upper_bounds = (double *)prom_malloc(sizeof(double) * count);
   upper_bounds[0] = bucket;
   if (count == 1) {
     self->upper_bounds = upper_bounds;
@@ -46,23 +46,22 @@ prom_histogram_buckets_t* prom_histogram_buckets_new(size_t count, double bucket
   return self;
 }
 
-
-prom_histogram_buckets_t* prom_histogram_buckets_linear(double start, double width, size_t count) {
+prom_histogram_buckets_t *prom_histogram_buckets_linear(double start, double width, size_t count) {
   if (count <= 1) return NULL;
 
-  prom_histogram_buckets_t *self = (prom_histogram_buckets_t*) prom_malloc(sizeof(prom_histogram_buckets_t));
+  prom_histogram_buckets_t *self = (prom_histogram_buckets_t *)prom_malloc(sizeof(prom_histogram_buckets_t));
 
-  double *upper_bounds = (double*) prom_malloc(sizeof(double) * count);
+  double *upper_bounds = (double *)prom_malloc(sizeof(double) * count);
   upper_bounds[0] = start;
   for (size_t i = 1; i < count; i++) {
-    upper_bounds[i] = upper_bounds[i-1] + width;
+    upper_bounds[i] = upper_bounds[i - 1] + width;
   }
   self->upper_bounds = upper_bounds;
   self->count = count;
   return self;
 }
 
-prom_histogram_buckets_t* prom_histogram_buckets_exponential(double start, double factor, size_t count) {
+prom_histogram_buckets_t *prom_histogram_buckets_exponential(double start, double factor, size_t count) {
   if (count < 1) {
     PROM_LOG("count must be less than 1");
     return NULL;
@@ -76,12 +75,12 @@ prom_histogram_buckets_t* prom_histogram_buckets_exponential(double start, doubl
     return NULL;
   }
 
-  prom_histogram_buckets_t *self = (prom_histogram_buckets_t*) prom_malloc(sizeof(prom_histogram_buckets_t));
+  prom_histogram_buckets_t *self = (prom_histogram_buckets_t *)prom_malloc(sizeof(prom_histogram_buckets_t));
 
-  double *upper_bounds = (double*) prom_malloc(sizeof(double) * count);
+  double *upper_bounds = (double *)prom_malloc(sizeof(double) * count);
   upper_bounds[0] = start;
   for (size_t i = 1; i < count; i++) {
-    upper_bounds[i] = upper_bounds[i-1] * factor;
+    upper_bounds[i] = upper_bounds[i - 1] * factor;
   }
   self->upper_bounds = upper_bounds;
   self->count = count;
@@ -91,7 +90,7 @@ prom_histogram_buckets_t* prom_histogram_buckets_exponential(double start, doubl
 int prom_histogram_buckets_destroy(prom_histogram_buckets_t *self) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 0;
-  prom_free((double *) self->upper_bounds);
+  prom_free((double *)self->upper_bounds);
   self->upper_bounds = NULL;
   prom_free(self);
   self = NULL;

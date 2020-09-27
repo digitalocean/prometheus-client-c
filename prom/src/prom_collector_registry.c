@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #include <pthread.h>
 #include <regex.h>
 #include <stdio.h>
@@ -26,8 +25,8 @@
 
 // Private
 #include "prom_assert.h"
-#include "prom_collector_t.h"
 #include "prom_collector_registry_t.h"
+#include "prom_collector_t.h"
 #include "prom_errors.h"
 #include "prom_log.h"
 #include "prom_map_i.h"
@@ -39,11 +38,10 @@
 
 prom_collector_registry_t *PROM_COLLECTOR_REGISTRY_DEFAULT;
 
-prom_collector_registry_t* prom_collector_registry_new(const char *name)
-{
+prom_collector_registry_t *prom_collector_registry_new(const char *name) {
   int r = 0;
 
-  prom_collector_registry_t* self = (prom_collector_registry_t*) prom_malloc(sizeof(prom_collector_registry_t));
+  prom_collector_registry_t *self = (prom_collector_registry_t *)prom_malloc(sizeof(prom_collector_registry_t));
 
   self->disable_process_metrics = false;
 
@@ -54,7 +52,7 @@ prom_collector_registry_t* prom_collector_registry_new(const char *name)
 
   self->metric_formatter = prom_metric_formatter_new();
   self->string_builder = prom_string_builder_new();
-  self->lock = (pthread_rwlock_t*) prom_malloc(sizeof(pthread_rwlock_t));
+  self->lock = (pthread_rwlock_t *)prom_malloc(sizeof(pthread_rwlock_t));
   r = pthread_rwlock_init(self->lock, NULL);
   if (r) {
     PROM_LOG("failed to initialize rwlock");
@@ -74,11 +72,9 @@ int prom_collector_registry_enable_process_metrics(prom_collector_registry_t *se
   return 1;
 }
 
-
 int prom_collector_registry_enable_custom_process_metrics(prom_collector_registry_t *self,
                                                           const char *process_limits_path,
-                                                          const char *process_stats_path)
-{
+                                                          const char *process_stats_path) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) {
     PROM_LOG("prom_collector_registry_t is NULL");
@@ -91,7 +87,6 @@ int prom_collector_registry_enable_custom_process_metrics(prom_collector_registr
   }
   return 1;
 }
-
 
 int prom_collector_registry_default_init(void) {
   if (PROM_COLLECTOR_REGISTRY_DEFAULT != NULL) return 0;
@@ -129,7 +124,7 @@ int prom_collector_registry_destroy(prom_collector_registry_t *self) {
   self->lock = NULL;
   if (r) ret = r;
 
-  prom_free((char *) self->name);
+  prom_free((char *)self->name);
   self->name = NULL;
 
   prom_free(self);
@@ -141,9 +136,8 @@ int prom_collector_registry_destroy(prom_collector_registry_t *self) {
 int prom_collector_registry_register_metric(prom_metric_t *metric) {
   PROM_ASSERT(metric != NULL);
 
-  prom_collector_t *default_collector = (prom_collector_t *) prom_map_get(
-    PROM_COLLECTOR_REGISTRY_DEFAULT->collectors, "default"
-  );
+  prom_collector_t *default_collector =
+      (prom_collector_t *)prom_map_get(PROM_COLLECTOR_REGISTRY_DEFAULT->collectors, "default");
 
   if (default_collector == NULL) {
     return 1;
@@ -152,7 +146,7 @@ int prom_collector_registry_register_metric(prom_metric_t *metric) {
   return prom_collector_add_metric(default_collector, metric);
 }
 
-prom_metric_t* prom_collector_registry_must_register_metric(prom_metric_t *metric) {
+prom_metric_t *prom_collector_registry_must_register_metric(prom_metric_t *metric) {
   int err = prom_collector_registry_register_metric(metric);
   if (err != 0) {
     exit(err);
@@ -171,7 +165,7 @@ int prom_collector_registry_register_collector(prom_collector_registry_t *self, 
     PROM_LOG(PROM_PTHREAD_RWLOCK_LOCK_ERROR);
     return 1;
   }
-  if (prom_map_get(self->collectors, collector->name) != NULL){
+  if (prom_map_get(self->collectors, collector->name) != NULL) {
     PROM_LOG("the given prom_collector_t* is already registered");
     int rr = pthread_rwlock_unlock(self->lock);
     if (rr) {
@@ -203,14 +197,14 @@ int prom_collector_registry_validate_metric_name(prom_collector_registry_t *self
   regex_t r;
   int ret = 0;
   ret = regcomp(&r, "^[a-zA-Z_:][a-zA-Z0-9_:]*$", REG_EXTENDED);
-  if (ret){
+  if (ret) {
     PROM_LOG(PROM_REGEX_REGCOMP_ERROR);
     regfree(&r);
     return ret;
   }
 
   ret = regexec(&r, metric_name, 0, NULL, 0);
-  if (ret){
+  if (ret) {
     PROM_LOG(PROM_REGEX_REGEXEC_ERROR);
     regfree(&r);
     return ret;
@@ -219,9 +213,8 @@ int prom_collector_registry_validate_metric_name(prom_collector_registry_t *self
   return 0;
 }
 
-const char* prom_collector_registry_bridge(prom_collector_registry_t *self) {
+const char *prom_collector_registry_bridge(prom_collector_registry_t *self) {
   prom_metric_formatter_clear(self->metric_formatter);
   prom_metric_formatter_load_metrics(self->metric_formatter, self->collectors);
-  return (const char*) prom_metric_formatter_dump(self->metric_formatter);
+  return (const char *)prom_metric_formatter_dump(self->metric_formatter);
 }
-

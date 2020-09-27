@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 
 void test_prom_collector(void) {
   prom_collector_t *collector = prom_collector_new("test");
-  prom_counter_t *counter = prom_counter_new( "test_counter", "counter under test", 0, NULL);
+  prom_counter_t *counter = prom_counter_new("test_counter", "counter under test", 0, NULL);
   prom_collector_add_metric(collector, counter);
   prom_map_t *m = collector->collect_fn(collector);
   TEST_ASSERT_EQUAL_INT(1, prom_map_size(m));
@@ -27,10 +27,9 @@ void test_prom_collector(void) {
 }
 
 void test_prom_process_collector(void) {
-  prom_collector_t *collector = prom_collector_process_new(
-    "/code/prom/test/fixtures/limits", "/code/prom/test/fixtures/stat"
-  );
-  prom_map_t *m  = collector->collect_fn(collector);
+  prom_collector_t *collector =
+      prom_collector_process_new("/code/prom/test/fixtures/limits", "/code/prom/test/fixtures/stat");
+  prom_map_t *m = collector->collect_fn(collector);
   TEST_ASSERT_EQUAL_INT(6, prom_map_size(m));
   prom_collector_destroy(collector);
   collector = NULL;

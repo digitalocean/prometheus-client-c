@@ -1,6 +1,6 @@
 
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
 
 void test_prom_histogram_buckets_new(void) {
@@ -23,16 +22,17 @@ void test_prom_histogram_buckets_new(void) {
   TEST_ASSERT_EQUAL_DOUBLE(1.0, result->upper_bounds[0]);
   TEST_ASSERT_EQUAL_DOUBLE(2.0, result->upper_bounds[1]);
   TEST_ASSERT_EQUAL_DOUBLE(3.0, result->upper_bounds[2]);
+  TEST_ASSERT_EQUAL_INT(3, prom_histogram_buckets_count(result));
   prom_histogram_buckets_destroy(result);
   result = NULL;
 }
 
-
-void test_prom_histogram_buckets_linear(void){
+void test_prom_histogram_buckets_linear(void) {
   prom_histogram_buckets_t *result = prom_histogram_buckets_linear(0.0, 1.5, 3);
   TEST_ASSERT_EQUAL_DOUBLE(0.0, result->upper_bounds[0]);
   TEST_ASSERT_EQUAL_DOUBLE(1.5, result->upper_bounds[1]);
   TEST_ASSERT_EQUAL_DOUBLE(3.0, result->upper_bounds[2]);
+  TEST_ASSERT_EQUAL_INT(3, prom_histogram_buckets_count(result));
   prom_histogram_buckets_destroy(result);
   result = NULL;
 }
@@ -42,6 +42,7 @@ void test_prom_histogram_buckets_expontential(void) {
   TEST_ASSERT_EQUAL_DOUBLE(1.0, result->upper_bounds[0]);
   TEST_ASSERT_EQUAL_DOUBLE(2.0, result->upper_bounds[1]);
   TEST_ASSERT_EQUAL_DOUBLE(4.0, result->upper_bounds[2]);
+  TEST_ASSERT_EQUAL_INT(3, prom_histogram_buckets_count(result));
   prom_histogram_buckets_destroy(result);
 }
 

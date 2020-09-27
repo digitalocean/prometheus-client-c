@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,7 @@ void promtest_counter(void) {
 
   // Start each thread
   for (int i = 0; i < PROMTEST_THREAD_POOL_SIZE; i++) {
-    if (pthread_create(&(thread_pool[i]), NULL, promtest_counter_handler,
-                       NULL)) {
+    if (pthread_create(&(thread_pool[i]), NULL, promtest_counter_handler, NULL)) {
       TEST_FAIL_MESSAGE("failed to create thread");
     }
   }
@@ -99,15 +98,14 @@ int promtest_counter_setup(void) {
   prom_collector_registry_default_init();
 
   // Set the counter
-  foo_counter = prom_collector_registry_must_register_metric(
-      prom_counter_new("foo_counter", "counter for foo", 0, NULL));
+  foo_counter =
+      prom_collector_registry_must_register_metric(prom_counter_new("foo_counter", "counter for foo", 0, NULL));
 
   // Set the collector registry on the handler to the default registry
   promhttp_set_active_collector_registry(NULL);
 
   // Start the HTTP server
-  promtest_daemon =
-      promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
+  promtest_daemon = promhttp_start_daemon(MHD_USE_SELECT_INTERNALLY, 8000, NULL, NULL);
 
   if (promtest_daemon == NULL)
     return 1;

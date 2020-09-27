@@ -48,3 +48,7 @@ changed_files:
 smoke: package
 	./auto dev -e auto -a smoke
 .PHONY: smoke
+
+format:
+	echo $(shell while read file_path; do echo ${file_path}; done < <(find -E ${PWD} -type f -regex ".*/prom[[:alnum:]_-]+\.[c|h]" ! -regex '.*CPack.*'))
+.PHONY: format

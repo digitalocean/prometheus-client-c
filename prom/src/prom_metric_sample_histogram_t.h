@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,4 +36,4 @@ struct prom_metric_sample_histogram {
   pthread_rwlock_t *rwlock;
 };
 
-#endif // PROM_METRIC_HISTOGRAM_SAMPLE_T_H
+#endif  // PROM_METRIC_HISTOGRAM_SAMPLE_T_H

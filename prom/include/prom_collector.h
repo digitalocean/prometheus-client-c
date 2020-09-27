@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ typedef struct prom_collector prom_collector_t;
  * @param self The target prom_collector_t*
  * @return The prom_map_t* containing the collected metrics
  */
-typedef prom_map_t* prom_collect_fn(prom_collector_t* self);
+typedef prom_map_t *prom_collect_fn(prom_collector_t *self);
 
 /**
  * @brief Create a collector
  * @param name The name of the collector. The name MUST NOT be default or process.
  * @return The constructed prom_collector_t*
  */
-prom_collector_t* prom_collector_new(const char *name);
+prom_collector_t *prom_collector_new(const char *name);
 
 /**
  *@brief Construct a prom_collector_t* which includes the default process metrics
@@ -57,7 +57,7 @@ prom_collector_t* prom_collector_new(const char *name);
  *                  by the host environment. Otherwise, pass a string to said path.
  * @return The constructed prom_collector_t*
  */
-prom_collector_t* prom_collector_process_new(const char *limits_path, const char *stat_path);
+prom_collector_t *prom_collector_process_new(const char *limits_path, const char *stat_path);
 
 /**
  * @brief Destroy a collector. You MUST set self to NULL after destruction.
@@ -97,4 +97,4 @@ int prom_collector_add_metric(prom_collector_t *self, prom_metric_t *metric);
  */
 int prom_collector_set_collect_fn(prom_collector_t *self, prom_collect_fn *fn);
 
-#endif // PROM_COLLECTOR_H
+#endif  // PROM_COLLECTOR_H

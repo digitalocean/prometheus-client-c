@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  */
 
 #include <assert.h>
-#include "prom_test_helpers.h"
 
+#include "prom_test_helpers.h"
 
 const char *sample_labels_a[] = {"f", "b"};
 const char *sample_labels_b[] = {"o", "r"};
 
 void test_counter_inc(void) {
-  prom_counter_t *c = prom_counter_new("test_counter", "counter under test", 2, (const char *[]) { "foo", "bar" });
+  prom_counter_t *c = prom_counter_new("test_counter", "counter under test", 2, (const char *[]){"foo", "bar"});
   TEST_ASSERT(c);
 
   prom_counter_inc(c, sample_labels_a);
@@ -38,11 +38,11 @@ void test_counter_inc(void) {
 }
 
 void test_counter_add(void) {
-  prom_counter_t *c = prom_counter_new("test_counter", "counter under test", 2, (const char *[]) { "foo", "bar"});
+  prom_counter_t *c = prom_counter_new("test_counter", "counter under test", 2, (const char *[]){"foo", "bar"});
   TEST_ASSERT(c);
 
   prom_counter_add(c, 100000000.1, sample_labels_a);
-  prom_metric_sample_t *sample = prom_metric_sample_from_labels(c,  sample_labels_a);
+  prom_metric_sample_t *sample = prom_metric_sample_from_labels(c, sample_labels_a);
   TEST_ASSERT_EQUAL_DOUBLE(100000000.1, sample->r_value);
 
   sample = prom_metric_sample_from_labels(c, sample_labels_b);
@@ -53,8 +53,8 @@ void test_counter_add(void) {
 }
 
 int main(int argc, const char **argv) {
-    UNITY_BEGIN();
-    RUN_TEST(test_counter_inc);
-    RUN_TEST(test_counter_add);
-    return UNITY_END();
+  UNITY_BEGIN();
+  RUN_TEST(test_counter_inc);
+  RUN_TEST(test_counter_add);
+  return UNITY_END();
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-
-
 #ifndef PROM_STRING_BUILDER_T_H
 #define PROM_STRING_BUILDER_T_H
-
 
 struct prom_string_builder;
 /**
@@ -26,5 +23,4 @@ struct prom_string_builder;
  */
 typedef struct prom_string_builder prom_string_builder_t;
 
-
-#endif // PROM_STRING_BUILDER_T_H
+#endif  // PROM_STRING_BUILDER_T_H

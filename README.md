@@ -27,8 +27,8 @@ project directory and execute `make`. This process will build the development co
 run the unit tests and execute the smoke tests.
 
 The stages of the development workflow are automated via `auto` which can be found in the root of this project directory.
-Execute `./auto -h` for information regarding the different subcommands. Information for each subcommand can be
-obtained by executing `./auto CMD -h`.
+Execute `bash auto -h` for information regarding the different subcommands. Information for each subcommand can be
+obtained by executing `bash auto CMD -h`.
 
 ## Contributing
 
@@ -54,7 +54,7 @@ communication process so please do not be shy. Speak up!
 ### Coding Rules for Contribution
 
 * Please follow the general coding style already present in the project.
-  * clang-format your code with style Google. 
+  * clang-format your code by executing `bash auto format` before submitting a PR.
   * Every struct must have a constructor function and destructor function.
   * Every method must pass a pointer to the target struct as the first argument.
   * Every function that is not a constructor or destructor and does not return a value must return an int to signify

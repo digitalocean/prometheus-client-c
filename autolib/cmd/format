@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+########################################################################################################################
+# Meta
+########################################################################################################################
+
+# Propagate environment variables
+if [[ "$AUTO_DEBUG" == "1" ]]; then
+  set -x
+  export AUTO_DEBUG=1
+fi
+
+PROGRAM_NAME=$(basename $0)
+
+short="Format the project"
+read -d '' long <<EOF
+
+You SHOULD execute this command within the development container.
+
+EOF
+
+usage(){
+  cat <<EOF
+
+$PROGRAM_NAME [-h]
+
+$short
+
+EOF
+}
+
+########################################################################################################################
+# End Meta
+########################################################################################################################
+
+source "$(dirname ${BASH_SOURCE[0]})/../autolib.sh"
+
+main(){
+  declare -i return_value=0
+
+  while getopts "h" opt; do
+    case $opt in
+      ( h ) {
+        usage && exit 0
+      } ;;
+    esac
+  done
+
+  while read file_path; do
+    local temp
+    temp=$(mktemp) || {
+      return_value=$?
+      autolib_output_error "failed to create temp file"
+      exit $return_code
+    }
+
+    {
+      clang-format --style=file $file_path > $temp &&
+      sed -i 's/Copyright 2019-2020/Copyright 2019-2020/g' $temp &&
+      mv $temp $file_path
+    } || {
+      return_value=$?
+      autolib_output_error "failed to format project"
+      exit $return_code
+    }
+  done < <(find ${PWD} -regextype posix-extended -type f -regex ".*/prom[[:alnum:]_-]+\.[c|h]" ! -regex '.*CPack.*') || {
+    return_value=$?
+    autolib_output_error "failed to find relevant C project files"
+    exit $return_code
+  }
+}
+
+[[ $BASH_SOURCE == $0 ]] && main $@

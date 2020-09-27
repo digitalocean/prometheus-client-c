@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 
 #include <stddef.h>
 
@@ -32,16 +31,16 @@
 int prom_string_builder_init(prom_string_builder_t *self);
 
 struct prom_string_builder {
-  char *str;         /**< the target string  */
-  size_t allocated;  /**< the size allocated to the string in bytes */
-  size_t len;        /**< the length of str */
-  size_t init_size;  /**< the initialize size of space to allocate */
+  char *str;        /**< the target string  */
+  size_t allocated; /**< the size allocated to the string in bytes */
+  size_t len;       /**< the length of str */
+  size_t init_size; /**< the initialize size of space to allocate */
 };
 
-prom_string_builder_t* prom_string_builder_new(void) {
+prom_string_builder_t *prom_string_builder_new(void) {
   int r = 0;
 
-  prom_string_builder_t *self = (prom_string_builder_t*) prom_malloc(sizeof(prom_string_builder_t));
+  prom_string_builder_t *self = (prom_string_builder_t *)prom_malloc(sizeof(prom_string_builder_t));
   self->init_size = PROM_STRING_BUILDER_INIT_SIZE;
   r = prom_string_builder_init(self);
   if (r) {
@@ -55,13 +54,12 @@ prom_string_builder_t* prom_string_builder_new(void) {
 int prom_string_builder_init(prom_string_builder_t *self) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
-  self->str = (char*) prom_malloc(self->init_size);
+  self->str = (char *)prom_malloc(self->init_size);
   *self->str = '\0';
   self->allocated = self->init_size;
   self->len = 0;
   return 0;
 }
-
 
 int prom_string_builder_destroy(prom_string_builder_t *self) {
   PROM_ASSERT(self != NULL);
@@ -82,9 +80,9 @@ int prom_string_builder_destroy(prom_string_builder_t *self) {
 static int prom_string_builder_ensure_space(prom_string_builder_t *self, size_t add_len) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
-  if (add_len == 0 || self->allocated >= self->len+add_len+1) return 0;
-  while (self->allocated < self->len+add_len+1) self->allocated <<= 1;
-  self->str = (char *) prom_realloc(self->str, self->allocated);
+  if (add_len == 0 || self->allocated >= self->len + add_len + 1) return 0;
+  while (self->allocated < self->len + add_len + 1) self->allocated <<= 1;
+  self->str = (char *)prom_realloc(self->str, self->allocated);
   return 0;
 }
 
@@ -99,7 +97,7 @@ int prom_string_builder_add_str(prom_string_builder_t *self, const char *str) {
   r = prom_string_builder_ensure_space(self, len);
   if (r) return r;
 
-  memcpy(self->str+self->len, str, len);
+  memcpy(self->str + self->len, str, len);
   self->len += len;
   self->str[self->len] = '\0';
   return 0;
@@ -141,15 +139,15 @@ size_t prom_string_builder_len(prom_string_builder_t *self) {
   return self->len;
 }
 
-char* prom_string_builder_dump(prom_string_builder_t *self) {
+char *prom_string_builder_dump(prom_string_builder_t *self) {
   PROM_ASSERT(self != NULL);
   // +1 to accommodate \0
-  char* out = (char*) prom_malloc((self->len+1) * sizeof(char));
-  memcpy(out, self->str, self->len+1);
+  char *out = (char *)prom_malloc((self->len + 1) * sizeof(char));
+  memcpy(out, self->str, self->len + 1);
   return out;
 }
 
-char* prom_string_builder_str(prom_string_builder_t *self) {
+char *prom_string_builder_str(prom_string_builder_t *self) {
   PROM_ASSERT(self != NULL);
   return self->str;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-
-
-#include <stdio.h>
 #include <dirent.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include <unistd.h>
 
@@ -37,14 +35,14 @@ int prom_process_fds_count(const char *path) {
   int r = 0;
   struct dirent *de;
   DIR *d;
-   if (path) {
+  if (path) {
     d = opendir(path);
     if (d == NULL) {
       PROM_LOG(PROM_STDIO_OPEN_DIR_ERROR);
       return -1;
     }
   } else {
-    int pid = (int) getpid();
+    int pid = (int)getpid();
     char p[50];
     sprintf(p, "/proc/%d/fd", pid);
     d = opendir(p);
@@ -68,12 +66,7 @@ int prom_process_fds_count(const char *path) {
   return count;
 }
 
-
 int prom_process_fds_init(void) {
-  prom_process_open_fds = prom_gauge_new(
-    "process_open_fds",
-    "Number of open file descriptors.",
-    0, NULL
-  );
+  prom_process_open_fds = prom_gauge_new("process_open_fds", "Number of open file descriptors.", 0, NULL);
   return 0;
 }

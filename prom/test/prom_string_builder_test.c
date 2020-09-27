@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
 
 void test_prom_string_builder_add_str(void) {
   prom_string_builder_t *sb = prom_string_builder_new();
   prom_string_builder_add_str(sb, "fooooooooooooooooooooooooooooooooo");
   prom_string_builder_add_str(sb, " baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar");
-  TEST_ASSERT_EQUAL_STRING(prom_string_builder_str(sb), "fooooooooooooooooooooooooooooooooo baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar");
+  TEST_ASSERT_EQUAL_STRING(prom_string_builder_str(sb),
+                           "fooooooooooooooooooooooooooooooooo baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar");
 
   prom_string_builder_destroy(sb);
   sb = NULL;
@@ -49,7 +49,7 @@ void test_prom_string_builder_dump(void) {
   TEST_ASSERT_EQUAL_STRING(original, result);
 
   prom_string_builder_destroy(sb);
-  free((char *) result);
+  free((char *)result);
   result = NULL;
   sb = NULL;
 }

@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -51,10 +51,7 @@ typedef prom_metric_t prom_gauge_t;
  *     // An example without labels
  *     prom_gauge_new("foo", "foo is a gauge without labels", 0, NULL);
  */
-prom_gauge_t* prom_gauge_new(const char *name,
-                             const char *help,
-                             size_t label_key_count,
-                             const char **label_keys);
+prom_gauge_t *prom_gauge_new(const char *name, const char *help, size_t label_key_count, const char **label_keys);
 
 /**
  * @brief Destroys a prom_gauge_t*. You must set self to NULL after destruction. A non-zero integer value will be
@@ -63,7 +60,6 @@ prom_gauge_t* prom_gauge_new(const char *name,
  * @return A non-zero integer value upon failure
  */
 int prom_gauge_destroy(prom_gauge_t *self);
-
 
 /**
  * @brief Increment the prom_gauge_t* by 1.
@@ -82,7 +78,6 @@ int prom_gauge_destroy(prom_gauge_t *self);
  */
 int prom_gauge_inc(prom_gauge_t *self, const char **label_values);
 
-
 /**
  * @brief Decrement the prom_gauge_t* by 1.
  * @param self The target  prom_gauger_t*
@@ -99,7 +94,6 @@ int prom_gauge_inc(prom_gauge_t *self, const char **label_values);
  *     prom_gauge_dec(foo_gauge, NULL);
  */
 int prom_gauge_dec(prom_gauge_t *self, const char **label_values);
-
 
 /**
  * @brief Add the value to the prom_gauge_t*.
@@ -120,7 +114,6 @@ int prom_gauge_dec(prom_gauge_t *self, const char **label_values);
  */
 int prom_gauge_add(prom_gauge_t *self, double r_value, const char **label_values);
 
-
 /**
  * @brief Subtract the value to the prom_gauge. A non-zero integer value will be returned on failure.
  * @param self The target prom_gauge_t*
@@ -139,7 +132,6 @@ int prom_gauge_add(prom_gauge_t *self, double r_value, const char **label_values
  *     prom_gauge_sub(foo_gauge, 22, NULL);
  */
 int prom_gauge_sub(prom_gauge_t *self, double r_value, const char **label_values);
-
 
 /**
  * @brief Set the value for the prom_gauge_t*

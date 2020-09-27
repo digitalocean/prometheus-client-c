@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
-
 
 void test_prom_map(void) {
   prom_map_t *map = prom_map_new();
   prom_map_set(map, "foo", "bar");
   prom_map_set(map, "bing", "bang");
-  TEST_ASSERT_EQUAL_STRING("bar", (const char*) prom_map_get(map, "foo"));
-  TEST_ASSERT_EQUAL_STRING("bang", (const char*) prom_map_get(map, "bing"));
+  TEST_ASSERT_EQUAL_STRING("bar", (const char *)prom_map_get(map, "foo"));
+  TEST_ASSERT_EQUAL_STRING("bang", (const char *)prom_map_get(map, "bing"));
   TEST_ASSERT_NULL(prom_map_get(map, "nope"));
   TEST_ASSERT_EQUAL_INT(2, prom_map_size(map));
 
-  for (
-    prom_linked_list_node_t *current_node = map->keys->head;
-    current_node != NULL;
-    current_node = current_node->next
-  ) {
-    const char *key = (const char *) current_node->item;
+  for (prom_linked_list_node_t *current_node = map->keys->head; current_node != NULL;
+       current_node = current_node->next) {
+    const char *key = (const char *)current_node->item;
 
     const char *expected;
     if (strcmp(key, "foo") == 0) {
@@ -51,7 +46,6 @@ void test_prom_map(void) {
 }
 
 void test_prom_map_when_large(void) {
-
   prom_map_t *map = prom_map_new();
   prom_map_set_free_value_fn(map, free);
 
@@ -59,25 +53,25 @@ void test_prom_map_when_large(void) {
   for (int i = 1; i <= 10000; i++) {
     char buf[4];
     sprintf(buf, "%d", i);
-    const char *k = (const char *) buf;
+    const char *k = (const char *)buf;
     int *set = malloc(sizeof(int));
     *set = i;
-    prom_map_set(map, k, (void *) set);
-    TEST_ASSERT_EQUAL_INT(i, *((int*) prom_map_get(map, k)));
+    prom_map_set(map, k, (void *)set);
+    TEST_ASSERT_EQUAL_INT(i, *((int *)prom_map_get(map, k)));
   }
 
   // Update one of the keys
   int *at_50 = malloc(sizeof(int));
   *at_50 = 5000;
-  prom_map_set(map, "50", (void *) at_50);
-  TEST_ASSERT_EQUAL_INT(5000, *((int*) prom_map_get(map, "50")));
+  prom_map_set(map, "50", (void *)at_50);
+  TEST_ASSERT_EQUAL_INT(5000, *((int *)prom_map_get(map, "50")));
 
   // Ensure each key and value is correct
   for (int i = 1; i <= 10000; i++) {
     char buf[5];
     sprintf(buf, "%d", i);
-    const char *k = (const char  *) buf;
-    int actual = *((int*) prom_map_get(map, k));
+    const char *k = (const char *)buf;
+    int actual = *((int *)prom_map_get(map, k));
     if (i == 50) {
       TEST_ASSERT_EQUAL_INT(5000, actual);
     } else {

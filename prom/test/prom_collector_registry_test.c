@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
-
 
 static void prom_registry_test_init(void);
 static void prom_registry_test_destroy(void);
@@ -35,12 +33,11 @@ void test_large_registry(void) {
   prom_registry_test_destroy();
 }
 
-
 void test_prom_collector_registry_must_register(void) {
   prom_registry_test_init();
   int r = 0;
 
-  const char *labels[] = { "foo" };
+  const char *labels[] = {"foo"};
   r = prom_counter_inc(test_counter, labels);
   if (r) TEST_FAIL();
   r = prom_gauge_add(test_gauge, 2.0, labels);
@@ -60,7 +57,7 @@ void test_prom_collector_registry_bridge(void) {
 
   if (test_histogram == NULL) TEST_FAIL_MESSAGE("histogram failed to initialize");
 
-  const char *labels[] = { "foo" };
+  const char *labels[] = {"foo"};
   prom_counter_inc(test_counter, labels);
   prom_gauge_set(test_gauge, 2.0, labels);
   r = prom_histogram_observe(test_histogram, 3.0, NULL);
@@ -70,33 +67,38 @@ void test_prom_collector_registry_bridge(void) {
 
   const char *result = prom_collector_registry_bridge(PROM_COLLECTOR_REGISTRY_DEFAULT);
 
-  const char *expected = "# HELP test_counter counter under test\n# TYPE test_counter counter\ntest_counter{label=\"foo\"} 1.000000\n\n# HELP test_gauge gauge under test\n# TYPE test_gauge gauge\ntest_gauge{label=\"foo\"} 2.000000\n\n# HELP test_histogram histogram under test\n# TYPE test_histogram histogram\ntest_histogram{le=\"5.000000\"} 1.000000\ntest_histogram{le=\"10.000000\"} 2.000000\ntest_histogram{le=\"+Inf\"} 2.000000\ntest_histogram_count 2.000000\ntest_histogram_sum 10.000000\n\n# HELP process_max_fds Maximum number of open file descriptors.\n# TYPE process_max_fds gauge\nprocess_max_fds 1048576.000000\n\n# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.\n# TYPE process_virtual_memory_max_bytes gauge\nprocess_virtual_memory_max_bytes -1.000000\n\n";
+  const char *expected =
+      "# HELP test_counter counter under test\n# TYPE test_counter counter\ntest_counter{label=\"foo\"} 1.000000\n\n# "
+      "HELP test_gauge gauge under test\n# TYPE test_gauge gauge\ntest_gauge{label=\"foo\"} 2.000000\n\n# HELP "
+      "test_histogram histogram under test\n# TYPE test_histogram histogram\ntest_histogram{le=\"5.000000\"} "
+      "1.000000\ntest_histogram{le=\"10.000000\"} 2.000000\ntest_histogram{le=\"+Inf\"} 2.000000\ntest_histogram_count "
+      "2.000000\ntest_histogram_sum 10.000000\n\n# HELP process_max_fds Maximum number of open file descriptors.\n# "
+      "TYPE process_max_fds gauge\nprocess_max_fds 1048576.000000\n\n# HELP process_virtual_memory_max_bytes Maximum "
+      "amount of virtual memory available in bytes.\n# TYPE process_virtual_memory_max_bytes "
+      "gauge\nprocess_virtual_memory_max_bytes -1.000000\n\n";
   TEST_ASSERT_NOT_NULL(strstr(result, expected));
-  free((char *) result);
+  free((char *)result);
   result = NULL;
 
   prom_registry_test_destroy();
 }
 
-void test_prom_collector_registry_validate_metric_name(void){
+void test_prom_collector_registry_validate_metric_name(void) {
   prom_registry_test_init();
 
-  TEST_ASSERT_EQUAL_INT(0, prom_collector_registry_validate_metric_name(PROM_COLLECTOR_REGISTRY_DEFAULT, "this_is_a_name09"));
+  TEST_ASSERT_EQUAL_INT(
+      0, prom_collector_registry_validate_metric_name(PROM_COLLECTOR_REGISTRY_DEFAULT, "this_is_a_name09"));
   prom_registry_test_destroy();
 }
 
 void prom_registry_test_init(void) {
   prom_collector_registry_default_init();
-  const char *label[] =  { "label" };
-  test_counter = prom_collector_registry_must_register_metric(prom_counter_new(
-    "test_counter", "counter under test", 1, label
-  ));
-  test_gauge = prom_collector_registry_must_register_metric(prom_gauge_new(
-    "test_gauge", "gauge under test", 1, label
-  ));
+  const char *label[] = {"label"};
+  test_counter =
+      prom_collector_registry_must_register_metric(prom_counter_new("test_counter", "counter under test", 1, label));
+  test_gauge = prom_collector_registry_must_register_metric(prom_gauge_new("test_gauge", "gauge under test", 1, label));
   test_histogram = prom_collector_registry_must_register_metric(prom_histogram_new(
-    "test_histogram", "histogram under test", prom_histogram_buckets_linear(5.0, 5.0, 2), 0, NULL
-  ));
+      "test_histogram", "histogram under test", prom_histogram_buckets_linear(5.0, 5.0, 2), 0, NULL));
 }
 
 static void prom_registry_test_destroy(void) {

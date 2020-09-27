@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,4 +23,4 @@ int prom_collector_registry_enable_custom_process_metrics(prom_collector_registr
                                                           const char *process_limits_path,
                                                           const char *process_stats_path);
 
-#endif // PROM_COLLECTOR_REGISTRY_I_INCLUDED
+#endif  // PROM_COLLECTOR_REGISTRY_I_INCLUDED
