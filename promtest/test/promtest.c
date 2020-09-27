@@ -17,7 +17,6 @@
 #include "promtest_counter.h"
 #include "promtest_gauge.h"
 #include "promtest_helpers.h"
-#include "promtest_histogram_buckets.h"
 #include "unity.h"
 
 int main(int argc, const char **argv) {

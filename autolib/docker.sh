@@ -45,7 +45,7 @@ ENV GCC_VERSION 10.1.0
 
 RUN set -x && \
     apt-get update && \
-    apt-get install -y apt-utils clang-format && \
+    apt-get install -y apt-utils clang-tools && \
     apt-get install -y curl tar build-essential git pkg-config gdb valgrind gcc libmicrohttpd-dev doxygen graphviz && \
     curl -sL https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.tar.gz | tar xzf - -C /opt && \
     cp /opt/cmake-3.14.5-Linux-x86_64/bin/* /usr/local/bin/ && \
