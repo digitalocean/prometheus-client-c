@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,17 @@
  * limitations under the License.
  */
 
-
 #ifndef PROM_LIST_T_H
 #define PROM_LIST_T_H
 
 #include "prom_linked_list.h"
 
-typedef enum {
-  PROM_LESS = -1,
-  PROM_EQUAL = 0,
-  PROM_GREATER = 1
-} prom_linked_list_compare_t;
+typedef enum { PROM_LESS = -1, PROM_EQUAL = 0, PROM_GREATER = 1 } prom_linked_list_compare_t;
 
 /**
  * @brief API PRIVATE Frees an item in a prom_linked_list_node
  */
-typedef void (*prom_linked_list_free_item_fn)(void*);
+typedef void (*prom_linked_list_free_item_fn)(void *);
 
 /**
  * @brief API PRIVATE Compares two items within a prom_linked_list
@@ -41,7 +36,7 @@ typedef prom_linked_list_compare_t (*prom_linked_list_compare_item_fn)(void *ite
  * next prom_linked_list_node*
  */
 typedef struct prom_linked_list_node {
-  struct prom_linked_list_node* next;
+  struct prom_linked_list_node *next;
   void *item;
 } prom_linked_list_node_t;
 
@@ -56,5 +51,4 @@ struct prom_linked_list {
   prom_linked_list_compare_item_fn compare_fn;
 };
 
-#endif // PROM_LIST_T_H
-
+#endif  // PROM_LIST_T_H

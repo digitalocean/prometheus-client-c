@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-
 // Public
-#include "prom_alloc.h"
 #include "prom_histogram.h"
+
+#include "prom_alloc.h"
 #include "prom_histogram_buckets.h"
 
 // Private
@@ -26,19 +26,13 @@
 #include "prom_log.h"
 #include "prom_map_i.h"
 #include "prom_metric_i.h"
-#include "prom_metric_t.h"
 #include "prom_metric_sample_histogram_i.h"
 #include "prom_metric_sample_histogram_t.h"
+#include "prom_metric_t.h"
 
-
-
-prom_histogram_t* prom_histogram_new(const char *name,
-                                     const char *help,
-                                     prom_histogram_buckets_t *buckets,
-                                     size_t label_key_count,
-                                     const char **label_keys)
-{
-  prom_histogram_t *self = (prom_histogram_t*) prom_metric_new(PROM_HISTOGRAM, name, help, label_key_count, label_keys);
+prom_histogram_t *prom_histogram_new(const char *name, const char *help, prom_histogram_buckets_t *buckets,
+                                     size_t label_key_count, const char **label_keys) {
+  prom_histogram_t *self = (prom_histogram_t *)prom_metric_new(PROM_HISTOGRAM, name, help, label_key_count, label_keys);
   if (buckets == NULL) {
     self->buckets = prom_histogram_default_buckets;
   } else {
@@ -47,7 +41,7 @@ prom_histogram_t* prom_histogram_new(const char *name,
       if (i == 0) {
         continue;
       }
-      if (buckets->upper_bounds[i-1] > buckets->upper_bounds[i]) {
+      if (buckets->upper_bounds[i - 1] > buckets->upper_bounds[i]) {
         return NULL;
       }
     }

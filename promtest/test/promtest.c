@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-#include "unity.h"
-
-#include "promtest_helpers.h"
 #include "promtest_counter.h"
 #include "promtest_gauge.h"
-
+#include "promtest_helpers.h"
+#include "unity.h"
 
 int main(int argc, const char **argv) {
   UNITY_BEGIN();

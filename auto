@@ -68,7 +68,7 @@ main(){
       usage
       exit 0
     } ;;
-    ( build | dev | test | package | docs | clean | smoke ) {
+    ( build | dev | test | package | docs | clean | smoke | format ) {
       shift
       exec "${lib}/cmd/${cmd}" $@ || exit $?
     } ;;

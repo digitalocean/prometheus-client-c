@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 #ifndef PROM_LIST_H
 #define PROM_LIST_H
 
@@ -22,9 +21,8 @@ limitations under the License.
 
 struct prom_linked_list;
 /**
-* @brief Provides a generic linked list
-*/
+ * @brief Provides a generic linked list
+ */
 typedef struct prom_linked_list prom_linked_list_t;
-
 
 #endif  // PROM_LIST_H

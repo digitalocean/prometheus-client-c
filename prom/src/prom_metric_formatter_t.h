@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #ifndef PROM_METRIC_FORMATTER_T_H
 #define PROM_METRIC_FORMATTER_T_H
 
@@ -25,4 +24,4 @@ typedef struct prom_metric_formatter {
   prom_string_builder_t *err_builder;
 } prom_metric_formatter_t;
 
-#endif // PROM_METRIC_FORMATTER_T_H
+#endif  // PROM_METRIC_FORMATTER_T_H

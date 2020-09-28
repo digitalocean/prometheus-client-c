@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-
 #ifndef PROM_PROESS_FDS_I_INCLUDED
 #define PROM_PROESS_FDS_I_INCLUDED
-
 
 int prom_process_fds_count(const char *path);
 int prom_process_fds_init(void);
 
-#endif // PROM_PROESS_FDS_I_INCLUDED
+#endif  // PROM_PROESS_FDS_I_INCLUDED

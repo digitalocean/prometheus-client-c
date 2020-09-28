@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-
-
 #include "prom_test_helpers.h"
 
-
-const char* l_value = "test{foo=\"bar\"}";
+const char *l_value = "test{foo=\"bar\"}";
 
 void test_prom_metric_sample_add(void) {
   prom_metric_sample_t *s = prom_metric_sample_new(PROM_COUNTER, l_value, 0.0);

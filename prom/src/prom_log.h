@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@
 #define PROM_LOG_H
 
 #ifdef PROM_LOG_ENABLE
-  #define PROM_LOG(msg) printf("%s %s %s %s %d %s\n", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, msg);
+#define PROM_LOG(msg) printf("%s %s %s %s %d %s\n", __DATE__, __TIME__, __FILE__, __FUNCTION__, __LINE__, msg);
 #else
-  #define PROM_LOG(msg)
-#endif // PROM_LOG_ENABLE
+#define PROM_LOG(msg)
+#endif  // PROM_LOG_ENABLE
 
-#endif // PROM_LOG_H
+#endif  // PROM_LOG_H

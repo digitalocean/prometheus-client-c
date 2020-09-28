@@ -60,7 +60,7 @@ run(){
   pushd docker > /dev/null || return $?
     make || {
       r=$?
-      outlib_output_error "Docker Build Failure"
+      autolib_output_error "Docker Build Failure"
       return $r
     }
   popd > /dev/null

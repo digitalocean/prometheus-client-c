@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,16 +28,15 @@
 #include "prom_log.h"
 #include "prom_procfs_i.h"
 
-
 static int prom_procfs_ensure_buf_size(prom_procfs_buf_t *self) {
   PROM_ASSERT(self != NULL);
-  if (self->allocated >= self->size+1) return 0;
-  while (self->allocated < self->size+1) self->allocated <<= 1;
-  self->buf = (char *) prom_realloc(self->buf, self->allocated);
+  if (self->allocated >= self->size + 1) return 0;
+  while (self->allocated < self->size + 1) self->allocated <<= 1;
+  self->buf = (char *)prom_realloc(self->buf, self->allocated);
   return 0;
 }
 
-prom_procfs_buf_t* prom_procfs_buf_new(const char *path) {
+prom_procfs_buf_t *prom_procfs_buf_new(const char *path) {
   int r = 0;
 
   FILE *f = fopen(path, "r");
@@ -49,12 +48,12 @@ prom_procfs_buf_t* prom_procfs_buf_new(const char *path) {
     return NULL;
   }
 
-  #define PROM_PROCFS_BUF_NEW_HANDLE_F_CLOSE(f) \
-    r = fclose(f);                              \
-    if (r) {                                    \
-      strerror_r(errno, errbuf, 100);           \
-      PROM_LOG(errbuf);                         \
-    }
+#define PROM_PROCFS_BUF_NEW_HANDLE_F_CLOSE(f) \
+  r = fclose(f);                              \
+  if (r) {                                    \
+    strerror_r(errno, errbuf, 100);           \
+    PROM_LOG(errbuf);                         \
+  }
 
   unsigned short int initial_size = 32;
   prom_procfs_buf_t *self = prom_malloc(sizeof(prom_procfs_buf_t));
@@ -63,11 +62,7 @@ prom_procfs_buf_t* prom_procfs_buf_new(const char *path) {
   self->index = 0;
   self->allocated = initial_size;
 
-  for (
-    int current_char = getc(f), i = 0;
-    current_char != EOF;
-    current_char = getc(f), i++
-  ) {
+  for (int current_char = getc(f), i = 0; current_char != EOF; current_char = getc(f), i++) {
     r = prom_procfs_ensure_buf_size(self);
     if (r) {
       prom_procfs_buf_destroy(self);

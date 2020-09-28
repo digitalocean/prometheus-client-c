@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 
 #ifndef PROM_STRING_BUILDER_I_H
 #define PROM_STRING_BUILDER_I_H
@@ -38,15 +37,13 @@ int prom_string_builder_destroy(prom_string_builder_t *self);
  * API PRIVATE
  * @brief Adds a string
  */
-int prom_string_builder_add_str(prom_string_builder_t *self, const char* str);
-
+int prom_string_builder_add_str(prom_string_builder_t *self, const char *str);
 
 /**
  * API PRIVATE
  * @brief Adds a char
  */
 int prom_string_builder_add_char(prom_string_builder_t *self, char c);
-
 
 /**
  * API PRIVATE
@@ -70,13 +67,12 @@ size_t prom_string_builder_len(prom_string_builder_t *self);
  * API PRIVATE
  * @brief Returns a copy of the string. The returned string must be deallocated when no longer needed.
  */
-char* prom_string_builder_dump(prom_string_builder_t *self);
-
+char *prom_string_builder_dump(prom_string_builder_t *self);
 
 /**
  * API PRIVATE
  * @brief Getter for str member
  */
-char* prom_string_builder_str(prom_string_builder_t *self);
+char *prom_string_builder_str(prom_string_builder_t *self);
 
-#endif // PROM_STRING_BUILDER_I_H
+#endif  // PROM_STRING_BUILDER_I_H

@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,22 @@
  * limitations under the License.
  */
 
-
 // Public
-#include "prom_alloc.h"
 #include "prom_gauge.h"
+
+#include "prom_alloc.h"
 
 // Private
 #include "prom_assert.h"
 #include "prom_errors.h"
 #include "prom_log.h"
 #include "prom_metric_i.h"
-#include "prom_metric_t.h"
 #include "prom_metric_sample_i.h"
 #include "prom_metric_sample_t.h"
+#include "prom_metric_t.h"
 
-
-prom_gauge_t* prom_gauge_new(const char *name,
-                             const char *help,
-                             size_t label_key_count,
-                             const char **label_keys)
-{
-  return (prom_gauge_t*) prom_metric_new(PROM_GAUGE, name, help, label_key_count, label_keys);
+prom_gauge_t *prom_gauge_new(const char *name, const char *help, size_t label_key_count, const char **label_keys) {
+  return (prom_gauge_t *)prom_metric_new(PROM_GAUGE, name, help, label_key_count, label_keys);
 }
 
 int prom_gauge_destroy(prom_gauge_t *self) {

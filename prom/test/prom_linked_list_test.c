@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-
 #include "prom_test_helpers.h"
-
 
 void test_prom_linked_list_append(void) {
   prom_linked_list_t *l = prom_linked_list_new();
@@ -31,8 +29,8 @@ void test_prom_linked_list_append(void) {
   prom_linked_list_append(l, two);
   prom_linked_list_append(l, three);
 
-  prom_linked_list_node_t* current_node = l->head;
-  char *current_str = (char *) current_node->item;
+  prom_linked_list_node_t *current_node = l->head;
+  char *current_str = (char *)current_node->item;
   TEST_ASSERT_EQUAL_STRING("one", current_str);
   current_node = current_node->next;
   current_str = current_node->item;
@@ -58,8 +56,8 @@ void test_prom_linked_list_push(void) {
   prom_linked_list_push(l, two);
   prom_linked_list_push(l, three);
 
-  prom_linked_list_node_t* current_node = l->head;
-  char *current_str = (char *) current_node->item;
+  prom_linked_list_node_t *current_node = l->head;
+  char *current_str = (char *)current_node->item;
   TEST_ASSERT_EQUAL_STRING("three", current_str);
   current_node = current_node->next;
   current_str = current_node->item;
@@ -74,8 +72,8 @@ void test_prom_linked_list_push(void) {
 
 void test_prom_linked_list_remove(void) {
   auto prom_linked_list_compare_t compare_fn(void *item_a, void *item_b) {
-    const char *str_a = (const char *) item_a;
-    const char *str_b = (const char *) item_b;
+    const char *str_a = (const char *)item_a;
+    const char *str_b = (const char *)item_b;
     return strcmp(str_a, str_b);
   }
 
@@ -96,7 +94,6 @@ void test_prom_linked_list_remove(void) {
   prom_linked_list_destroy(list);
   list = NULL;
 }
-
 
 int main(int argc, const char **argv) {
   UNITY_BEGIN();

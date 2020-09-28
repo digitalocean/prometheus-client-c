@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,7 @@
 struct MHD_Daemon *promtest_daemon;
 
 promtest_popen_buf_t *promtest_popen_buf_new(FILE *f) {
-  promtest_popen_buf_t *self =
-      (promtest_popen_buf_t *)malloc(sizeof(promtest_popen_buf_t));
+  promtest_popen_buf_t *self = (promtest_popen_buf_t *)malloc(sizeof(promtest_popen_buf_t));
   self->buf = malloc(32);
   self->size = 32;
   self->allocated = 32;
@@ -52,8 +51,7 @@ int promtest_popen_buf_destroy(promtest_popen_buf_t *self) {
 }
 
 int promtest_popen_buf_read(promtest_popen_buf_t *self) {
-  for (int current_char = fgetc(self->f), i = 0; current_char != EOF;
-       current_char = fgetc(self->f), i++) {
+  for (int current_char = fgetc(self->f), i = 0; current_char != EOF; current_char = fgetc(self->f), i++) {
     promtest_popen_buf_ensure_space(self);
     self->buf[i] = current_char;
     self->size++;

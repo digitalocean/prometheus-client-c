@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,18 @@
  * limitations under the License.
  */
 
-
-
 #ifndef PROM_MAP_I_INCLUDED
 #define PROM_MAP_I_INCLUDED
 
 #include "prom_map_t.h"
 
-prom_map_t* prom_map_new(void);
+prom_map_t *prom_map_new(void);
 
 int prom_map_set_free_value_fn(prom_map_t *self, prom_map_node_free_value_fn free_value_fn);
 
-void* prom_map_get(prom_map_t *self, const char *key);
+void *prom_map_get(prom_map_t *self, const char *key);
 
-int prom_map_set(prom_map_t *self,  const char *key, void *value);
+int prom_map_set(prom_map_t *self, const char *key, void *value);
 
 int prom_map_delete(prom_map_t *self, const char *key);
 
@@ -35,6 +33,6 @@ int prom_map_destroy(prom_map_t *self);
 
 size_t prom_map_size(prom_map_t *self);
 
-prom_map_node_t* prom_map_node_new(const char *key, void *value, prom_map_node_free_value_fn free_value_fn);
+prom_map_node_t *prom_map_node_new(const char *key, void *value, prom_map_node_free_value_fn free_value_fn);
 
-#endif // PROM_MAP_I_INCLUDED
+#endif  // PROM_MAP_I_INCLUDED

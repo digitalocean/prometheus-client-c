@@ -1,5 +1,5 @@
 /*
-Copyright 2019 DigitalOcean Inc.
+Copyright 2019-2020 DigitalOcean Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ int prom_collector_registry_default_init(void);
  * @param name The name of the collector registry. It MUST NOT be default.
  * @return The constructed prom_collector_registry_t*
  */
-prom_collector_registry_t* prom_collector_registry_new(const char *name);
+prom_collector_registry_t *prom_collector_registry_new(const char *name);
 
 /**
  * @brief Destroy a collector registry. You MUST set self to NULL after destruction.
@@ -74,7 +74,7 @@ int prom_collector_registry_enable_process_metrics(prom_collector_registry_t *se
  * @param metric The metric to register on PROM_DEFAULT_COLLECTOR_REGISTRY*
  * @return The registered prom_metric_t*
  */
-prom_metric_t* prom_collector_registry_must_register_metric(prom_metric_t *metric);
+prom_metric_t *prom_collector_registry_must_register_metric(prom_metric_t *metric);
 
 /**
  * @brief Registers a metric with the default collector on PROM_DEFAULT_COLLECTOR_REGISTRY. Returns an non-zero integer
@@ -104,7 +104,7 @@ int prom_collector_registry_register_collector(prom_collector_registry_t *self, 
  * @param self The target prom_collector_registry_t*
  * @return The string int he default metric exposition format.
  */
-const char* prom_collector_registry_bridge(prom_collector_registry_t *self);
+const char *prom_collector_registry_bridge(prom_collector_registry_t *self);
 
 /**
  *@brief Validates that the given metric name complies with the specification:
@@ -117,7 +117,6 @@ const char* prom_collector_registry_bridge(prom_collector_registry_t *self);
  * @param metric_name The metric name to validate
  * @return A non-zero integer value upon failure
  */
-int prom_collector_registry_validate_metric_name(prom_collector_registry_t *self,
-                                                                const char *metric_name);
+int prom_collector_registry_validate_metric_name(prom_collector_registry_t *self, const char *metric_name);
 
-#endif // PROM_H
+#endif  // PROM_H

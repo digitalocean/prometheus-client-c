@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,8 @@
 #include "prom_linked_list_t.h"
 #include "prom_log.h"
 
-
-prom_linked_list_t* prom_linked_list_new(void) {
-  prom_linked_list_t *self = (prom_linked_list_t*) prom_malloc(sizeof(prom_linked_list_t));
+prom_linked_list_t *prom_linked_list_new(void) {
+  prom_linked_list_t *self = (prom_linked_list_t *)prom_malloc(sizeof(prom_linked_list_t));
   self->head = NULL;
   self->tail = NULL;
   self->free_fn = NULL;
@@ -87,10 +86,10 @@ void *prom_linked_list_last(prom_linked_list_t *self) {
   }
 }
 
-int prom_linked_list_append(prom_linked_list_t *self, void *item){
+int prom_linked_list_append(prom_linked_list_t *self, void *item) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
-  prom_linked_list_node_t *node = (prom_linked_list_node_t *) prom_malloc(sizeof(prom_linked_list_node_t));
+  prom_linked_list_node_t *node = (prom_linked_list_node_t *)prom_malloc(sizeof(prom_linked_list_node_t));
 
   node->item = item;
   if (self->tail) {
@@ -104,10 +103,10 @@ int prom_linked_list_append(prom_linked_list_t *self, void *item){
   return 0;
 }
 
-int prom_linked_list_push(prom_linked_list_t *self, void *item){
+int prom_linked_list_push(prom_linked_list_t *self, void *item) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
-  prom_linked_list_node_t *node = (prom_linked_list_node_t *) prom_malloc(sizeof(prom_linked_list_node_t));
+  prom_linked_list_node_t *node = (prom_linked_list_node_t *)prom_malloc(sizeof(prom_linked_list_node_t));
 
   node->item = item;
   node->next = self->head;
@@ -123,16 +122,16 @@ void *prom_linked_list_pop(prom_linked_list_t *self) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return NULL;
   prom_linked_list_node_t *node = self->head;
-  void* item = NULL;
-  if (node != NULL){
+  void *item = NULL;
+  if (node != NULL) {
     item = node->item;
     self->head = node->next;
     if (self->tail == node) {
       self->tail = NULL;
     }
-    if (node->item != NULL){
-      if (self->free_fn){
-      (*self->free_fn)(node->item);
+    if (node->item != NULL) {
+      if (self->free_fn) {
+        (*self->free_fn)(node->item);
       } else {
         prom_free(node->item);
       }
@@ -144,7 +143,7 @@ void *prom_linked_list_pop(prom_linked_list_t *self) {
   return item;
 }
 
-int prom_linked_list_remove(prom_linked_list_t *self, void* item) {
+int prom_linked_list_remove(prom_linked_list_t *self, void *item) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 1;
   prom_linked_list_node_t *node;
@@ -219,4 +218,4 @@ int prom_linked_list_set_compare_fn(prom_linked_list_t *self, prom_linked_list_c
   return 0;
 }
 
-void prom_linked_list_no_op_free(void *item) { }
+void prom_linked_list_no_op_free(void *item) {}

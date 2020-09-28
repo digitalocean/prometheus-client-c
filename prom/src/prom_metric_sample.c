@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 DigitalOcean Inc.
+ * Copyright 2019-2020 DigitalOcean Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #include <stdatomic.h>
 
 // Public
@@ -27,9 +26,8 @@
 #include "prom_metric_sample_i.h"
 #include "prom_metric_sample_t.h"
 
-
-prom_metric_sample_t* prom_metric_sample_new(prom_metric_type_t type, const char *l_value, double r_value) {
-  prom_metric_sample_t *self = (prom_metric_sample_t*) prom_malloc(sizeof(prom_metric_sample_t));
+prom_metric_sample_t *prom_metric_sample_new(prom_metric_type_t type, const char *l_value, double r_value) {
+  prom_metric_sample_t *self = (prom_metric_sample_t *)prom_malloc(sizeof(prom_metric_sample_t));
   self->type = type;
   self->l_value = prom_strdup(l_value);
   self->r_value = ATOMIC_VAR_INIT(r_value);
@@ -39,9 +37,9 @@ prom_metric_sample_t* prom_metric_sample_new(prom_metric_type_t type, const char
 int prom_metric_sample_destroy(prom_metric_sample_t *self) {
   PROM_ASSERT(self != NULL);
   if (self == NULL) return 0;
-  prom_free((void *) self->l_value);
+  prom_free((void *)self->l_value);
   self->l_value = NULL;
-  prom_free((void *) self);
+  prom_free((void *)self);
   self = NULL;
   return 0;
 }
@@ -49,14 +47,14 @@ int prom_metric_sample_destroy(prom_metric_sample_t *self) {
 int prom_metric_sample_destroy_generic(void *gen) {
   int r = 0;
 
-  prom_metric_sample_t *self = (prom_metric_sample_t*) gen;
+  prom_metric_sample_t *self = (prom_metric_sample_t *)gen;
   r = prom_metric_sample_destroy(self);
   self = NULL;
   return r;
 }
 
 void prom_metric_sample_free_generic(void *gen) {
-  prom_metric_sample_t *self = (prom_metric_sample_t*) gen;
+  prom_metric_sample_t *self = (prom_metric_sample_t *)gen;
   prom_metric_sample_destroy(self);
 }
 
