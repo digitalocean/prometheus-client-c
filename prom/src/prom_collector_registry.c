@@ -91,12 +91,9 @@ int prom_collector_registry_enable_custom_process_metrics(prom_collector_registr
 int prom_collector_registry_default_init(void) {
   if (PROM_COLLECTOR_REGISTRY_DEFAULT != NULL) return 0;
 
-  int r = 0;
-
   PROM_COLLECTOR_REGISTRY_DEFAULT = prom_collector_registry_new("default");
   if (PROM_COLLECTOR_REGISTRY_DEFAULT) {
-    r = prom_collector_registry_enable_process_metrics(PROM_COLLECTOR_REGISTRY_DEFAULT);
-    if (r) return r;
+    return prom_collector_registry_enable_process_metrics(PROM_COLLECTOR_REGISTRY_DEFAULT);
   }
   return 1;
 }
