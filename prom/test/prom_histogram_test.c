@@ -31,7 +31,7 @@ void test_prom_histogram(void) {
   char *bucket_key = prom_metric_sample_histogram_bucket_to_str(5.0);
   const char *l_value = prom_map_get(h_sample->l_values, bucket_key);
   prom_metric_sample_t *sample = (prom_metric_sample_t *)prom_map_get(h_sample->samples, l_value);
-  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"5.000000\"}", sample->l_value);
+  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"5.0\"}", sample->l_value);
   TEST_ASSERT_EQUAL_DOUBLE(1.0, sample->r_value);
   free((char *)bucket_key);
   bucket_key = NULL;
@@ -39,7 +39,7 @@ void test_prom_histogram(void) {
   bucket_key = prom_metric_sample_histogram_bucket_to_str(10.0);
   l_value = prom_map_get(h_sample->l_values, bucket_key);
   sample = (prom_metric_sample_t *)prom_map_get(h_sample->samples, l_value);
-  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"10.000000\"}", sample->l_value);
+  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"10.0\"}", sample->l_value);
   TEST_ASSERT_EQUAL_DOUBLE(2.0, sample->r_value);
   free((char *)bucket_key);
   bucket_key = NULL;
@@ -47,7 +47,7 @@ void test_prom_histogram(void) {
   bucket_key = prom_metric_sample_histogram_bucket_to_str(15.0);
   l_value = prom_map_get(h_sample->l_values, bucket_key);
   sample = (prom_metric_sample_t *)prom_map_get(h_sample->samples, l_value);
-  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"15.000000\"}", sample->l_value);
+  TEST_ASSERT_EQUAL_STRING("test_histogram{le=\"15.0\"}", sample->l_value);
   TEST_ASSERT_EQUAL_DOUBLE(3.0, sample->r_value);
   free((char *)bucket_key);
   bucket_key = NULL;
