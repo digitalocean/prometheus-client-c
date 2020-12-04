@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-#include "promtest_counter.h"
-#include "promtest_gauge.h"
-#include "promtest_histogram.h"
-#include "promtest_helpers.h"
-#include "unity.h"
+#include "prom.h"
 
-int main(int argc, const char **argv) {
-  UNITY_BEGIN();
-  RUN_TEST(promtest_counter);
-  RUN_TEST(promtest_gauge);
-  RUN_TEST(promtest_histogram);
-  return UNITY_END();
-}
+#ifndef PROMTEST_HISTOGRAM_H
+#define PROMTEST_HISTOGRAM_H
+
+extern prom_histogram_t *foo_histogram;
+
+int promtest_histogram_setup(void);
+int promtest_histogram_teardown(void);
+
+void promtest_histogram(void);
+
+#endif  // PROMTEST_HISTOGRAM_H

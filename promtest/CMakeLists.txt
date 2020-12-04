@@ -112,6 +112,8 @@ add_executable(
     ${test_dir}/promtest_counter.h
     ${test_dir}/promtest_gauge.c
     ${test_dir}/promtest_gauge.h
+    ${test_dir}/promtest_histogram.c
+    ${test_dir}/promtest_histogram.h
 )
 target_link_libraries(promtest microhttpd prom promhttp Unity parson Threads::Threads)
 target_include_directories(promtest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
