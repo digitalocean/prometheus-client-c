@@ -34,6 +34,10 @@ prom_histogram_t *prom_histogram_new(const char *name, const char *help, prom_hi
                                      size_t label_key_count, const char **label_keys) {
   prom_histogram_t *self = (prom_histogram_t *)prom_metric_new(PROM_HISTOGRAM, name, help, label_key_count, label_keys);
   if (buckets == NULL) {
+    if (!prom_histogram_default_buckets) {
+      prom_histogram_default_buckets = prom_histogram_buckets_new(11,
+          0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0, 2.5, 5.0, 10.0);
+    }
     self->buckets = prom_histogram_default_buckets;
   } else {
     // Ensure the bucket values are increasing

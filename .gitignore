@@ -1,3 +1,4 @@
+.*.swp
 docker/Dockerfile
 .vscode
 prom/build/*
