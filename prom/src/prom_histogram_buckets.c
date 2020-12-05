@@ -43,7 +43,6 @@ prom_histogram_buckets_t *prom_histogram_buckets_new(size_t count, double bucket
   }
   va_end(arg_list);
   self->upper_bounds = upper_bounds;
-  self->count = count;
   return self;
 }
 
