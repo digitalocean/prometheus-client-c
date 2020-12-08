@@ -175,7 +175,6 @@ static int promtest_parse_counter_output(const char *output, char **value) {
       TEST_FAIL_MESSAGE("failed to get metric sample");
     }
     *value = (char *)json_object_get_string(sample, "value");
-    break;
   }
   if (strlen(*value) == 0) {
     return 1;

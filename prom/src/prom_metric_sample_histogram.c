@@ -501,6 +501,9 @@ static void prom_metric_sample_histogram_free_str_generic(void *gen) {
 
 char *prom_metric_sample_histogram_bucket_to_str(double bucket) {
   char *buf = (char *)prom_malloc(sizeof(char) * 50);
-  sprintf(buf, "%f", bucket);
+  sprintf(buf, "%g", bucket);
+  if (!strchr(buf, '.')) {
+    strcat(buf, ".0");
+  }
   return buf;
 }

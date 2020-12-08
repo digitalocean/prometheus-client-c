@@ -67,16 +67,29 @@ void test_prom_collector_registry_bridge(void) {
 
   const char *result = prom_collector_registry_bridge(PROM_COLLECTOR_REGISTRY_DEFAULT);
 
-  const char *expected =
-      "# HELP test_counter counter under test\n# TYPE test_counter counter\ntest_counter{label=\"foo\"} 1.000000\n\n# "
-      "HELP test_gauge gauge under test\n# TYPE test_gauge gauge\ntest_gauge{label=\"foo\"} 2.000000\n\n# HELP "
-      "test_histogram histogram under test\n# TYPE test_histogram histogram\ntest_histogram{le=\"5.000000\"} "
-      "1.000000\ntest_histogram{le=\"10.000000\"} 2.000000\ntest_histogram{le=\"+Inf\"} 2.000000\ntest_histogram_count "
-      "2.000000\ntest_histogram_sum 10.000000\n\n# HELP process_max_fds Maximum number of open file descriptors.\n# "
-      "TYPE process_max_fds gauge\nprocess_max_fds 1048576.000000\n\n# HELP process_virtual_memory_max_bytes Maximum "
-      "amount of virtual memory available in bytes.\n# TYPE process_virtual_memory_max_bytes "
-      "gauge\nprocess_virtual_memory_max_bytes -1.000000\n\n";
-  TEST_ASSERT_NOT_NULL(strstr(result, expected));
+  const char *expected[] = {
+      "# HELP test_counter counter under test",
+      "# TYPE test_counter counter",
+      "test_counter{label=\"foo\"}",
+      "HELP test_gauge gauge under test",
+      "# TYPE test_gauge gauge",
+      "test_gauge{label=\"foo\"}",
+      "# HELP test_histogram histogram under test",
+      "# TYPE test_histogram histogram\ntest_histogram{le=\"5.0\"}",
+      "test_histogram{le=\"10.0\"}",
+      "test_histogram{le=\"+Inf\"}",
+      "test_histogram_count",
+      "test_histogram_sum",
+      "# HELP process_max_fds Maximum number of open file descriptors.",
+      "# TYPE process_max_fds gauge",
+      "process_max_fds",
+      "# HELP process_virtual_memory_max_bytes Maximum amount of virtual memory available in bytes.",
+      "# TYPE process_virtual_memory_max_bytes"};
+
+  for (int i = 0; i < 17; i++) {
+    TEST_ASSERT_NOT_NULL(strstr(result, expected[i]));
+  }
+
   free((char *)result);
   result = NULL;
 

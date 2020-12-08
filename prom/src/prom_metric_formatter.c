@@ -171,7 +171,7 @@ int prom_metric_formatter_load_sample(prom_metric_formatter_t *self, prom_metric
   if (r) return r;
 
   char buffer[50];
-  sprintf(buffer, "%f", sample->r_value);
+  sprintf(buffer, "%.17g", sample->r_value);
   r = prom_string_builder_add_str(self->string_builder, buffer);
   if (r) return r;
 
