@@ -218,7 +218,7 @@ prom_map_t *prom_collector_process_collect(prom_collector_t *self) {
   prom_process_stat_t *stat = prom_process_stat_new(stat_f);
 
   // Set the metrics related to the stat file
-  r = prom_gauge_set(prom_process_cpu_seconds_total, ((stat->cutime + stat->cstime) / 100), NULL);
+  r = prom_gauge_set(prom_process_cpu_seconds_total, ((stat->cutime + stat->cstime + stat->utime + stat->stime) / 100), NULL);
   if (r) {
     prom_process_limits_file_destroy(limits_f);
     prom_map_destroy(limits_map);
