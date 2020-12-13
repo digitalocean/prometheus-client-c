@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <unistd.h>
 
 // Public
 #include "prom_alloc.h"
@@ -152,6 +153,9 @@ prom_collector_t *prom_collector_process_new(const char *limits_path, const char
   r = prom_collector_add_metric(self, prom_process_virtual_memory_bytes);
   if (r) return NULL;
 
+  r = prom_collector_add_metric(self, prom_process_resident_memory_bytes);
+  if (r) return NULL;
+
   r = prom_collector_add_metric(self, prom_process_start_time_seconds);
   if (r) return NULL;
 
@@ -227,6 +231,14 @@ prom_map_t *prom_collector_process_collect(prom_collector_t *self) {
     return NULL;
   }
   r = prom_gauge_set(prom_process_virtual_memory_bytes, stat->vsize, NULL);
+  if (r) {
+    prom_process_limits_file_destroy(limits_f);
+    prom_map_destroy(limits_map);
+    prom_process_stat_file_destroy(stat_f);
+    prom_process_stat_destroy(stat);
+    return NULL;
+  }
+  r = prom_gauge_set(prom_process_resident_memory_bytes, stat->rss*sysconf(_SC_PAGE_SIZE), NULL);
   if (r) {
     prom_process_limits_file_destroy(limits_f);
     prom_map_destroy(limits_map);

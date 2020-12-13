@@ -30,7 +30,7 @@ void test_prom_process_collector(void) {
   prom_collector_t *collector =
       prom_collector_process_new("/code/prom/test/fixtures/limits", "/code/prom/test/fixtures/stat");
   prom_map_t *m = collector->collect_fn(collector);
-  TEST_ASSERT_EQUAL_INT(6, prom_map_size(m));
+  TEST_ASSERT_EQUAL_INT(7, prom_map_size(m));
   prom_collector_destroy(collector);
   collector = NULL;
 }
