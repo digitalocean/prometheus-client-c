@@ -47,7 +47,6 @@ typedef enum prom_process_limit_rdp_limit_type {
 } prom_process_limit_rdp_limit_type_t;
 
 prom_gauge_t *prom_process_virtual_memory_max_bytes;
-prom_gauge_t *prom_process_resident_memory_bytes;
 prom_gauge_t *prom_process_max_fds;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

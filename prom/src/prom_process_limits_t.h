@@ -23,7 +23,6 @@
 extern prom_gauge_t *prom_process_open_fds;
 extern prom_gauge_t *prom_process_max_fds;
 extern prom_gauge_t *prom_process_virtual_memory_max_bytes;
-extern prom_gauge_t *prom_process_resident_memory_bytes;
 
 typedef struct prom_process_limits_row {
   const char *limit; /**< Pointer to a string */
