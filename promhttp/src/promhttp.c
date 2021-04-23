@@ -19,6 +19,8 @@
 #include "microhttpd.h"
 #include "prom.h"
 
+#define MIMETYPE_TEXT_PLAIN "text/plain"
+
 prom_collector_registry_t *PROM_ACTIVE_REGISTRY;
 
 void promhttp_set_active_collector_registry(prom_collector_registry_t *active_registry) {
@@ -34,6 +36,7 @@ int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *u
   if (strcmp(method, "GET") != 0) {
     char *buf = "Invalid HTTP Method\n";
     struct MHD_Response *response = MHD_create_response_from_buffer(strlen(buf), (void *)buf, MHD_RESPMEM_PERSISTENT);
+    MHD_add_response_header (response, "Content-Type", MIMETYPE_TEXT_PLAIN);
     int ret = MHD_queue_response(connection, MHD_HTTP_BAD_REQUEST, response);
     MHD_destroy_response(response);
     return ret;
@@ -41,6 +44,7 @@ int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *u
   if (strcmp(url, "/") == 0) {
     char *buf = "OK\n";
     struct MHD_Response *response = MHD_create_response_from_buffer(strlen(buf), (void *)buf, MHD_RESPMEM_PERSISTENT);
+    MHD_add_response_header (response, "Content-Type", MIMETYPE_TEXT_PLAIN);
     int ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
     MHD_destroy_response(response);
     return ret;
@@ -48,12 +52,14 @@ int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *u
   if (strcmp(url, "/metrics") == 0) {
     const char *buf = prom_collector_registry_bridge(PROM_ACTIVE_REGISTRY);
     struct MHD_Response *response = MHD_create_response_from_buffer(strlen(buf), (void *)buf, MHD_RESPMEM_MUST_FREE);
+    MHD_add_response_header (response, "Content-Type", MIMETYPE_TEXT_PLAIN);
     int ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
     MHD_destroy_response(response);
     return ret;
   }
   char *buf = "Bad Request\n";
   struct MHD_Response *response = MHD_create_response_from_buffer(strlen(buf), (void *)buf, MHD_RESPMEM_PERSISTENT);
+  MHD_add_response_header (response, "Content-Type", MIMETYPE_TEXT_PLAIN);
   int ret = MHD_queue_response(connection, MHD_HTTP_BAD_REQUEST, response);
   MHD_destroy_response(response);
   return ret;
