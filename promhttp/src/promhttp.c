@@ -19,7 +19,7 @@
 #include "microhttpd.h"
 #include "prom.h"
 
-#define MIMETYPE_TEXT_PLAIN "text/plain"
+#define MIMETYPE_TEXT_PLAIN "text/plain; version=0.0.4; charset=utf-8"
 
 prom_collector_registry_t *PROM_ACTIVE_REGISTRY;
 
