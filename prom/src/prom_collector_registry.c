@@ -143,6 +143,19 @@ int prom_collector_registry_register_metric(prom_metric_t *metric) {
   return prom_collector_add_metric(default_collector, metric);
 }
 
+int prom_collector_registry_unregister_metric(prom_metric_t *metric) {
+  PROM_ASSERT(metric != NULL);
+
+  prom_collector_t *default_collector =
+      (prom_collector_t *)prom_map_get(PROM_COLLECTOR_REGISTRY_DEFAULT->collectors, "default");
+
+  if (default_collector == NULL) {
+    return 1;
+  }
+
+  return prom_collector_remove_metric(default_collector, metric);
+}
+
 prom_metric_t *prom_collector_registry_must_register_metric(prom_metric_t *metric) {
   int err = prom_collector_registry_register_metric(metric);
   if (err != 0) {
