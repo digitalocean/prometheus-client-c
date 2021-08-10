@@ -88,6 +88,14 @@ int prom_collector_destroy_generic(void *gen);
 int prom_collector_add_metric(prom_collector_t *self, prom_metric_t *metric);
 
 /**
+ * @brief Remove a metric from a collector
+ * @param self The target prom_collector_t*
+ * @param metric the prom_metric_t* to remove from the prom_collector_t* passed as self.
+ * @return A non-zero integer value upon failure.
+ */
+int prom_collector_remove_metric(prom_collector_t *self, prom_metric_t *metric);
+
+/**
  * @brief The collect function is responsible for doing any work involving a set of metrics and then returning them
  *        for metric exposition.
  * @param self The target prom_collector_t*
