@@ -22,6 +22,9 @@ void test_prom_collector(void) {
   prom_collector_add_metric(collector, counter);
   prom_map_t *m = collector->collect_fn(collector);
   TEST_ASSERT_EQUAL_INT(1, prom_map_size(m));
+  prom_counter_inc(counter, NULL);
+  prom_collector_remove_metric(collector, counter);
+  TEST_ASSERT_EQUAL_INT(0, prom_map_size(m));
   prom_collector_destroy(collector);
   collector = NULL;
 }

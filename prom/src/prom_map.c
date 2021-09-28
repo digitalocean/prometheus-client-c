@@ -369,10 +369,10 @@ static int prom_map_delete_internal(const char *key, size_t *size, size_t *max_s
     prom_map_node_t *current_map_node = (prom_map_node_t *)current_node->item;
     prom_linked_list_compare_t result = prom_linked_list_compare(list, current_map_node, temp_map_node);
     if (result == PROM_EQUAL) {
-      r = prom_linked_list_remove(list, current_node);
+      r = prom_linked_list_remove(keys, (char *)current_map_node->key);
       if (r) return r;
 
-      r = prom_linked_list_remove(keys, (char *)current_map_node->key);
+      r = prom_linked_list_remove(list, current_node->item);
       if (r) return r;
 
       (*size)--;

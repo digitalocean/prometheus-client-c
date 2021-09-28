@@ -116,6 +116,16 @@ int prom_collector_add_metric(prom_collector_t *self, prom_metric_t *metric) {
   return prom_map_set(self->metrics, metric->name, metric);
 }
 
+int prom_collector_remove_metric(prom_collector_t *self, prom_metric_t *metric) {
+  PROM_ASSERT(self != NULL);
+  if (self == NULL) return 1;
+  if (prom_map_get(self->metrics, metric->name) == NULL) {
+    PROM_LOG("metric not found in collector");
+    return 1;
+  }
+  return prom_map_delete(self->metrics, metric->name);
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Process Collector
 

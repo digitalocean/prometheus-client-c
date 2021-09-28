@@ -88,6 +88,15 @@ prom_metric_t *prom_collector_registry_must_register_metric(prom_metric_t *metri
 int prom_collector_registry_register_metric(prom_metric_t *metric);
 
 /**
+ * @brief Unregisters a metric with the default collector on PROM_DEFAULT_COLLECTOR_REGISTRY. Returns an non-zero integer
+ * value on failure.
+ *
+ * @param metric The metric to unregister on PROM_DEFAULT_COLLECTOR_REGISTRY*
+ * @return A non-zero integer value upon failure
+ */
+int prom_collector_registry_unregister_metric(prom_metric_t *metric);
+
+/**
  * @brief Register a collector with the given registry. Returns a non-zero integer value on failure.
  * @param self The target prom_collector_registry_t*
  * @param collector The prom_collector_t* to register onto the prom_collector_registry_t* as self
