@@ -15,6 +15,7 @@
  */
 
 #include <string.h>
+#include <stdarg.h>
 
 #include "microhttpd.h"
 #include "prom.h"
@@ -62,4 +63,23 @@ int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *u
 struct MHD_Daemon *promhttp_start_daemon(unsigned int flags, unsigned short port, MHD_AcceptPolicyCallback apc,
                                          void *apc_cls) {
   return MHD_start_daemon(flags, port, apc, apc_cls, &promhttp_handler, NULL, MHD_OPTION_END);
+}
+
+static struct MHD_Daemon *promhttp_start_daemon_with_options_va(unsigned int flags, unsigned short port,
+                                                      MHD_AcceptPolicyCallback apc,
+                                                      void *apc_cls, va_list ap) {
+  return MHD_start_daemon_va(flags, port, apc, apc_cls, &promhttp_handler, NULL, ap);
+}
+
+struct MHD_Daemon *promhttp_start_daemon_with_options(unsigned int flags, unsigned short port,
+                                                      MHD_AcceptPolicyCallback apc,
+                                                      void *apc_cls, ...) {
+  va_list ap;
+  struct MHD_Daemon *ret;
+
+  va_start(ap, apc_cls);
+  ret = promhttp_start_daemon_with_options_va(flags, port, apc, apc_cls, ap);
+  va_end(ap);
+
+  return ret;
 }
