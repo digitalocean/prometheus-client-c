@@ -46,3 +46,16 @@ void promhttp_set_active_collector_registry(prom_collector_registry_t *active_re
  */
 struct MHD_Daemon *promhttp_start_daemon(unsigned int flags, unsigned short port, MHD_AcceptPolicyCallback apc,
                                          void *apc_cls);
+
+/**
+ *  @brief Starts a daemon in the background and returns a pointer to an MHD_Daemon.
+ *
+ * This is the same as promhttp_start_daemon(), except it allows applications
+ * to pass options to MHD_start_daemon() directly.
+ *
+ * @return struct MHD_Daemon*
+ */
+struct MHD_Daemon *promhttp_start_daemon_with_options(unsigned int flags, unsigned short port,
+                                                      MHD_AcceptPolicyCallback apc,
+                                                      void *apc_cls, ...);
+
