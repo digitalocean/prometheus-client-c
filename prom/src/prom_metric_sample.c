@@ -63,7 +63,7 @@ int prom_metric_sample_add(prom_metric_sample_t *self, double r_value) {
   if (r_value < 0) {
     return 1;
   }
-  _Atomic double old = atomic_load(&self->r_value);
+  double old = atomic_load(&self->r_value);
   for (;;) {
     _Atomic double new = ATOMIC_VAR_INIT(old + r_value);
     if (atomic_compare_exchange_weak(&self->r_value, &old, new)) {
@@ -78,7 +78,7 @@ int prom_metric_sample_sub(prom_metric_sample_t *self, double r_value) {
     PROM_LOG(PROM_METRIC_INCORRECT_TYPE);
     return 1;
   }
-  _Atomic double old = atomic_load(&self->r_value);
+  double old = atomic_load(&self->r_value);
   for (;;) {
     _Atomic double new = ATOMIC_VAR_INIT(old - r_value);
     if (atomic_compare_exchange_weak(&self->r_value, &old, new)) {
