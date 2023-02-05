@@ -43,6 +43,17 @@ typedef struct prom_collector prom_collector_t;
 typedef prom_map_t *prom_collect_fn(prom_collector_t *self);
 
 /**
+ * @brief The default implementaion of the prom_collect_fn.
+ *
+ * It simply calls self->metrics. This function may be useful when you are using a custom collector, because
+ * prom_collector_t type is opaque and its metrics field can't be accessed outside library.
+ *
+ * @param self The target prom_collector_t*
+ * @return The prom_map_t* containing the collected metrics
+ */
+prom_map_t *prom_collector_default_collect(prom_collector_t *self);
+
+/**
  * @brief Create a collector
  * @param name The name of the collector. The name MUST NOT be default or process.
  * @return The constructed prom_collector_t*
