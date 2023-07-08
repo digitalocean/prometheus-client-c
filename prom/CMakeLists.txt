@@ -120,7 +120,11 @@ target_sources(
     PRIVATE ${private_files}
 )
 
-target_link_libraries(prom PUBLIC Threads::Threads)
+if(UNIX AND NOT APPLE)
+  target_link_libraries(prom PUBLIC Threads::Threads -latomic)
+else()
+  target_link_libraries(prom PUBLIC Threads::Threads )
+endif()
 
 if ($ENV{TEST})
     include(test/CMakeLists.txt)
