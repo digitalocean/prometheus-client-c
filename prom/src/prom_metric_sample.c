@@ -88,10 +88,11 @@ int prom_metric_sample_sub(prom_metric_sample_t *self, double r_value) {
 }
 
 int prom_metric_sample_set(prom_metric_sample_t *self, double r_value) {
-  if (self->type != PROM_GAUGE) {
+  if ((self->type == PROM_COUNTER) && (r_value < self->r_value)) {
     PROM_LOG(PROM_METRIC_INCORRECT_TYPE);
     return 1;
   }
+
   atomic_store(&self->r_value, r_value);
   return 0;
 }
