@@ -64,3 +64,15 @@ int prom_counter_add(prom_counter_t *self, double r_value, const char **label_va
   if (sample == NULL) return 1;
   return prom_metric_sample_add(sample, r_value);
 }
+
+int prom_counter_set(prom_counter_t *self, double r_value, const char **label_values) {
+  PROM_ASSERT(self != NULL);
+  if (self == NULL) return 1;
+  if (self->type != PROM_COUNTER) {
+    PROM_LOG(PROM_METRIC_INCORRECT_TYPE);
+    return 1;
+  }
+  prom_metric_sample_t *sample = prom_metric_sample_from_labels(self, label_values);
+  if (sample == NULL) return 1;
+  return prom_metric_sample_set(sample, r_value);
+}
