@@ -136,6 +136,9 @@ set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/../README.md)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A prometheus client library")
 set(CPACK_PACKAGE_HOMEPAGE_URL https://github.internal.digitalocean.com/timeseries/prometheus-client-c)
 
+set(target1 libprom)
+configure_file(libprom.pc.in ${CMAKE_INSTALL_LIBDIR}/pkgconfig/libprom.pc @ONLY)
+
 include(CPack)
 include(GNUInstallDirs)
 install(TARGETS prom ARCHIVE)
