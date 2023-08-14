@@ -76,6 +76,9 @@ set(CPACK_PACKAGE_HOMEPAGE_URL https://github.internal.digitalocean.com/timeseri
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libprom-dev (= ${Version})")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libmicrohttpd-dev")
 
+set(target1 libpromhttp)
+configure_file(libpromhttp.pc.in ${CMAKE_INSTALL_LIBDIR}/pkgconfig/libpromhttp.pc @ONLY)
+
 include(CPack)
 include(GNUInstallDirs)
 install(TARGETS promhttp ARCHIVE)
