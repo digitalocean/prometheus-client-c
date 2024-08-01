@@ -11,7 +11,7 @@ if [[ "$AUTO_DEBUG" == "1" ]]; then
 fi
 
 export PROJECT_ROOT=$(pushd $(dirname $0) > /dev/null; echo $PWD; popd > /dev/null)
-export DOCKER_IMAGE
+export DOCKER_IMAGE="${DOCKER_IMAGE:=ubuntu:22.04}"
 export CI=${CI:=0}
 export CC=/usr/bin/gcc
 

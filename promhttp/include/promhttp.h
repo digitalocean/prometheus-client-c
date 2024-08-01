@@ -36,6 +36,15 @@
  */
 void promhttp_set_active_collector_registry(prom_collector_registry_t *active_registry);
 
+#if MHD_VERSION >= 0x00097002
+#define PROM_MHD_RESULT enum MHD_Result
+#else
+#define PROM_MHD_RESULT int
+#endif
+
+PROM_MHD_RESULT promhttp_handler(void *cls, struct MHD_Connection *connection, const char *url, const char *method,
+                                 const char *version, const char *upload_data, size_t *upload_data_size, void **con_cls);
+
 /**
  *  @brief Starts a daemon in the background and returns a pointer to an HMD_Daemon.
  *

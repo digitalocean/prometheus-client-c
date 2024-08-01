@@ -19,7 +19,7 @@ autolib_build() {
   pushd ${lib}/build > /dev/null || return $?
     autolib_output_banner "${lib}: CMake Build Stage"
     # YOU MUST set TEST to 1 in order to build the tests
-    TEST=$build_test cmake -v .. || {
+    TEST=$build_test cmake .. || {
       autolib_output_error "${lib}: CMake Failure"
       return 1
     }

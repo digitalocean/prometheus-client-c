@@ -5,6 +5,25 @@ source "${lib}/output.sh"
 
 PROJECT_ROOT=$(pushd "$(dirname ${BASH_SOURCE[0]})/.." > /dev/null; echo $PWD; popd > /dev/null)
 
+autolib_new_ubuntu_22_04_template() {
+  cat <<'EOF'
+FROM __DOCKER_IMAGE__
+
+RUN apt-get update -y
+RUN apt-get install -y apt-utils software-properties-common clang-format git tar curl build-essential pkg-config gdb valgrind gcc libmicrohttpd-dev doxygen graphviz cmake golang
+RUN go install github.com/prometheus/prom2json/cmd/prom2json@v1.3.3
+RUN go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+RUN printf "export PATH="${PATH}:$(go env GOPATH)/bin"" >> /root/.bash_profile
+RUN printf '#!/usr/bin/env bash\nsource /root/.bash_profile\nexec /bin/bash $@\n' > /entrypoint
+RUN chmod +x /entrypoint
+RUN rm -rf /var/lib/apt/lists/*
+
+WORKDIR /code
+ENTRYPOINT ["/entrypoint"]
+
+EOF
+}
+
 autolib_new_debian_template(){
   cat <<'EOF'
 FROM __DOCKER_IMAGE__
@@ -102,6 +121,13 @@ autolib_write_dockerfile(){
   local docker_image="$1"
   local r
   case "$docker_image" in
+    ( ubuntu:22.04 ) {
+       autolib_new_ubuntu_22_04_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
+        r=$?
+        autolib_output_error "failed to generate dockerfile"
+        return $r
+      }
+    } ;;
     ( ubuntu:20.04 | ubuntu:18.04 ) {
        autolib_new_debian_template | sed "s/__DOCKER_IMAGE__/$docker_image/g" > ${PROJECT_ROOT}/docker/Dockerfile || {
         r=$?

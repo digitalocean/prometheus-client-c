@@ -18,6 +18,7 @@
 
 #include "microhttpd.h"
 #include "prom.h"
+#include "promhttp.h"
 
 prom_collector_registry_t *PROM_ACTIVE_REGISTRY;
 
@@ -29,7 +30,7 @@ void promhttp_set_active_collector_registry(prom_collector_registry_t *active_re
   }
 }
 
-int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *url, const char *method,
+PROM_MHD_RESULT promhttp_handler(void *cls, struct MHD_Connection *connection, const char *url, const char *method,
                      const char *version, const char *upload_data, size_t *upload_data_size, void **con_cls) {
   if (strcmp(method, "GET") != 0) {
     char *buf = "Invalid HTTP Method\n";
