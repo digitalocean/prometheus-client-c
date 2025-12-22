@@ -48,6 +48,7 @@ int promhttp_handler(void *cls, struct MHD_Connection *connection, const char *u
   if (strcmp(url, "/metrics") == 0) {
     const char *buf = prom_collector_registry_bridge(PROM_ACTIVE_REGISTRY);
     struct MHD_Response *response = MHD_create_response_from_buffer(strlen(buf), (void *)buf, MHD_RESPMEM_MUST_FREE);
+    MHD_add_response_header(response, "Content-Type", "text/plain; version=0.0.4; charset=utf-8");
     int ret = MHD_queue_response(connection, MHD_HTTP_OK, response);
     MHD_destroy_response(response);
     return ret;
